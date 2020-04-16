@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>Álgebra lineal - Espacios vectoriales</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../assets/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+
+<link rel="stylesheet" href="../assets/reveal.js-3.3.0.1/css/theme/sky.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+    <link href="../assets/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+    <link href="../assets/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Álgebra lineal - Espacios vectoriales</h1>
+  <h1 class="subtitle">Módulo 2</h1>
+</section>
+
+<section class="slide level2">
+
+<p>Iniciaremos estas notas repasando algunos conceptos básicos del álgebra lineal, estos conceptos son necesarios para entender el desarrollo de los temas posteriores.</p>
+</section>
+<section><section id="campos" class="title-slide slide level1"><h1><strong>Campos</strong></h1></section><section id="campo" class="slide level2">
+<h2><strong>Campo</strong></h2>
+<p>Sea <span class="math inline">\(\mathbb{F}\)</span> un subconjunto de los números complejos <span class="math inline">\(\mathbb{C}\)</span>. Decimos que <span class="math inline">\(\mathbb{F}\)</span> es un campo, si satisface las siguientes condiciones:</p>
+</section><section id="campo-1" class="slide level2">
+<h2><strong>Campo</strong></h2>
+<ul>
+<li><p>Si <span class="math inline">\(x,y \in \mathbb{F}\)</span>, entonces <span class="math inline">\(x + y \in \mathbb{F}\)</span>, <span class="math inline">\(xy \in \mathbb{F}\)</span> (cerradura bajo la suma y el producto).</p></li>
+<li><p>Los elementos <span class="math inline">\(0\)</span> y <span class="math inline">\(1\)</span> pertenecen a <span class="math inline">\(\mathbb{F}\)</span> (existencia del neutro aditivo y neutro multiplicativo).</p></li>
+<li><p>Si <span class="math inline">\(x \in \mathbb{F}\)</span>, entonces <span class="math inline">\(-x\)</span> es también un elemento de <span class="math inline">\(\mathbb{F}\)</span> (existencia del inverso aditivo).</p></li>
+<li><p>Si <span class="math inline">\(x \in \mathbb{F}\)</span> y <span class="math inline">\(x \neq 0\)</span>, entonces <span class="math inline">\(x^{-1} \in \mathbb{F}\)</span> (existencia del inverso multiplicativo).</p></li>
+<li><p>A los elementos de un campo se les llamará <strong>números</strong> o <strong>escalares</strong>.</p></li>
+</ul>
+</section><section id="ejemplos-de-campos" class="slide level2">
+<h2><strong>Ejemplos de campos</strong></h2>
+<p>Algunos campos con los cuales se trabaja comúnmente son:</p>
+<ul>
+<li><p>El conjunto de los números reales <span class="math inline">\(\mathbb{R}\)</span></p></li>
+<li><p>El conjunto de los números racionales <span class="math inline">\(\mathbb{Q}\)</span></p></li>
+<li><p>El conjunto de los números complejos <span class="math inline">\(\mathbb{C}\)</span></p></li>
+</ul>
+</section><section id="ejercicio" class="slide level2">
+<h2><strong>Ejercicio</strong></h2>
+<p>El conjunto de los números enteros, <span class="math inline">\(\mathbb{Z}\)</span>, ¿es un campo?</p>
+</section></section>
+<section><section id="espacios-vectoriales" class="title-slide slide level1"><h1><strong>Espacios vectoriales</strong></h1></section><section id="espacio-vectorial" class="slide level2">
+<h2><strong>Espacio vectorial</strong></h2>
+<p>Decimos que un conjunto, <span class="math inline">\(\mathbb{V}\)</span>, (vectores) sobre un campo <span class="math inline">\(\mathbb{V}\)</span> (escalares), es un <strong>espacio vectorial</strong> si:</p>
+<ul>
+<li><p>Existen dos operaciones definidas <span class="math inline">\((\cdot, +)\)</span> con la propiedad de cerradura:</p>
+<ul>
+<li><p><span class="math inline">\(a \cdot \mathbf{v} \in \mathbb{V}\)</span>, para todo <span class="math inline">\(a \in \mathbb{F}, \mathbf{v} \in \mathbb{V}\)</span></p></li>
+<li><p><span class="math inline">\(\mathbf{v} + \mathbf{w} \in \mathbb{V}\)</span>, para todo <span class="math inline">\(\mathbf{v}, \mathbf{w} \in \mathbf{V}\)</span></p></li>
+</ul></li>
+</ul>
+<p>tales que</p>
+</section><section id="section" class="slide level2">
+<h2></h2>
+<ol type="1">
+<li><p>Para <span class="math inline">\(\mathbf{u}, \mathbf{v}, \mathbf{w} \in \mathbb{V}\)</span>, se tiene que: <span class="math display">\[ (\mathbf{u} + \mathbf{v}) + \mathbf{w} = \mathbf{u} + (\mathbf{v} + \mathbf{w})\]</span></p></li>
+<li><p>Existe un elemento <span class="math inline">\(\mathbf{0} \in \mathbb{V}\)</span>, tal que <span class="math inline">\(\mathbf{0} + \mathbf{v} = \mathbf{v}\)</span> para todo <span class="math inline">\(\mathbf{v} \in \mathbb{V}\)</span>.</p></li>
+<li><p>Para todo <span class="math inline">\(\mathbf{v} \in \mathbb{V}\)</span> existe un elemento <span class="math inline">\(\mathbf{-v} \in \mathbb{V}\)</span>, tal que <span class="math inline">\(\mathbf{v} + (\mathbf{-v}) = \mathbf{0}\)</span>.</p></li>
+<li><p>Para todo <span class="math inline">\(\mathbf{v}, \mathbf{w} \in \mathbb{V}\)</span>, se tiene que <span class="math inline">\(\mathbf{v} + \mathbf{w} = \mathbf{w} + \mathbf{v}\)</span>.</p></li>
+</ol>
+</section><section id="section-1" class="slide level2">
+<h2></h2>
+<ol start="5" type="1">
+<li><p>Para todo <span class="math inline">\(a \in \mathbb{F}\)</span> y para todo <span class="math inline">\(\mathbf{v}, \mathbf{w} \in \mathbb{V}\)</span>, tenemos que <span class="math inline">\(a \cdot (\mathbf{v} + \mathbf{w}) = a \cdot \mathbf{v} + a \cdot \mathbf{w}\)</span>.</p></li>
+<li><p>Para todo <span class="math inline">\(a,b \in \mathbb{F}\)</span> y <span class="math inline">\(\mathbf{v} \in \mathbb{V}\)</span>, se tiene que <span class="math inline">\(a \cdot (b \cdot \mathbf{v}) = (ab) \cdot \mathbf{v}\)</span>.</p></li>
+<li><p>Para todo <span class="math inline">\(a,b \in \mathbb{F}\)</span> y <span class="math inline">\(\mathbf{v} \in \mathbb{V}\)</span>, tenemos <span class="math inline">\((a + b) \cdot \mathbf{v} = a \cdot \mathbf{v} + b \cdot \mathbf{v}\)</span>.</p></li>
+<li><p>Para todo <span class="math inline">\(\mathbf{v} \in \mathbb{V}\)</span> y <span class="math inline">\(1 \in \mathbb{F}\)</span>, tenemos que <span class="math inline">\(1 \cdot \mathbf{v} = \mathbf{v}\)</span>.</p></li>
+</ol>
+</section><section id="section-2" class="slide level2">
+<h2></h2>
+<p><strong>Nota: </strong> es más común utilizar la siguiente notación:</p>
+<ul>
+<li><p><span class="math inline">\(a \cdot \mathbf{v} = a \mathbf{v}\)</span></p></li>
+<li><p><span class="math inline">\(\mathbf{v} + (- \mathbf{w}) = \mathbf{v} - \mathbf{w}\)</span></p></li>
+</ul>
+</section><section id="ejercicio-1" class="slide level2">
+<h2><strong>Ejercicio</strong></h2>
+<p>Demuestre que si <span class="math inline">\(\mathbb{V}\)</span> es un espacio vectorial sobre un campo <span class="math inline">\(\mathbb{F}\)</span>, entonces para todo <span class="math inline">\(\mathbf{v} \in \mathbb{V}\)</span> tenemos que:</p>
+<p><span class="math display">\[ 0 \mathbf{v} = \mathbf{0}\]</span></p>
+<p>En donde <span class="math inline">\(0\)</span> es el elemento cero de <span class="math inline">\(\mathbb{F}\)</span> y <span class="math inline">\(\mathbf{0}\)</span> es el elemento cero de <span class="math inline">\(\mathbb{V}\)</span></p>
+<p>Sugerencia: Sume <span class="math inline">\(\mathbf{v}\)</span> en el lado izquierdo de la ecuación</p>
+</section><section id="ejercicio-2" class="slide level2">
+<h2><strong>Ejercicio</strong></h2>
+<p>¿Es el conjunto <span class="math inline">\(\mathbb{R}^n\)</span>, un espacio vectorial sobre el campo de los números complejos <span class="math inline">\(\mathbb{C}\)</span>?</p>
+</section><section id="subespacio-vectorial" class="slide level2">
+<h2><strong>Subespacio vectorial</strong></h2>
+<p>Sea <span class="math inline">\(\mathbb{V}\)</span> un espacio vectorial y <span class="math inline">\(\mathbb{W}\)</span> <span class="math inline">\(\subset\)</span> <span class="math inline">\(\mathbb{V}\)</span>. Decimos que <span class="math inline">\(\mathbb{W}\)</span> es un subespacio vectorial si:</p>
+<ol type="1">
+<li><p>Si <span class="math inline">\(\mathbf{v}, \mathbf{w} \in \mathbb{W}\)</span>, entonces <span class="math inline">\(\mathbf{v} + \mathbf{w} \in \mathbb{W}\)</span>.</p></li>
+<li><p>Si <span class="math inline">\(\mathbf{v} \in \mathbb{W}\)</span> y <span class="math inline">\(c\)</span> es un escalar, entonces <span class="math inline">\(c\mathbf{v} \in \mathbb{W}\)</span></p></li>
+<li><p><span class="math inline">\(\mathbf{0} \in \mathbb{W}\)</span></p></li>
+</ol>
+</section><section id="ejercicio-3" class="slide level2">
+<h2><strong>Ejercicio</strong></h2>
+<p>Si <span class="math inline">\(\mathbb{V} = \mathbb{R}^n\)</span>y <span class="math inline">\(\mathbb{F} = \mathbb{R}\)</span>, demuestre que el conjunto de vectores en <span class="math inline">\(\mathbb{V}\)</span> cuya primera coordenada es igual a cero forma un subespacio vectorial de <span class="math inline">\(\mathbb{V}\)</span>.</p>
+</section></section>
+<section><section id="combinaciones-lineales-y-bases" class="title-slide slide level1"><h1><strong>Combinaciones lineales y bases</strong></h1></section><section id="combinación-lineal" class="slide level2">
+<h2><strong>Combinación lineal</strong></h2>
+<p>Sea <span class="math inline">\(\mathbb{V}\)</span> un espacio vectorial sobre un campo <span class="math inline">\(\mathbb{F}\)</span>.</p>
+<p>Una expresión del tipo</p>
+<p><span class="math display">\[a_1 \mathbf{v_1} + \ldots + a_n \mathbf{v_n}\]</span> con <span class="math inline">\(a_i \in \mathbb{F}, \mathbf{v_i} \in \mathbb{V}\)</span> para toda <span class="math inline">\(i\)</span>, es llamada una combinación lineal de <span class="math inline">\(\mathbf{v_1}, \ldots, \mathbf{v_n}\)</span></p>
+</section><section id="espacio-generado" class="slide level2">
+<h2><strong>Espacio generado</strong></h2>
+<p>Si todo elemento <span class="math inline">\(\mathbf{v} \in \mathbb{V}\)</span> se puede expresar como una combinación lineal de vectores <span class="math inline">\(\mathbf{v_1}, \ldots, \mathbf{v_n}\)</span> de <span class="math inline">\(\mathbb{V}\)</span>, es decir, si existen escalares <span class="math inline">\(a_1, \ldots, a_n\)</span> tales que</p>
+<p><span class="math display">\[\mathbf{v} = a_1 \mathbf{v_1} + \ldots + a_n \mathbf{v_n}\]</span></p>
+<p>entonces decimos que los vectores, <span class="math inline">\(\mathbf{v_1}, \ldots, \mathbf{v_n}\)</span>, <strong>generan el espacio</strong> <span class="math inline">\(\mathbb{V}\)</span></p>
+</section><section id="dependencia-lineal-de-vectores" class="slide level2">
+<h2><strong>Dependencia lineal de vectores</strong></h2>
+<p>Sea <span class="math inline">\(\mathbb{V}\)</span> un espacio vectorial sobre un campo <span class="math inline">\(\mathbb{F}\)</span> y sea <span class="math inline">\(\mathbf{v_1}, \ldots, \mathbf{v_n}\)</span> un conjunto de vectores de <span class="math inline">\(\mathbb{V}\)</span>. Decimos que <span class="math inline">\(\mathbf{v_1}, \ldots, \mathbf{v_n}\)</span> son linealmente dependientes sobre el campo <span class="math inline">\(\mathbb{F}\)</span> si existen escalares <span class="math inline">\(a_1, \ldots, a_n\)</span> con <strong>al menos un</strong> <span class="math inline">\(a_i\)</span> <strong>distinto de cero</strong>, tales que</p>
+<p><span class="math display">\[a_1 \mathbf{v_1} + \ldots + a_n \mathbf{v_n} = \mathbf{0}\]</span></p>
+<p>En otras palabras, existe al menos un vector <span class="math inline">\(\mathbf{v}_i \neq \mathbf{0}\)</span> tal que:</p>
+<p><span class="math display">\[\mathbf{v_i} = \sum_{j \neq i} -\dfrac{a_j}{a_i} \mathbf{v_j}\]</span></p>
+</section><section id="independencia-lineal-de-vectores" class="slide level2">
+<h2><strong>independencia lineal de vectores</strong></h2>
+<p>Decimos que un conjunto de vectores, <span class="math inline">\(\mathbf{v_1}, \ldots, \mathbf{v_n}\)</span>, son <strong>linealmente independientes</strong>, si la igualdad</p>
+<p><span class="math display">\[a_1 \mathbf{v_1} + \ldots + a_n \mathbf{v_n} = \mathbf{0}\]</span></p>
+<p>implica que <span class="math inline">\(a_1=a_2 \ldots = a_n = 0\)</span>; en otras palabras, no es posible expresar algún vector <span class="math inline">\(\mathbf{v_i}\)</span> como combinación lineal de los demás.</p>
+</section><section id="ejercicio-4" class="slide level2">
+<h2><strong>Ejercicio</strong></h2>
+<p>Demuestre que si <span class="math inline">\(\mathbb{V} = \mathbb{R}^n\)</span> y <span class="math inline">\(\mathbb{F} = \mathbb{R}\)</span>, entonces el conjunto de vectores</p>
+<p><span class="math display">\[
+\begin{matrix}
+\mathbf{e_1} &amp; = &amp; \left(1, 0, \ldots, 0 \right)\\
+\mathbf{e_2} &amp; = &amp; \left(0, 1, \ldots, 0 \right) \\
+\vdots &amp; \vdots &amp; \vdots \\
+\mathbf{e_n} &amp; = &amp; \left(0, 0, \ldots, 1 \right)
+\end{matrix}
+\]</span></p>
+<p>es un conjunto linealmente independiente.</p>
+</section><section id="ejercicio-5" class="slide level2">
+<h2><strong>Ejercicio</strong></h2>
+<p>Demuestre que si <span class="math inline">\(\{ \mathbf{v_1}, \ldots, \mathbf{v_n} \}\)</span> es un conjunto de vectores linealmente independiente, entonces el conjunto <span class="math inline">\(\{ \mathbf{v_1}, \ldots, \mathbf{v_n}, \mathbf{0} \}\)</span> es linealmente dependiente. Sugerencia: Primero demuestre para todo escalar <span class="math inline">\(c\)</span>, <span class="math inline">\(c\mathbf{0} = \mathbf{0}\)</span>.</p>
+</section><section id="base-de-un-espacio-vectorial" class="slide level2">
+<h2><strong>Base de un espacio vectorial</strong></h2>
+<p>Decimos que un conjunto de vectores <span class="math inline">\(\mathbf{v_1}, \ldots, \mathbf{v_n}\)</span> de un espacio vectorial <span class="math inline">\(\mathbb{V}\)</span> sobre un campo <span class="math inline">\(\mathbb{F}\)</span>, forma una base de <span class="math inline">\(\mathbb{V}\)</span> si:</p>
+<ul>
+<li><p><span class="math inline">\(\mathbf{v_1}, \ldots, \mathbf{v_n}\)</span> son linealmente independientes.</p></li>
+<li><p><span class="math inline">\(\mathbf{v_1}, \ldots, \mathbf{v_n}\)</span> generan <span class="math inline">\(\mathbb{V}\)</span>.</p></li>
+</ul>
+</section><section id="ejercicio-6" class="slide level2">
+<h2><strong>Ejercicio</strong></h2>
+<p>Demuestre que si <span class="math inline">\(\mathbb{V} = \mathbb{R}^n\)</span> y <span class="math inline">\(\mathbb{F} = \mathbb{R}\)</span>, entonces el conjunto de vectores</p>
+<p><span class="math display">\[
+\begin{matrix}
+\mathbf{e_1} &amp; = &amp; \left(1, 0, \ldots, 0 \right)\\
+\mathbf{e_2} &amp; = &amp; \left(0, 1, \ldots, 0 \right) \\
+\vdots &amp; \vdots &amp; \vdots \\
+\mathbf{e_n} &amp; = &amp; \left(0, 0, \ldots, 1 \right)
+\end{matrix}
+\]</span></p>
+<p>forma una base de <span class="math inline">\(\mathbb{R}^n\)</span>.</p>
+</section></section>
+<section><section id="dimensión-de-un-espacio-vectorial" class="title-slide slide level1"><h1><strong>Dimensión de un espacio vectorial</strong></h1></section><section id="dimensión-de-un-espacio-vectorial-1" class="slide level2">
+<h2><strong>Dimensión de un espacio vectorial</strong></h2>
+<p>Sea <span class="math inline">\(\mathcal{B} = \{\mathbf{v_1},\ldots, \mathbf{v_n} \}\)</span> una base para el espacio vectorial <span class="math inline">\(\mathbb{V}\)</span>, tal que <span class="math inline">\(\left| \mathcal{B} \right| = n &lt; \infty\)</span>. Decimos que la dimensión de <span class="math inline">\(\mathbb{V}\)</span>, <span class="math inline">\(dim(\mathbb{V})\)</span>, es igual a <span class="math inline">\(n\)</span>.</p>
+<p>La dimensión de un espacio vectorial es el número de vectores linealmente independientes necesarios para generar dicho espacio.</p>
+</section><section id="teorema" class="slide level2">
+<h2><strong>Teorema</strong></h2>
+<p>Sea <span class="math inline">\(\mathbb{V}\)</span> un espacio vectorial sobre un campo <span class="math inline">\(\mathbb{F}\)</span>.</p>
+<p>Sea <span class="math inline">\(\mathbf{v_1}, \ldots, \mathbf{v_m}\)</span> una base de <span class="math inline">\(\mathbb{V}\)</span> y sea <span class="math inline">\(\mathbf{w_1}, \ldots, \mathbf{w_n}\)</span> un conjunto de elementos de <span class="math inline">\(\mathbb{V}\)</span>, supongamos que <span class="math inline">\(n &gt; m\)</span>.</p>
+<p>Entonces <span class="math inline">\(\mathbf{w_1}, \ldots, \mathbf{w_n}\)</span> forman un conjunto linealmente dependiente.</p>
+<p><strong>Pregunta:</strong> Desde el punto de vista de los datos que poseemos, ¿cómo podríamos interpretar el teorema?</p>
+</section><section id="ejercicio-7" class="slide level2">
+<h2><strong>Ejercicio</strong></h2>
+<p>¿Cuál es la dimensión de cada subespacio vectorial?</p>
+<ul>
+<li><p><span class="math inline">\(\mathbb{R}^n\)</span> sobre el campo <span class="math inline">\(\mathbb{R}\)</span>.</p></li>
+<li><p>Recta en <span class="math inline">\(\mathbb{R}^2\)</span> que pasa por el origen.</p></li>
+<li><p>Plano en <span class="math inline">\(\mathbb{R}^3\)</span> que pasa por el origen.</p></li>
+<li><p><span class="math inline">\(\mathbb{Q}\)</span> sobre <span class="math inline">\(\mathbb{Z}\)</span>.</p></li>
+</ul>
+</section></section>
+    </div>
+  </div>
+
+  <script src="../assets/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="../assets/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: true,
+        // Enables touch navigation on devices with touch input
+        touch: true,
+        // Transition style
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+
+
+        chalkboard: {
+        },
+
+        keyboard: {
+          67: function() { RevealChalkboard.toggleNotesCanvas() },    // toggle notes canvas when 'c' is pressed
+          66: function() { RevealChalkboard.toggleChalkboard() }, // toggle chalkboard when 'b' is pressed
+          46: function() { RevealChalkboard.clear() },    // clear chalkboard when 'DEL' is pressed
+           8: function() { RevealChalkboard.reset() },    // reset chalkboard data on current slide when 'BACKSPACE' is pressed
+          68: function() { RevealChalkboard.download() }, // downlad recorded chalkboard drawing when 'd' is pressed
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: '../assets/reveal.js-3.3.0.1/plugin/chalkboard/chalkboard.js', async: true },
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>
