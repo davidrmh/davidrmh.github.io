@@ -1,0 +1,229 @@
+---
+title: "Álgebra lineal - Espacios vectoriales"
+subtitle: "Módulo 2"
+output: 
+  revealjs::revealjs_presentation:
+    theme: sky
+    highlight: kate
+    transition: fade
+    incremental: false
+    center: true
+    self_contained: false
+    reveal_plugins: ["chalkboard"]
+    reveal_options:
+      slideNumber: true
+      touch: true
+---
+Iniciaremos estas notas repasando algunos conceptos básicos del álgebra lineal, estos conceptos son necesarios para entender el desarrollo de los temas posteriores.
+
+# **Campos**
+
+## **Campo**
+
+Sea $\mathbb{F}$ un subconjunto de los números complejos $\mathbb{C}$. Decimos que $\mathbb{F}$ es un campo, si satisface las siguientes condiciones:
+
+## **Campo**
+
+* Si $x,y \in \mathbb{F}$, entonces $x + y \in \mathbb{F}$, $xy \in \mathbb{F}$ (cerradura bajo la suma y el producto).
+
+* Los elementos $0$ y $1$ pertenecen a $\mathbb{F}$ (existencia del neutro aditivo y neutro multiplicativo).
+
+* Si $x \in \mathbb{F}$, entonces $-x$ es también un elemento de $\mathbb{F}$ (existencia del inverso aditivo).
+
+* Si $x \in \mathbb{F}$ y $x \neq 0$, entonces $x^{-1} \in \mathbb{F}$ (existencia del inverso multiplicativo).
+
+* A los elementos de un campo se les llamará **números** o **escalares**.
+
+## **Ejemplos de campos**
+
+Algunos campos con los cuales se trabaja comúnmente son:
+
+* El conjunto de los números reales $\mathbb{R}$
+
+* El conjunto de los números racionales $\mathbb{Q}$
+
+* El conjunto de los números complejos $\mathbb{C}$
+
+## **Ejercicio**
+El conjunto de los números enteros, $\mathbb{Z}$, ¿es un campo?
+
+# **Espacios vectoriales**
+
+## **Espacio vectorial**
+
+Decimos que un conjunto, $\mathbb{V}$, (vectores) sobre un campo $\mathbb{V}$ (escalares), es un **espacio vectorial** si:
+
+* Existen dos operaciones definidas $(\cdot, +)$ con la propiedad de cerradura:
+
+  * $a \cdot \mathbf{v} \in \mathbb{V}$, para todo $a \in \mathbb{F}, \mathbf{v} \in \mathbb{V}$
+  
+  * $\mathbf{v} + \mathbf{w} \in \mathbb{V}$, para todo $\mathbf{v}, \mathbf{w} \in \mathbf{V}$
+  
+tales que
+
+## 
+
+1. Para $\mathbf{u}, \mathbf{v}, \mathbf{w} \in \mathbb{V}$, se tiene que:
+$$ (\mathbf{u} + \mathbf{v}) + \mathbf{w} = \mathbf{u} + (\mathbf{v} + \mathbf{w})$$
+
+2. Existe un elemento $\mathbf{0} \in \mathbb{V}$, tal que $\mathbf{0} + \mathbf{v} = \mathbf{v}$ para todo $\mathbf{v} \in \mathbb{V}$.
+
+3. Para todo $\mathbf{v} \in \mathbb{V}$ existe un elemento $\mathbf{-v} \in \mathbb{V}$, tal que $\mathbf{v} + (\mathbf{-v}) = \mathbf{0}$.
+
+4. Para todo $\mathbf{v}, \mathbf{w} \in \mathbb{V}$, se tiene que $\mathbf{v} + \mathbf{w} = \mathbf{w} + \mathbf{v}$.
+
+## 
+
+5. Para todo $a \in \mathbb{F}$ y para todo $\mathbf{v}, \mathbf{w} \in \mathbb{V}$, tenemos que $a \cdot (\mathbf{v} + \mathbf{w}) = a \cdot \mathbf{v} + a \cdot \mathbf{w}$.
+
+6. Para todo $a,b \in \mathbb{F}$ y $\mathbf{v} \in \mathbb{V}$, se tiene que $a \cdot (b \cdot \mathbf{v}) = (ab) \cdot \mathbf{v}$.
+
+7. Para todo $a,b \in \mathbb{F}$ y $\mathbf{v} \in \mathbb{V}$, tenemos $(a + b) \cdot \mathbf{v} = a \cdot \mathbf{v} + b \cdot \mathbf{v}$.
+
+8. Para todo $\mathbf{v} \in \mathbb{V}$ y $1 \in \mathbb{F}$, tenemos que $1 \cdot \mathbf{v} = \mathbf{v}$.
+
+## 
+
+**Nota: ** es más común utilizar la siguiente notación:
+
+* $a \cdot \mathbf{v} = a \mathbf{v}$
+
+* $\mathbf{v} + (- \mathbf{w}) = \mathbf{v} - \mathbf{w}$
+
+## **Ejercicio**
+
+Demuestre que si $\mathbb{V}$ es un espacio vectorial sobre un campo $\mathbb{F}$, entonces para todo $\mathbf{v} \in \mathbb{V}$ tenemos que:
+
+$$ 0 \mathbf{v} = \mathbf{0}$$
+
+En donde $0$ es el elemento cero de $\mathbb{F}$ y $\mathbf{0}$ es el elemento cero de $\mathbb{V}$
+
+Sugerencia: Sume $\mathbf{v}$ en el lado izquierdo de la ecuación
+
+## **Ejercicio**
+
+¿Es el conjunto $\mathbb{R}^n$, un espacio vectorial sobre el campo de los números complejos $\mathbb{C}$?
+
+## **Subespacio vectorial**
+
+Sea $\mathbb{V}$ un espacio vectorial y $\mathbb{W}$ $\subset$ $\mathbb{V}$. Decimos que $\mathbb{W}$ es un subespacio vectorial si:
+
+1. Si $\mathbf{v}, \mathbf{w} \in \mathbb{W}$, entonces $\mathbf{v} + \mathbf{w} \in \mathbb{W}$.
+
+2. Si $\mathbf{v} \in \mathbb{W}$ y $c$ es un escalar, entonces $c\mathbf{v} \in \mathbb{W}$
+
+3. $\mathbf{0} \in \mathbb{W}$
+
+## **Ejercicio**
+
+Si $\mathbb{V} = \mathbb{R}^n$y $\mathbb{F} = \mathbb{R}$, demuestre que el conjunto de vectores en $\mathbb{V}$ cuya primera coordenada es igual a cero forma un subespacio vectorial de $\mathbb{V}$.
+
+# **Combinaciones lineales y bases**
+
+## **Combinación lineal**
+
+Sea $\mathbb{V}$ un espacio vectorial sobre un campo $\mathbb{F}$.
+
+Una expresión del tipo 
+
+$$a_1 \mathbf{v_1} + \ldots + a_n \mathbf{v_n}$$
+con $a_i \in \mathbb{F}, \mathbf{v_i} \in \mathbb{V}$ para toda $i$, es llamada una combinación lineal de $\mathbf{v_1}, \ldots, \mathbf{v_n}$
+
+## **Espacio generado**
+
+Si todo elemento $\mathbf{v} \in \mathbb{V}$ se puede expresar como una combinación lineal de vectores $\mathbf{v_1}, \ldots, \mathbf{v_n}$ de $\mathbb{V}$, es decir, si existen escalares $a_1, \ldots, a_n$ tales que
+
+$$\mathbf{v} = a_1 \mathbf{v_1} + \ldots + a_n \mathbf{v_n}$$
+
+entonces decimos que los vectores, $\mathbf{v_1}, \ldots, \mathbf{v_n}$, **generan el espacio** $\mathbb{V}$
+
+## **Dependencia lineal de vectores**
+
+Sea $\mathbb{V}$ un espacio vectorial sobre un campo $\mathbb{F}$ y sea $\mathbf{v_1}, \ldots, \mathbf{v_n}$ un conjunto de vectores de $\mathbb{V}$. Decimos que $\mathbf{v_1}, \ldots, \mathbf{v_n}$ son linealmente dependientes sobre el campo $\mathbb{F}$ si existen escalares $a_1, \ldots, a_n$ con **al menos un** $a_i$ **distinto de cero**, tales que
+
+$$a_1 \mathbf{v_1} + \ldots + a_n \mathbf{v_n} = \mathbf{0}$$
+
+En otras palabras, existe al menos un vector $\mathbf{v}_i \neq \mathbf{0}$ tal que:
+
+$$\mathbf{v_i} = \sum_{j \neq i} -\dfrac{a_j}{a_i} \mathbf{v_j}$$
+
+## **independencia lineal de vectores**
+
+Decimos que un conjunto de vectores, $\mathbf{v_1}, \ldots, \mathbf{v_n}$, son **linealmente independientes**, si la igualdad
+
+$$a_1 \mathbf{v_1} + \ldots + a_n \mathbf{v_n} = \mathbf{0}$$
+
+implica que $a_1=a_2 \ldots = a_n = 0$; en otras palabras, no es posible expresar algún vector $\mathbf{v_i}$ como combinación lineal de los demás.
+
+## **Ejercicio**
+
+Demuestre que si $\mathbb{V} = \mathbb{R}^n$ y $\mathbb{F} = \mathbb{R}$, entonces el conjunto de vectores
+
+$$
+\begin{matrix}
+\mathbf{e_1} & = & \left(1, 0, \ldots, 0 \right)\\
+\mathbf{e_2} & = & \left(0, 1, \ldots, 0 \right) \\
+\vdots & \vdots & \vdots \\
+\mathbf{e_n} & = & \left(0, 0, \ldots, 1 \right)
+\end{matrix}
+$$
+
+es un conjunto linealmente independiente.
+
+## **Ejercicio**
+
+Demuestre que si $\{ \mathbf{v_1}, \ldots, \mathbf{v_n} \}$ es un conjunto de vectores linealmente independiente, entonces el conjunto $\{ \mathbf{v_1}, \ldots, \mathbf{v_n}, \mathbf{0} \}$ es linealmente dependiente.
+Sugerencia: Primero demuestre para todo escalar $c$, $c\mathbf{0} = \mathbf{0}$.
+
+## **Base de un espacio vectorial**
+
+Decimos que un conjunto de vectores $\mathbf{v_1}, \ldots, \mathbf{v_n}$ de un espacio vectorial $\mathbb{V}$ sobre un campo $\mathbb{F}$, forma una base de $\mathbb{V}$ si:
+
+* $\mathbf{v_1}, \ldots, \mathbf{v_n}$ son linealmente independientes.
+
+* $\mathbf{v_1}, \ldots, \mathbf{v_n}$ generan $\mathbb{V}$.
+
+## **Ejercicio**
+
+Demuestre que si $\mathbb{V} = \mathbb{R}^n$ y $\mathbb{F} = \mathbb{R}$, entonces el conjunto de vectores
+
+$$
+\begin{matrix}
+\mathbf{e_1} & = & \left(1, 0, \ldots, 0 \right)\\
+\mathbf{e_2} & = & \left(0, 1, \ldots, 0 \right) \\
+\vdots & \vdots & \vdots \\
+\mathbf{e_n} & = & \left(0, 0, \ldots, 1 \right)
+\end{matrix}
+$$
+
+forma una base de $\mathbb{R}^n$.
+
+# **Dimensión de un espacio vectorial**
+
+## **Dimensión de un espacio vectorial**
+
+Sea $\mathcal{B} = \{\mathbf{v_1},\ldots, \mathbf{v_n}  \}$ una base para el espacio vectorial $\mathbb{V}$, tal que $\left| \mathcal{B} \right| = n < \infty$. Decimos que la dimensión de $\mathbb{V}$, $dim(\mathbb{V})$, es igual a $n$.
+
+La dimensión de un espacio vectorial es el número de vectores linealmente independientes necesarios para generar dicho espacio.
+
+## **Teorema**
+
+Sea $\mathbb{V}$ un espacio vectorial sobre un campo $\mathbb{F}$. 
+
+Sea $\mathbf{v_1}, \ldots, \mathbf{v_m}$ una base de $\mathbb{V}$ y sea $\mathbf{w_1}, \ldots, \mathbf{w_n}$ un conjunto de elementos de $\mathbb{V}$, supongamos que $n > m$. 
+
+Entonces $\mathbf{w_1}, \ldots, \mathbf{w_n}$ forman un conjunto linealmente dependiente.
+
+**Pregunta:** Desde el punto de vista de los datos que poseemos, ¿cómo podríamos interpretar el teorema?
+
+## **Ejercicio**
+
+¿Cuál es la dimensión de cada subespacio vectorial?
+
+* $\mathbb{R}^n$ sobre el campo $\mathbb{R}$.
+
+* Recta en $\mathbb{R}^2$ que pasa por el origen.
+
+* Plano en $\mathbb{R}^3$ que pasa por el origen.
+
+* $\mathbb{Q}$ sobre $\mathbb{Z}$.

@@ -1,0 +1,36 @@
+---
+title: "Diplomado DS-ML ITAM  <br> Módulo 2"
+author: "Profesor: David R. Montalván Hernández"
+date: "Última actualización `r format(Sys.time(), '%d/%m/%Y - %H:%M:%S')`"
+output:
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: vignette
+---
+
+# **Bienvenido al módulo 2**
+
+En este módulo se dará un breve repaso de algunos temas relacionados al álgebra lineal y la probabilidad. 
+
+# **Herramientas a utilizar**
+
+Seguiremos utilizando el lenguaje **python** como lenguaje de programación, así como los **jupyter notebooks**.
+
+Además, este módulo depende fuertemente del la librería **numpy**
+
+```{python, eval = FALSE, python.reticulate = FALSE}
+import numpy as np
+```
+
+# **Referencias**
+
+Las referencias serán compartidas por el profesor a tráves de una liga de **one drive**
+
+# **Contacto**
+[david.montalvan@itam.mx](mailto:david.montalvan@itam.mx)
+
+# **Temario**
+
+|Fecha|Tema|Presentación|Notebook|Ejercicios|Notas|
+|:-----:|:-----|:------------|:--------|:----------|:----|
+|20 abril 2020|Espacios vectoriales|[Espacios vectoriales](./presentaciones/espacios_vectoriales.html)|--|En la presentación|--|
