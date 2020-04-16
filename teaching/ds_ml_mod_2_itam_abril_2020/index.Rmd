@@ -26,11 +26,14 @@ import numpy as np
 
 Las referencias serán compartidas por el profesor a tráves de una liga de **one drive**
 
-# **Contacto**
-[david.montalvan@itam.mx](mailto:david.montalvan@itam.mx)
+# **Anuncios**
 
 # **Temario**
 
-|Fecha|Tema|Presentación|Notebook|Ejercicios|Notas|
-|:-----:|:-----|:------------|:--------|:----------|:----|
-|20 abril 2020|Espacios vectoriales|[Espacios vectoriales](./presentaciones/espacios_vectoriales.html)|--|En la presentación|--|
+|Fecha|Tema|Presentación|Notebook|Ejercicios|
+|:-----:|:-----|:------------|:--------|:----------|
+|20 abril 2020|Espacios vectoriales|[Espacios vectoriales](./presentaciones/espacios_vectoriales.html)|--|En la presentación|
+
+# **Contacto**
+[david.montalvan@itam.mx](mailto:david.montalvan@itam.mx)
+
