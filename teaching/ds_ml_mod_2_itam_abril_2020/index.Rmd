@@ -32,7 +32,7 @@ Las referencias serán compartidas por el profesor a tráves de una liga de **on
 
 |Fecha|Tema|Presentación|Notebook|Ejercicios|Soluciones|
 |:-----:|:-----|:------------|:--------|:----------|:--|
-|20 abril 2020|Espacios vectoriales|[Espacios vectoriales](./presentaciones/espacios_vectoriales.html)|--|En la presentación|Vistas en clase|
+|27 abril 2020|Espacios vectoriales|[Espacios vectoriales](./presentaciones/espacios_vectoriales.html)|--|En la presentación|Vistas en clase|
 
 # **Contacto**
 [david.montalvan@itam.mx](mailto:david.montalvan@itam.mx)
