@@ -33,7 +33,8 @@ Las referencias serán compartidas por el profesor a tráves de una liga de **on
 
 |Fecha|Tema|Presentación|Notebook|Ejercicios|Soluciones|
 |:-----:|:-----|:------------|:--------|:----------|:--|
-|18 abril 2020|* 01-Introducción a python <br> * 02-Colecciones|--|<a href="./notebooks/lec01-intro.ipynb" download>* lec01-intro </a> <br>  <a href="./notebooks/lec02-collections.ipynb" download>* lec02-colecciones </a> |En el notebook|-|
+|18 abril 2020|* 01-Introducción a python|Sólo notebook|<a href="./notebooks/lec01-intro.ipynb" download>* lec01-intro </a>  |En el notebook|--|
+|25 abril 2020|* 02-Colecciones <br> * 03 Control de flujo|Sólo notebook|<a href="./notebooks/lec02-collections.ipynb" download>* lec02-colecciones </a> <br> <a href="./notebooks/lec03-control-flow.ipynb" download>* lec03-control-flow </a>|En el notebook|--|
 
 # **Contacto**
 Si desean contactarme pueden usar **Teams**.
