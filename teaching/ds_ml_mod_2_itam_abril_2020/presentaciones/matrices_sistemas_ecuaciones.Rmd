@@ -1,0 +1,599 @@
+---
+title: "Álgebra lineal - Matrices y sistemas de ecuaciones"
+author: "David R. Montalván Hernández"
+subtitle: "Módulo 2"
+output: 
+  revealjs::revealjs_presentation:
+    theme: sky
+    highlight: kate
+    transition: fade
+    incremental: false
+    center: true
+    self_contained: false
+    reveal_plugins: ["chalkboard"]
+    reveal_options:
+      slideNumber: true
+      touch: true
+---
+
+En estas notas se repasarán algunos resultados relacionados a las matrices y
+los sistemas de ecuaciones lineales.
+
+# **Matrices**
+
+## **Matriz**
+Sean $\mathbb{F}$ un campo y $n,m$ entero positivos. Una matriz de tamaño $m \times n$ es un arreglo rectangular ($m$ renglones y $n$ columnas) de números en $\mathbb{F}$
+
+$$
+\begin{pmatrix}
+a_{11} & a_{12} & \ldots & a_{1n} \\
+a_{21} & a_{22} & \ldots & a_{2n} \\
+\vdots & \vdots & \vdots & \vdots \\
+a_{m1} & a_{m2} & \ldots & a_{mn}
+\end{pmatrix}
+$$
+
+Si $n=m$, decimos que es una matriz cuadrada. Para referirnos al elemento en el renglón $i$, columna $j$ utilizaremos la notación $a_{ij}$.
+
+## 
+
+De acuerdo a la definición de matriz, un vetor  renglón es una matriz de $1 \times n$
+
+$$ \mathbf{a} = 
+\begin{pmatrix}
+a_{1} & \ldots & a_{n}
+\end{pmatrix}
+$$
+
+Un vector columna es una matriz de $n \times 1$
+
+$$
+\mathbf{b} = 
+\begin{pmatrix}
+b_{1} \\
+\vdots \\
+b_{n}
+\end{pmatrix}
+$$
+
+## 
+
+Con *numpy* creamos una matriz de la siguiente forma
+```{python, python.reticulate = FALSE, eval = FALSE}
+import numpy as np
+#Matriz
+matriz = np.array([ [1,2,3], [4,5,6] ])
+
+#vector renglón
+renglon_1 = np.array([1,2,3]) #ndim = 1 shape = (3,)
+
+# o también
+
+renglon_2 = np.array( [ [1,2,3] ]) #ndim = 2 shape = (1,3)
+
+#Vector columna
+columna = np.array([ [1], [2], [3] ]) #ndim = 2 shape = (3,1)
+```
+
+## **Matriz transpuesta**
+
+Sea $\mathbf{A}$ una matriz de tamaño $m \times n$. La transpuesta de $\mathbf{A}$, es la matriz, $\mathbf{B}$, de tamaño $n \times m$ tal que $b_{ij} = a_{ji}$, es decir, se intercambian renglones por columnas.
+Denotaremos a la matriz transpuesta de $\mathbf{A}$ como $\mathbf{A}^{T}$.
+
+## **Ejercicio**
+
+Si 
+
+$$
+\mathbf{A} = 
+\begin{pmatrix}
+2  & 1 & 0 \\
+1 & 3 & 5
+\end{pmatrix}
+$$
+
+obtener $\mathbf{A}^T$.
+
+##
+
+Utilizando *numpy* podemos utilizar el método *transpose* para obtener la matriz transpuesta.
+
+```{python, python.reticulate=FALSE, eval=FALSE}
+matriz_A = np.array([ [2, 1, 0], [1, 3, 5] ])
+
+A_transp = matriz_A.transpose()
+```
+
+## **Diagonal de una matriz**
+
+Sea $\mathbf{A}$ una **matriz cuadrada** de $n \times n$, la diagonal de $\mathbf{A}$ son los elementos $a_{11}, a_{22}, \ldots, a_{nn}$.
+
+##
+
+con *numpy* podemos utilizar el método *diagonal* para extraer la diagonal de una matriz
+
+```{python, python.reticulate=FALSE, eval=FALSE}
+#matriz de 3 x 3
+matriz = np.array([[1,2,3], [4,5,6], [7,8,9]])
+help(np.diagonal)
+
+diag = matriz.diagonal()
+
+matriz[0][0] = 10
+
+#La matriz no tiene que ser necesariamente cuadrada
+matriz = np.array([[1,2,3], [4,5,6]])
+
+diag = matriz.diagonal()
+```
+
+## **Matriz cero**
+
+La **matriz cero** se define como
+
+$$
+\mathbf{0} = 
+\begin{pmatrix}
+0 & 0 & \ldots & 0 \\
+\vdots & \vdots & \vdots & \vdots \\
+0 & 0 & \ldots & 0
+\end{pmatrix}
+$$
+
+##
+
+con *numpy* podemos crear la matriz cero, utilizando la funcion *zeros*
+
+```{python, python.reticulate=FALSE, eval=FALSE}
+mat_cero = np.zeros(shape = (2, 3))
+
+mat_cero_bool = np.zeros(shape = (2, 3), dtype = bool)
+```
+
+## **Matrices diagonal**
+
+Una matriz cuadrada de $n \times n$, se dice que es una **matriz diagonal** si tiene la siguiente forma:
+
+$$
+\begin{pmatrix}
+a_{11} & 0 & \ldots & 0 \\
+0 & a_{22} & \ldots & 0 \\
+\vdots & \vdots & \ddots & \ldots \\
+0 & 0 & \ldots & a_{nn}
+\end{pmatrix}
+$$
+
+si $a_{ii} = 1$ para toda $i$, la matriz recibe el nombre de **matriz identidad** o **matriz unitaria**.
+
+## 
+
+con *numpy* podemos utilizar la función *diagflat* para crear matrices diagonales
+
+```{python, python.reticulate=FALSE, eval=FALSE}
+mi_diagonal = np.array([1, 2, 3, 4])
+
+mat_diag = np.diagflat(mi_diagonal)
+
+help(np.diagflat)
+
+np.diagflat(mi_diagonal, 2) #shape (6, 6)
+
+np.diagflat(mi_diagonal, 3) #shape (7, 7)
+
+np.diagflat(mi_diagonal, -3) #shape (7, 7)
+
+#matriz indentidad
+identidad = np.identity(5)
+
+#similiar pero no exactamente igual a identity
+eye_cuadrada = np.eye(5)
+eye_rectangular = np.eye(5,6)
+```
+
+## **Matrices triangulares**
+
+Se dice que una matriz cuadrada de $n \times n$ es **triangular superior** si los elementos que están debajo de la diagonal son igual a cero, es decir, $a_{ij} = 0$ para $i > j$.
+
+$$
+\begin{pmatrix}
+a_{11} & a_{12} & \ldots & a_{1n} \\
+0 & a_{22} & \ldots & a_{2n} \\
+\ldots & \ldots & \ddots & \ldots \\
+0 & 0 & \ldots & a_{nn}
+\end{pmatrix}
+$$
+
+##
+
+De manera similar, se dice que es **triangular inferior** si $a_{ij} = 0$ para $i < j$.
+
+$$
+\begin{pmatrix}
+a_{11} & 0 & \ldots & 0 \\
+a_{21} & a_{22} & \ldots & 0 \\
+\ldots & \ldots & \ddots & \ldots \\
+a_{n1} & a_{n2} & \ldots & a_{nn}
+\end{pmatrix}
+$$
+
+## 
+
+con *numpy* podemos crear matrices triangulares con las funciones *triu* y *tril*
+
+```{python, python.reticulate=FALSE, eval=FALSE}
+#matrix 3 x 3 triangular superior
+np.triu([[1,2,3],[4,5,6],[7,8,9]])
+
+#matrix 3 x 3 triangular inferior
+np.tril([[1,2,3],[4,5,6],[7,8,9]])
+
+#¿Que pasa si no es una matriz cuadrada?
+#matriz de 4 x 3
+np.triu([[1,2,3],[4,5,6],[7,8,9], [10, 11, 12]])
+```
+
+## **Ejercicios**
+
+1. ¿Cuál es la dimensión del espacio de matrices de $m \times n$? Dé una base para este espacio.
+
+2. ¿Cuál es la dimensión del espacio de matrices triangulares superiores de tamaño $n \times n$?
+
+3. ¿Cual es la dimensión del espacio de matrices simétricas de $n \times n$? Dé una base para este espacio.
+
+## **Operaciones con matrices**
+
+**Suma de matrices**
+
+Sean $\mathbf{A}$ y $\mathbf{B}$ matrices de tamaño $m \times n$, definimos la suma $\mathbf{A} + \mathbf{B}$ como la matriz $\mathbf{C}$ tal que $c_{ij} = a_{ij} + b_{ij}$. En otras palabras, la suma de matrices se realiza componente por componente.
+
+**Producto escalar**
+
+Sea $\mathbf{A}$ una matriz y $c$ un escalar, definimos la matriz $\mathbf{B} = c\mathbf{A}$ como la matriz cuya componente $b_{ij} = c a_{ij}$. Es decir, multiplicamos cada elemento de $\mathbf{A}$ por el escalar $c$.
+
+## **Algunos resultados**
+
+1. Para cualquier matriz cuadrada $\mathbf{A}$, la matriz $\mathbf{A} + \mathbf{A}^{T}$ es una matriz simétrica.
+
+2. Si $\mathbf{A}$ y $\mathbf{B}$ son matrices de $m \times n$, entonces
+$$ \left( \mathbf{A} + \mathbf{B} \right) ^{T} = \mathbf{A}^{T} + \mathbf{B}^{T}.$$
+
+3. Si $\mathbf{A}$ es una matriz de $m \times n$ y $c$ un escalar, entonces 
+$$ (c\mathbf{A})^{T} = c \mathbf{A}^{T}.$$
+
+## **Producto punto**
+
+Sean $\mathbf{a} = (a_1, \ldots, a_n)$ y $\mathbf{b} = (b_1, \ldots, b_n)$ dos vectores con entradas sobre un campo $\mathbb{F}$, el **producto punto** entre $\mathbf{a}$ y $\mathbf{b}$ se define como
+
+$$\left< \mathbf{a}, \mathbf{b} \right> = \sum_{i=1}^{n} a_{i}b_{i}$$
+
+## **Propiedades del producto punto**
+
+* $\left< \mathbf{a}, \mathbf{b} \right> = \left< \mathbf{b}, \mathbf{a} \right>$.
+
+* $\left< \mathbf{a}, \mathbf{b} + \mathbf{c} \right> = \left< \mathbf{a}, \mathbf{b} \right> + \left< \mathbf{a}, \mathbf{c} \right> = \left< \mathbf{b} + \mathbf{c}, \mathbf{a} \right>$.
+
+* Si $k$ es un escalar, entonces
+
+$$
+\left< k\mathbf{a}, \mathbf{b} \right> = k\left< \mathbf{a}, \mathbf{b} \right> = \left< \mathbf{a}, k\mathbf{b} \right>
+$$
+
+* Si los componentes de $\mathbf{a}$ son números reales, entonces
+
+$$
+\left< \mathbf{a}, \mathbf{a} \right> = \sum_{i=1}^{n}a_{i}^{2} \geq 0.
+$$
+
+* Si $\left< \mathbf{a}, \mathbf{b} \right> = 0$ para todo $\mathbf{b}$, entonces $\mathbf{a} = (0,\ldots,0)$.
+
+##
+
+Con *numpy* podemos realizar el producto punto de dos vectores utilizando la función *dot*
+
+```{python, python.reticulate=FALSE, eval=FALSE}
+vector1 = np.array([1,2,3])
+vector1 = np.array([4,5,6])
+np.dot(vector1, vector2)
+
+#o también utilizando el método dot
+vector1.dot(vector2)
+
+help(np.dot)
+```
+
+## **Producto de matrices**
+
+Sea $\mathbf{A}$ una matriz de $m \times n$ y $\mathbf{B}$ una matriz de $n \times k$. El producto $\mathbf{A}\mathbf{B}$, se define como la matriz de tamaño $m \times k$:
+
+$$
+\begin{pmatrix}
+\left< \mathbf{a_1}, \mathbf{b^1} \right> & \left< \mathbf{a_1}, \mathbf{b^2} \right> & \ldots & \left< \mathbf{a_1}, \mathbf{b^k} \right> \\
+\left< \mathbf{a_2}, \mathbf{b^1} \right> & \left< \mathbf{a_2}, \mathbf{b^2} \right> & \ldots & \left< \mathbf{a_2}, \mathbf{b^k} \right> \\
+\vdots & \vdots & \ddots & \vdots\\
+\left< \mathbf{a_m}, \mathbf{b^1} \right> & \left< \mathbf{a_m}, \mathbf{b^2} \right> & \ldots & \left< \mathbf{a_m}, \mathbf{b^k} \right> \\
+\end{pmatrix}
+$$
+
+en donde $\mathbf{a_i}$ representa el $i-$ésimo renglón de $\mathbf{A}$ y $\mathbf{b^i}$ representa la $i-$ésima columna de $\mathbf{B}$.
+
+## **Propiedades del producto de matrices**
+
+1. $\mathbf{A} \mathbf{B} \neq \mathbf{B} \mathbf{A}$ (¿por qué?)
+
+2. $\mathbf{A} (\mathbf{B} + \mathbf{C}) = \mathbf{A}\mathbf{B} + \mathbf{A}\mathbf{C}$.
+
+3.  Si $k$ es un escalar 
+$$\mathbf{A}(k\mathbf{B}) = k(\mathbf{AB})$$
+4. $(\mathbf{AB})\mathbf{C} = \mathbf{A}(\mathbf{BC})$.
+
+5. $(\mathbf{AB})^{T} = \mathbf{B}^{T} \mathbf{A}^{T}$ (demostrar).
+
+6. Si $\mathbf{A}$ es una matriz cuadrada, entonces $\mathbf{A}^{0} = \mathbf{I}$ y para enteros no negativos, $r$ y $s$, tenemos que $\mathbf{A}^{r+s} = \mathbf{A}^{r} \mathbf{A}^{s}$.
+
+## 
+
+7. El producto punto, puede escribirse como el producto de una matriz renglón con una matriz columna:
+
+$$
+\left< \mathbf{a}, \mathbf{b} \right>=
+\begin{pmatrix}
+a_1, \ldots , a_n
+\end{pmatrix}
+\begin{pmatrix}
+b_1 \\
+\vdots \\
+b_n
+\end{pmatrix}
+$$
+
+En la literatura, es muy común representar a los vectores como vectores columnas y por lo tanto
+$$
+\left< \mathbf{a}, \mathbf{b} \right> = \mathbf{a}^{T} \mathbf{b}
+$$
+
+##
+
+con *numpy* es posible realizar la multiplicación de matrices utilizando las siguientes funciones:
+
+* *dot* (no sugerida)
+
+* *matmul*
+
+o el operador @.
+
+```{python, python.reticulate=FALSE, eval=FALSE}
+matriz_A = np.array([ [1,2,3], [4,5,6], [7,8,9] ])
+matriz_B = np.array([[1,2,3,4], [5,6,7,8], [9, 10, 11, 12] ] )
+
+#dot no es recomendado
+np.dot(matriz_A, matriz_B)
+
+np.matmul(matriz_A, matriz_B)
+
+matriz_A @ matriz_B
+```
+
+## **Ejercicio**
+
+Implemente el producto de matrices sin utilizar numpy, es decir, utilizando únicamente listas.
+
+```python
+A = [ [1,2,3], [4,5,6], [7,8,9] ]
+B = [ [1,2], [4,5], [7,8] ]
+```
+
+# **Sistemas de ecuaciones lineales**
+
+##
+
+Sean $\mathbb{F}$ un campo, $\mathbf{A}$ una matriz de $m \times n$ y $b_1, \ldots, b_m$ escalares de $\mathbb{F}$. Ecuaciones del tipo
+
+
+$$
+\begin{array}{rcl}
+a_{11}x_1 + \ldots + a_{1n}x_n & = & b_1 \\
+a_{21}x_1 + \ldots + a_{2n}x_n & = & b_2 \\
+\vdots &  &  \\
+a_{m1}x_1 + \ldots + a_{mn}x_n & = & b_m
+\end{array}
+$$
+
+
+son llamados sistemas de ecuaciones lineales. Los elementos de la matriz $\mathbf{A}$ son llamados **coeficientes** y los elementos $x_1, \ldots, x_n$ **incognitas**.
+
+##
+
+Si $b_1 = b_2 = \ldots = b_m = 0$, entonces decimos que es un sistema **homogéneo** y el sistema homogéneo asociado al sistema anterior es:
+
+$$
+\begin{array}{rcl}
+a_{11}x_1 + \ldots + a_{1n}x_n & = & 0 \\
+a_{21}x_1 + \ldots + a_{2n}x_n & = & 0 \\
+\vdots &  &  \\
+a_{m1}x_1 + \ldots + a_{mn}x_n & = & 0
+\end{array}
+$$
+Este sistema siempre tiene una solución, conocida como **solución trivial**.
+
+##
+
+Utilizando las columnas de la matriz $\mathbf{A}$, podemos reescribir el sistema de ecuaciones como:
+
+$$
+\begin{array}{crl}
+x_1
+\begin{pmatrix}
+a_{11} \\
+\vdots \\
+a_{m1}
+\end{pmatrix}
++ \ldots + 
+x_n
+\begin{pmatrix}
+a_{1n} \\
+\vdots \\
+a_{mn}
+\end{pmatrix}
+& = & 
+\begin{pmatrix}
+b_1 \\
+\vdots \\
+b_m
+\end{pmatrix}
+\end{array}
+$$
+
+o denotando a la $j-$ésima columna de $\mathbf{A}$ como $\mathbf{a_{j}}$ y al vector (columna) $(b_1, \ldots, b_m)^{T}$ como $\mathbf{b}$
+$$ x_1\mathbf{a_{1}} + \ldots + x_n \mathbf{a_{n}} = \mathbf{b}.$$
+En el caso de un sistema homogéneo, la existencia de una solución no trivial implica una dependencia lineal entre los vectores formados por las columnas de la matriz $\mathbf{A}.$
+
+## **Teorema**
+
+Sea 
+
+$$
+\begin{array}{rcl}
+a_{11}x_1 + \ldots + a_{1n}x_n & = & 0 \\
+a_{21}x_1 + \ldots + a_{2n}x_n & = & 0 \\
+\vdots &  &  \\
+a_{m1}x_1 + \ldots + a_{mn}x_n & = & 0
+\end{array}
+$$
+
+un sistema homogéneo de ecuaciones lineales. Si $n>m$, entonces existe una solución no trivial.
+
+## **Ejercicio**
+
+Demuestre el teorema anterior.
+
+**Sugerencia:** Utilice uno de los últimos resultados que se vio en la clase pasada.
+
+## **Ejercicio**
+
+Suponga que se tiene un sistema lineal homogéneo y que $n = m$. Además suponga que las columnas de la matriz $\mathbf{A}$ son linealmente independientes. Demuestre que la única solución es la solución trivial.
+
+## 
+
+con numpy es posible resolver sistemas de ecuaciones lineales utilizando la función *solve* del módulo *linalg*
+
+```{python, python.reticulate=FALSE, eval=FALSE}
+from numpy.linalg import solve
+
+#Matriz de coeficientes
+A = np.array([ [3,1], [1,2] ])
+
+#vector columna b
+b = np.array([9,8])
+
+#solucion
+#también se puede hacer np.linalg.solve
+x = solve(A, b)
+
+#Podemos validar la solución
+#utilizando la función allclose
+np.allclose(A @ x, b)
+```
+
+## **Rreplicando un instrumento**
+
+Suponga que se tienen tres instrumentos (una acción, un bono libre de riesgo y un derivado) y que en un año sólo puede haber dos posible escenarios
+
+* **Escenario 1**: La acción cuesta 975, el bono paga el nominal de 875 y el derivado tiene un payoff de 100.
+* **Escenario 2**: La acción cuesta 740, el bono paga el nominal de 875 y el derivado tiene un payoff de 0.
+
+Encuentre un portafolio compuesto **sólo de acciones y bonos**, tal que replique el payoff del derivado, en otras palabras, que tantas acciones y
+que tantos bonos se deben de comprar para replicar el derivado.
+
+# **Determinantes y matrices inversas**
+
+## **Matriz inversa**
+
+Sea $\mathbf{A}$ una matriz **cuadrada** de $n \times n$. Una matriz, $\mathbf{B}$, de $n \times n$; se dice que es la **inversa** de $\mathbf{A}$ si:
+
+$$ \mathbf{A} \mathbf{B} = \mathbf{B} \mathbf{A} = \mathbf{I} $$
+
+en donde $\mathbf{I}$ es la matriz identidad de tamaño $n \times n$. En este caso decimos que $\mathbf{A}$ es **invertible** o **no singular**.
+Denotaremos a la inversa de $\mathbf{A}$ como $\mathbf{A}^{-1}$. Si una matriz no tiene inversa, decimos que es **no invertible** o **singular**.
+
+## 
+
+con *numpy* se puede obtener la matriz inversa con la función *inv* del módulo *linalg*
+
+```{python, python.reticulate = FALSE, eval = FALSE}
+from numpy.linalg import inv
+
+A = np.array([ [975, 875], [740, 875] ])
+
+#también puede ser np.linalg.inv
+A_inv = inv(A)
+
+#validamos
+identidad = np.identity(A.shape[0])
+np.allclose(A @ A_inv, identidad)
+np.allclose(A_inv @ A, identidad)
+```
+
+## **Teoremas**
+
+Sean $\mathbf{A}$ y $\mathbf{B}$ matrices cuadradas del mismo tamaño, entonces tenemos que:
+$$ (\mathbf{A} \mathbf{B})^{-1} = \mathbf{B}^{-1} \mathbf{A}^{-1}$$
+
+Si $\mathbf{A}$ es una matriz invertible, entonces su inversa es única.
+
+## **Ejercicio**
+
+Demuestre los teoremas anteriores.
+
+## **Determinante matriz $2 \times 2$**
+
+Sea
+
+$$
+\mathbf{A} = 
+\begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}
+$$
+
+una matriz de $2 \times 2$, el determinante de $\mathbf{A}$, se define como:
+
+$$det(\mathbf{A}) = \left| \mathbf{A} \right| =
+\begin{vmatrix}
+a & b \\
+c & d
+\end{vmatrix}
+= ad -bc.
+$$
+De forma recursiva, es posible obtener el determinante de una matriz de $n \times n$.
+
+## **Propiedades del determinante**
+
+Para una matriz de $n \times n$ $\mathbf{A}$, el determinante cumple lo siguiente:
+
+
+* $\mathbf{A}$ es  no singular si y sólo si $|\mathbf{A}| \neq 0$
+
+* $|\mathbf{A}^{T}| = |\mathbf{A}|$
+
+* $|\mathbf{A}^{-1}| = |\mathbf{A}|^{-1}$
+
+## 
+
+* $|\mathbf{A}| = 0$ para $\mathbf{A}$ singular.
+
+* $|c\mathbf{A}| = c^{n}|\mathbf{A}|$ para $c$ un escalar.
+
+* $|\mathbf{A}\mathbf{B}| = |\mathbf{A}| |\mathbf{B}|$ con $\mathbf{B}$ una matriz de \matdim{n}{n}
+
+##
+
+con *numpy* es posible calcular el determinante de una matriz con la función *det* del módulo *linalg*
+
+```{python, python.reticulate = FALSE, eval = FALSE}
+from numpy.linalg import det
+
+A = np.array([ [975, 875], [740, 875] ])
+det_A = det(A)
+
+```

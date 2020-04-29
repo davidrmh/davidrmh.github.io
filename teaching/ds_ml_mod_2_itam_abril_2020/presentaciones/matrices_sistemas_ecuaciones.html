@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="David R. Montalván Hernández" />
+  <title>Álgebra lineal - Matrices y sistemas de ecuaciones</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../../assets/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span. { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="../../assets/reveal.js-3.3.0.1/css/theme/sky.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+    <link href="../../assets/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+    <link href="../../assets/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Álgebra lineal - Matrices y sistemas de ecuaciones</h1>
+  <h1 class="subtitle">Módulo 2</h1>
+    <h2 class="author">David R. Montalván Hernández</h2>
+</section>
+
+<section class="slide level2">
+
+<p>En estas notas se repasarán algunos resultados relacionados a las matrices y los sistemas de ecuaciones lineales.</p>
+</section>
+<section><section id="matrices" class="title-slide slide level1"><h1><strong>Matrices</strong></h1></section><section id="matriz" class="slide level2">
+<h2><strong>Matriz</strong></h2>
+<p>Sean <span class="math inline">\(\mathbb{F}\)</span> un campo y <span class="math inline">\(n,m\)</span> entero positivos. Una matriz de tamaño <span class="math inline">\(m \times n\)</span> es un arreglo rectangular (<span class="math inline">\(m\)</span> renglones y <span class="math inline">\(n\)</span> columnas) de números en <span class="math inline">\(\mathbb{F}\)</span></p>
+<p><span class="math display">\[
+\begin{pmatrix}
+a_{11} &amp; a_{12} &amp; \ldots &amp; a_{1n} \\
+a_{21} &amp; a_{22} &amp; \ldots &amp; a_{2n} \\
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots \\
+a_{m1} &amp; a_{m2} &amp; \ldots &amp; a_{mn}
+\end{pmatrix}
+\]</span></p>
+<p>Si <span class="math inline">\(n=m\)</span>, decimos que es una matriz cuadrada. Para referirnos al elemento en el renglón <span class="math inline">\(i\)</span>, columna <span class="math inline">\(j\)</span> utilizaremos la notación <span class="math inline">\(a_{ij}\)</span>.</p>
+</section><section id="section" class="slide level2">
+<h2></h2>
+<p>De acuerdo a la definición de matriz, un vetor renglón es una matriz de <span class="math inline">\(1 \times n\)</span></p>
+<p><span class="math display">\[ \mathbf{a} = 
+\begin{pmatrix}
+a_{1} &amp; \ldots &amp; a_{n}
+\end{pmatrix}
+\]</span></p>
+<p>Un vector columna es una matriz de <span class="math inline">\(n \times 1\)</span></p>
+<p><span class="math display">\[
+\mathbf{b} = 
+\begin{pmatrix}
+b_{1} \\
+\vdots \\
+b_{n}
+\end{pmatrix}
+\]</span></p>
+</section><section id="section-1" class="slide level2">
+<h2></h2>
+<p>Con <em>numpy</em> creamos una matriz de la siguiente forma</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="im">import</span> numpy <span class="im">as</span> np</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co">#Matriz</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">matriz <span class="op">=</span> np.array([ [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>], [<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>] ])</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">#vector renglón</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">renglon_1 <span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]) <span class="co">#ndim = 1 shape = (3,)</span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co"># o también</span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">renglon_2 <span class="op">=</span> np.array( [ [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>] ]) <span class="co">#ndim = 2 shape = (1,3)</span></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="co">#Vector columna</span></a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">columna <span class="op">=</span> np.array([ [<span class="dv">1</span>], [<span class="dv">2</span>], [<span class="dv">3</span>] ]) <span class="co">#ndim = 2 shape = (3,1)</span></a></code></pre></div>
+</section><section id="matriz-transpuesta" class="slide level2">
+<h2><strong>Matriz transpuesta</strong></h2>
+<p>Sea <span class="math inline">\(\mathbf{A}\)</span> una matriz de tamaño <span class="math inline">\(m \times n\)</span>. La transpuesta de <span class="math inline">\(\mathbf{A}\)</span>, es la matriz, <span class="math inline">\(\mathbf{B}\)</span>, de tamaño <span class="math inline">\(n \times m\)</span> tal que <span class="math inline">\(b_{ij} = a_{ji}\)</span>, es decir, se intercambian renglones por columnas. Denotaremos a la matriz transpuesta de <span class="math inline">\(\mathbf{A}\)</span> como <span class="math inline">\(\mathbf{A}^{T}\)</span>.</p>
+</section><section id="ejercicio" class="slide level2">
+<h2><strong>Ejercicio</strong></h2>
+<p>Si</p>
+<p><span class="math display">\[
+\mathbf{A} = 
+\begin{pmatrix}
+2  &amp; 1 &amp; 0 \\
+1 &amp; 3 &amp; 5
+\end{pmatrix}
+\]</span></p>
+<p>obtener <span class="math inline">\(\mathbf{A}^T\)</span>.</p>
+</section><section id="section-2" class="slide level2">
+<h2></h2>
+<p>Utilizando <em>numpy</em> podemos utilizar el método <em>transpose</em> para obtener la matriz transpuesta.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb2-1" data-line-number="1">matriz_A <span class="op">=</span> np.array([ [<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>], [<span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">5</span>] ])</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">A_transp <span class="op">=</span> matriz_A.transpose()</a></code></pre></div>
+</section><section id="diagonal-de-una-matriz" class="slide level2">
+<h2><strong>Diagonal de una matriz</strong></h2>
+<p>Sea <span class="math inline">\(\mathbf{A}\)</span> una <strong>matriz cuadrada</strong> de <span class="math inline">\(n \times n\)</span>, la diagonal de <span class="math inline">\(\mathbf{A}\)</span> son los elementos <span class="math inline">\(a_{11}, a_{22}, \ldots, a_{nn}\)</span>.</p>
+</section><section id="section-3" class="slide level2">
+<h2></h2>
+<p>con <em>numpy</em> podemos utilizar el método <em>diagonal</em> para extraer la diagonal de una matriz</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co">#matriz de 3 x 3</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">matriz <span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>], [<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>], [<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>]])</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="bu">help</span>(np.diagonal)</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">diag <span class="op">=</span> matriz.diagonal()</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">matriz[<span class="dv">0</span>][<span class="dv">0</span>] <span class="op">=</span> <span class="dv">10</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#La matriz no tiene que ser necesariamente cuadrada</span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">matriz <span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>], [<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>]])</a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">diag <span class="op">=</span> matriz.diagonal()</a></code></pre></div>
+</section><section id="matriz-cero" class="slide level2">
+<h2><strong>Matriz cero</strong></h2>
+<p>La <strong>matriz cero</strong> se define como</p>
+<p><span class="math display">\[
+\mathbf{0} = 
+\begin{pmatrix}
+0 &amp; 0 &amp; \ldots &amp; 0 \\
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots \\
+0 &amp; 0 &amp; \ldots &amp; 0
+\end{pmatrix}
+\]</span></p>
+</section><section id="section-4" class="slide level2">
+<h2></h2>
+<p>con <em>numpy</em> podemos crear la matriz cero, utilizando la funcion <em>zeros</em></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb4-1" data-line-number="1">mat_cero <span class="op">=</span> np.zeros(shape <span class="op">=</span> (<span class="dv">2</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">mat_cero_bool <span class="op">=</span> np.zeros(shape <span class="op">=</span> (<span class="dv">2</span>, <span class="dv">3</span>), dtype <span class="op">=</span> <span class="bu">bool</span>)</a></code></pre></div>
+</section><section id="matrices-diagonal" class="slide level2">
+<h2><strong>Matrices diagonal</strong></h2>
+<p>Una matriz cuadrada de <span class="math inline">\(n \times n\)</span>, se dice que es una <strong>matriz diagonal</strong> si tiene la siguiente forma:</p>
+<p><span class="math display">\[
+\begin{pmatrix}
+a_{11} &amp; 0 &amp; \ldots &amp; 0 \\
+0 &amp; a_{22} &amp; \ldots &amp; 0 \\
+\vdots &amp; \vdots &amp; \ddots &amp; \ldots \\
+0 &amp; 0 &amp; \ldots &amp; a_{nn}
+\end{pmatrix}
+\]</span></p>
+<p>si <span class="math inline">\(a_{ii} = 1\)</span> para toda <span class="math inline">\(i\)</span>, la matriz recibe el nombre de <strong>matriz identidad</strong> o <strong>matriz unitaria</strong>.</p>
+</section><section id="section-5" class="slide level2">
+<h2></h2>
+<p>con <em>numpy</em> podemos utilizar la función <em>diagflat</em> para crear matrices diagonales</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb5-1" data-line-number="1">mi_diagonal <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>])</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">mat_diag <span class="op">=</span> np.diagflat(mi_diagonal)</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="bu">help</span>(np.diagflat)</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">np.diagflat(mi_diagonal, <span class="dv">2</span>) <span class="co">#shape (6, 6)</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">np.diagflat(mi_diagonal, <span class="dv">3</span>) <span class="co">#shape (7, 7)</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11">np.diagflat(mi_diagonal, <span class="dv">-3</span>) <span class="co">#shape (7, 7)</span></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#matriz indentidad</span></a>
+<a class="sourceLine" id="cb5-14" data-line-number="14">identidad <span class="op">=</span> np.identity(<span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb5-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#similiar pero no exactamente igual a identity</span></a>
+<a class="sourceLine" id="cb5-17" data-line-number="17">eye_cuadrada <span class="op">=</span> np.eye(<span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb5-18" data-line-number="18">eye_rectangular <span class="op">=</span> np.eye(<span class="dv">5</span>,<span class="dv">6</span>)</a></code></pre></div>
+</section><section id="matrices-triangulares" class="slide level2">
+<h2><strong>Matrices triangulares</strong></h2>
+<p>Se dice que una matriz cuadrada de <span class="math inline">\(n \times n\)</span> es <strong>triangular superior</strong> si los elementos que están debajo de la diagonal son igual a cero, es decir, <span class="math inline">\(a_{ij} = 0\)</span> para <span class="math inline">\(i &gt; j\)</span>.</p>
+<p><span class="math display">\[
+\begin{pmatrix}
+a_{11} &amp; a_{12} &amp; \ldots &amp; a_{1n} \\
+0 &amp; a_{22} &amp; \ldots &amp; a_{2n} \\
+\ldots &amp; \ldots &amp; \ddots &amp; \ldots \\
+0 &amp; 0 &amp; \ldots &amp; a_{nn}
+\end{pmatrix}
+\]</span></p>
+</section><section id="section-6" class="slide level2">
+<h2></h2>
+<p>De manera similar, se dice que es <strong>triangular inferior</strong> si <span class="math inline">\(a_{ij} = 0\)</span> para <span class="math inline">\(i &lt; j\)</span>.</p>
+<p><span class="math display">\[
+\begin{pmatrix}
+a_{11} &amp; 0 &amp; \ldots &amp; 0 \\
+a_{21} &amp; a_{22} &amp; \ldots &amp; 0 \\
+\ldots &amp; \ldots &amp; \ddots &amp; \ldots \\
+a_{n1} &amp; a_{n2} &amp; \ldots &amp; a_{nn}
+\end{pmatrix}
+\]</span></p>
+</section><section id="section-7" class="slide level2">
+<h2></h2>
+<p>con <em>numpy</em> podemos crear matrices triangulares con las funciones <em>triu</em> y <em>tril</em></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co">#matrix 3 x 3 triangular superior</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">np.triu([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>],[<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>],[<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>]])</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#matrix 3 x 3 triangular inferior</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">np.tril([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>],[<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>],[<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>]])</a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#¿Que pasa si no es una matriz cuadrada?</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#matriz de 4 x 3</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9">np.triu([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>],[<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>],[<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>], [<span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>]])</a></code></pre></div>
+</section><section id="ejercicios" class="slide level2">
+<h2><strong>Ejercicios</strong></h2>
+<ol type="1">
+<li><p>¿Cuál es la dimensión del espacio de matrices de <span class="math inline">\(m \times n\)</span>? Dé una base para este espacio.</p></li>
+<li><p>¿Cuál es la dimensión del espacio de matrices triangulares superiores de tamaño <span class="math inline">\(n \times n\)</span>?</p></li>
+<li><p>¿Cual es la dimensión del espacio de matrices simétricas de <span class="math inline">\(n \times n\)</span>? Dé una base para este espacio.</p></li>
+</ol>
+</section><section id="operaciones-con-matrices" class="slide level2">
+<h2><strong>Operaciones con matrices</strong></h2>
+<p><strong>Suma de matrices</strong></p>
+<p>Sean <span class="math inline">\(\mathbf{A}\)</span> y <span class="math inline">\(\mathbf{B}\)</span> matrices de tamaño <span class="math inline">\(m \times n\)</span>, definimos la suma <span class="math inline">\(\mathbf{A} + \mathbf{B}\)</span> como la matriz <span class="math inline">\(\mathbf{C}\)</span> tal que <span class="math inline">\(c_{ij} = a_{ij} + b_{ij}\)</span>. En otras palabras, la suma de matrices se realiza componente por componente.</p>
+<p><strong>Producto escalar</strong></p>
+<p>Sea <span class="math inline">\(\mathbf{A}\)</span> una matriz y <span class="math inline">\(c\)</span> un escalar, definimos la matriz <span class="math inline">\(\mathbf{B} = c\mathbf{A}\)</span> como la matriz cuya componente <span class="math inline">\(b_{ij} = c a_{ij}\)</span>. Es decir, multiplicamos cada elemento de <span class="math inline">\(\mathbf{A}\)</span> por el escalar <span class="math inline">\(c\)</span>.</p>
+</section><section id="algunos-resultados" class="slide level2">
+<h2><strong>Algunos resultados</strong></h2>
+<ol type="1">
+<li><p>Para cualquier matriz cuadrada <span class="math inline">\(\mathbf{A}\)</span>, la matriz <span class="math inline">\(\mathbf{A} + \mathbf{A}^{T}\)</span> es una matriz simétrica.</p></li>
+<li><p>Si <span class="math inline">\(\mathbf{A}\)</span> y <span class="math inline">\(\mathbf{B}\)</span> son matrices de <span class="math inline">\(m \times n\)</span>, entonces <span class="math display">\[ \left( \mathbf{A} + \mathbf{B} \right) ^{T} = \mathbf{A}^{T} + \mathbf{B}^{T}.\]</span></p></li>
+<li><p>Si <span class="math inline">\(\mathbf{A}\)</span> es una matriz de <span class="math inline">\(m \times n\)</span> y <span class="math inline">\(c\)</span> un escalar, entonces <span class="math display">\[ (c\mathbf{A})^{T} = c \mathbf{A}^{T}.\]</span></p></li>
+</ol>
+</section><section id="producto-punto" class="slide level2">
+<h2><strong>Producto punto</strong></h2>
+<p>Sean <span class="math inline">\(\mathbf{a} = (a_1, \ldots, a_n)\)</span> y <span class="math inline">\(\mathbf{b} = (b_1, \ldots, b_n)\)</span> dos vectores con entradas sobre un campo <span class="math inline">\(\mathbb{F}\)</span>, el <strong>producto punto</strong> entre <span class="math inline">\(\mathbf{a}\)</span> y <span class="math inline">\(\mathbf{b}\)</span> se define como</p>
+<p><span class="math display">\[\left&lt; \mathbf{a}, \mathbf{b} \right&gt; = \sum_{i=1}^{n} a_{i}b_{i}\]</span></p>
+</section><section id="propiedades-del-producto-punto" class="slide level2">
+<h2><strong>Propiedades del producto punto</strong></h2>
+<ul>
+<li><p><span class="math inline">\(\left&lt; \mathbf{a}, \mathbf{b} \right&gt; = \left&lt; \mathbf{b}, \mathbf{a} \right&gt;\)</span>.</p></li>
+<li><p><span class="math inline">\(\left&lt; \mathbf{a}, \mathbf{b} + \mathbf{c} \right&gt; = \left&lt; \mathbf{a}, \mathbf{b} \right&gt; + \left&lt; \mathbf{a}, \mathbf{c} \right&gt; = \left&lt; \mathbf{b} + \mathbf{c}, \mathbf{a} \right&gt;\)</span>.</p></li>
+<li><p>Si <span class="math inline">\(k\)</span> es un escalar, entonces</p></li>
+</ul>
+<p><span class="math display">\[
+\left&lt; k\mathbf{a}, \mathbf{b} \right&gt; = k\left&lt; \mathbf{a}, \mathbf{b} \right&gt; = \left&lt; \mathbf{a}, k\mathbf{b} \right&gt;
+\]</span></p>
+<ul>
+<li>Si los componentes de <span class="math inline">\(\mathbf{a}\)</span> son números reales, entonces</li>
+</ul>
+<p><span class="math display">\[
+\left&lt; \mathbf{a}, \mathbf{a} \right&gt; = \sum_{i=1}^{n}a_{i}^{2} \geq 0.
+\]</span></p>
+<ul>
+<li>Si <span class="math inline">\(\left&lt; \mathbf{a}, \mathbf{b} \right&gt; = 0\)</span> para todo <span class="math inline">\(\mathbf{b}\)</span>, entonces <span class="math inline">\(\mathbf{a} = (0,\ldots,0)\)</span>.</li>
+</ul>
+</section><section id="section-8" class="slide level2">
+<h2></h2>
+<p>Con <em>numpy</em> podemos realizar el producto punto de dos vectores utilizando la función <em>dot</em></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb7-1" data-line-number="1">vector1 <span class="op">=</span> np.array([<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>])</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">vector1 <span class="op">=</span> np.array([<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>])</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">np.dot(vector1, vector2)</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#o también utilizando el método dot</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">vector1.dot(vector2)</a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="bu">help</span>(np.dot)</a></code></pre></div>
+</section><section id="producto-de-matrices" class="slide level2">
+<h2><strong>Producto de matrices</strong></h2>
+<p>Sea <span class="math inline">\(\mathbf{A}\)</span> una matriz de <span class="math inline">\(m \times n\)</span> y <span class="math inline">\(\mathbf{B}\)</span> una matriz de <span class="math inline">\(n \times k\)</span>. El producto <span class="math inline">\(\mathbf{A}\mathbf{B}\)</span>, se define como la matriz de tamaño <span class="math inline">\(m \times k\)</span>:</p>
+<p><span class="math display">\[
+\begin{pmatrix}
+\left&lt; \mathbf{a_1}, \mathbf{b^1} \right&gt; &amp; \left&lt; \mathbf{a_1}, \mathbf{b^2} \right&gt; &amp; \ldots &amp; \left&lt; \mathbf{a_1}, \mathbf{b^k} \right&gt; \\
+\left&lt; \mathbf{a_2}, \mathbf{b^1} \right&gt; &amp; \left&lt; \mathbf{a_2}, \mathbf{b^2} \right&gt; &amp; \ldots &amp; \left&lt; \mathbf{a_2}, \mathbf{b^k} \right&gt; \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+\left&lt; \mathbf{a_m}, \mathbf{b^1} \right&gt; &amp; \left&lt; \mathbf{a_m}, \mathbf{b^2} \right&gt; &amp; \ldots &amp; \left&lt; \mathbf{a_m}, \mathbf{b^k} \right&gt; \\
+\end{pmatrix}
+\]</span></p>
+<p>en donde <span class="math inline">\(\mathbf{a_i}\)</span> representa el <span class="math inline">\(i-\)</span>ésimo renglón de <span class="math inline">\(\mathbf{A}\)</span> y <span class="math inline">\(\mathbf{b^i}\)</span> representa la <span class="math inline">\(i-\)</span>ésima columna de <span class="math inline">\(\mathbf{B}\)</span>.</p>
+</section><section id="propiedades-del-producto-de-matrices" class="slide level2">
+<h2><strong>Propiedades del producto de matrices</strong></h2>
+<ol type="1">
+<li><p><span class="math inline">\(\mathbf{A} \mathbf{B} \neq \mathbf{B} \mathbf{A}\)</span> (¿por qué?)</p></li>
+<li><p><span class="math inline">\(\mathbf{A} (\mathbf{B} + \mathbf{C}) = \mathbf{A}\mathbf{B} + \mathbf{A}\mathbf{C}\)</span>.</p></li>
+<li>Si <span class="math inline">\(k\)</span> es un escalar <span class="math display">\[\mathbf{A}(k\mathbf{B}) = k(\mathbf{AB})\]</span></li>
+<li><p><span class="math inline">\((\mathbf{AB})\mathbf{C} = \mathbf{A}(\mathbf{BC})\)</span>.</p></li>
+<li><p><span class="math inline">\((\mathbf{AB})^{T} = \mathbf{B}^{T} \mathbf{A}^{T}\)</span> (demostrar).</p></li>
+<li><p>Si <span class="math inline">\(\mathbf{A}\)</span> es una matriz cuadrada, entonces <span class="math inline">\(\mathbf{A}^{0} = \mathbf{I}\)</span> y para enteros no negativos, <span class="math inline">\(r\)</span> y <span class="math inline">\(s\)</span>, tenemos que <span class="math inline">\(\mathbf{A}^{r+s} = \mathbf{A}^{r} \mathbf{A}^{s}\)</span>.</p></li>
+</ol>
+</section><section id="section-9" class="slide level2">
+<h2></h2>
+<ol start="7" type="1">
+<li>El producto punto, puede escribirse como el producto de una matriz renglón con una matriz columna:</li>
+</ol>
+<p><span class="math display">\[
+\left&lt; \mathbf{a}, \mathbf{b} \right&gt;=
+\begin{pmatrix}
+a_1, \ldots , a_n
+\end{pmatrix}
+\begin{pmatrix}
+b_1 \\
+\vdots \\
+b_n
+\end{pmatrix}
+\]</span></p>
+<p>En la literatura, es muy común representar a los vectores como vectores columnas y por lo tanto <span class="math display">\[
+\left&lt; \mathbf{a}, \mathbf{b} \right&gt; = \mathbf{a}^{T} \mathbf{b}
+\]</span></p>
+</section><section id="section-10" class="slide level2">
+<h2></h2>
+<p>con <em>numpy</em> es posible realizar la multiplicación de matrices utilizando las siguientes funciones:</p>
+<ul>
+<li><p><em>dot</em> (no sugerida)</p></li>
+<li><p><em>matmul</em></p></li>
+</ul>
+<p>o el operador @.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb8-1" data-line-number="1">matriz_A <span class="op">=</span> np.array([ [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>], [<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>], [<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>] ])</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">matriz_B <span class="op">=</span> np.array([[<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>], [<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>], [<span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>] ] )</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#dot no es recomendado</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">np.dot(matriz_A, matriz_B)</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">np.matmul(matriz_A, matriz_B)</a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9">matriz_A <span class="op">@</span> matriz_B</a></code></pre></div>
+</section><section id="ejercicio-1" class="slide level2">
+<h2><strong>Ejercicio</strong></h2>
+<p>Implemente el producto de matrices sin utilizar numpy, es decir, utilizando únicamente listas.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb9-1" data-line-number="1">A <span class="op">=</span> [ [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>], [<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>], [<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>] ]</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">B <span class="op">=</span> [ [<span class="dv">1</span>,<span class="dv">2</span>], [<span class="dv">4</span>,<span class="dv">5</span>], [<span class="dv">7</span>,<span class="dv">8</span>] ]</a></code></pre></div>
+</section></section>
+<section><section id="sistemas-de-ecuaciones-lineales" class="title-slide slide level1"><h1><strong>Sistemas de ecuaciones lineales</strong></h1></section><section id="section-11" class="slide level2">
+<h2></h2>
+<p>Sean <span class="math inline">\(\mathbb{F}\)</span> un campo, <span class="math inline">\(\mathbf{A}\)</span> una matriz de <span class="math inline">\(m \times n\)</span> y <span class="math inline">\(b_1, \ldots, b_m\)</span> escalares de <span class="math inline">\(\mathbb{F}\)</span>. Ecuaciones del tipo</p>
+<p><span class="math display">\[
+\begin{array}{rcl}
+a_{11}x_1 + \ldots + a_{1n}x_n &amp; = &amp; b_1 \\
+a_{21}x_1 + \ldots + a_{2n}x_n &amp; = &amp; b_2 \\
+\vdots &amp;  &amp;  \\
+a_{m1}x_1 + \ldots + a_{mn}x_n &amp; = &amp; b_m
+\end{array}
+\]</span></p>
+<p>son llamados sistemas de ecuaciones lineales. Los elementos de la matriz <span class="math inline">\(\mathbf{A}\)</span> son llamados <strong>coeficientes</strong> y los elementos <span class="math inline">\(x_1, \ldots, x_n\)</span> <strong>incognitas</strong>.</p>
+</section><section id="section-12" class="slide level2">
+<h2></h2>
+<p>Si <span class="math inline">\(b_1 = b_2 = \ldots = b_m = 0\)</span>, entonces decimos que es un sistema <strong>homogéneo</strong> y el sistema homogéneo asociado al sistema anterior es:</p>
+<p><span class="math display">\[
+\begin{array}{rcl}
+a_{11}x_1 + \ldots + a_{1n}x_n &amp; = &amp; 0 \\
+a_{21}x_1 + \ldots + a_{2n}x_n &amp; = &amp; 0 \\
+\vdots &amp;  &amp;  \\
+a_{m1}x_1 + \ldots + a_{mn}x_n &amp; = &amp; 0
+\end{array}
+\]</span> Este sistema siempre tiene una solución, conocida como <strong>solución trivial</strong>.</p>
+</section><section id="section-13" class="slide level2">
+<h2></h2>
+<p>Utilizando las columnas de la matriz <span class="math inline">\(\mathbf{A}\)</span>, podemos reescribir el sistema de ecuaciones como:</p>
+<p><span class="math display">\[
+\begin{array}{crl}
+x_1
+\begin{pmatrix}
+a_{11} \\
+\vdots \\
+a_{m1}
+\end{pmatrix}
++ \ldots + 
+x_n
+\begin{pmatrix}
+a_{1n} \\
+\vdots \\
+a_{mn}
+\end{pmatrix}
+&amp; = &amp; 
+\begin{pmatrix}
+b_1 \\
+\vdots \\
+b_m
+\end{pmatrix}
+\end{array}
+\]</span></p>
+<p>o denotando a la <span class="math inline">\(j-\)</span>ésima columna de <span class="math inline">\(\mathbf{A}\)</span> como <span class="math inline">\(\mathbf{a_{j}}\)</span> y al vector (columna) <span class="math inline">\((b_1, \ldots, b_m)^{T}\)</span> como <span class="math inline">\(\mathbf{b}\)</span> <span class="math display">\[ x_1\mathbf{a_{1}} + \ldots + x_n \mathbf{a_{n}} = \mathbf{b}.\]</span> En el caso de un sistema homogéneo, la existencia de una solución no trivial implica una dependencia lineal entre los vectores formados por las columnas de la matriz <span class="math inline">\(\mathbf{A}.\)</span></p>
+</section><section id="teorema" class="slide level2">
+<h2><strong>Teorema</strong></h2>
+<p>Sea</p>
+<p><span class="math display">\[
+\begin{array}{rcl}
+a_{11}x_1 + \ldots + a_{1n}x_n &amp; = &amp; 0 \\
+a_{21}x_1 + \ldots + a_{2n}x_n &amp; = &amp; 0 \\
+\vdots &amp;  &amp;  \\
+a_{m1}x_1 + \ldots + a_{mn}x_n &amp; = &amp; 0
+\end{array}
+\]</span></p>
+<p>un sistema homogéneo de ecuaciones lineales. Si <span class="math inline">\(n&gt;m\)</span>, entonces existe una solución no trivial.</p>
+</section><section id="ejercicio-2" class="slide level2">
+<h2><strong>Ejercicio</strong></h2>
+<p>Demuestre el teorema anterior.</p>
+<p><strong>Sugerencia:</strong> Utilice uno de los últimos resultados que se vio en la clase pasada.</p>
+</section><section id="ejercicio-3" class="slide level2">
+<h2><strong>Ejercicio</strong></h2>
+<p>Suponga que se tiene un sistema lineal homogéneo y que <span class="math inline">\(n = m\)</span>. Además suponga que las columnas de la matriz <span class="math inline">\(\mathbf{A}\)</span> son linealmente independientes. Demuestre que la única solución es la solución trivial.</p>
+</section><section id="section-14" class="slide level2">
+<h2></h2>
+<p>con numpy es posible resolver sistemas de ecuaciones lineales utilizando la función <em>solve</em> del módulo <em>linalg</em></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="im">from</span> numpy.linalg <span class="im">import</span> solve</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co">#Matriz de coeficientes</span></a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">A <span class="op">=</span> np.array([ [<span class="dv">3</span>,<span class="dv">1</span>], [<span class="dv">1</span>,<span class="dv">2</span>] ])</a>
+<a class="sourceLine" id="cb10-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#vector columna b</span></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7">b <span class="op">=</span> np.array([<span class="dv">9</span>,<span class="dv">8</span>])</a>
+<a class="sourceLine" id="cb10-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#solucion</span></a>
+<a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#también se puede hacer np.linalg.solve</span></a>
+<a class="sourceLine" id="cb10-11" data-line-number="11">x <span class="op">=</span> solve(A, b)</a>
+<a class="sourceLine" id="cb10-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb10-13" data-line-number="13"><span class="co">#Podemos validar la solución</span></a>
+<a class="sourceLine" id="cb10-14" data-line-number="14"><span class="co">#utilizando la función allclose</span></a>
+<a class="sourceLine" id="cb10-15" data-line-number="15">np.allclose(A <span class="op">@</span> x, b)</a></code></pre></div>
+</section><section id="rreplicando-un-instrumento" class="slide level2">
+<h2><strong>Rreplicando un instrumento</strong></h2>
+<p>Suponga que se tienen tres instrumentos (una acción, un bono libre de riesgo y un derivado) y que en un año sólo puede haber dos posible escenarios</p>
+<ul>
+<li><strong>Escenario 1</strong>: La acción cuesta 975, el bono paga el nominal de 875 y el derivado tiene un payoff de 100.</li>
+<li><strong>Escenario 2</strong>: La acción cuesta 740, el bono paga el nominal de 875 y el derivado tiene un payoff de 0.</li>
+</ul>
+<p>Encuentre un portafolio compuesto <strong>sólo de acciones y bonos</strong>, tal que replique el payoff del derivado, en otras palabras, que tantas acciones y que tantos bonos se deben de comprar para replicar el derivado.</p>
+</section></section>
+<section><section id="determinantes-y-matrices-inversas" class="title-slide slide level1"><h1><strong>Determinantes y matrices inversas</strong></h1></section><section id="matriz-inversa" class="slide level2">
+<h2><strong>Matriz inversa</strong></h2>
+<p>Sea <span class="math inline">\(\mathbf{A}\)</span> una matriz <strong>cuadrada</strong> de <span class="math inline">\(n \times n\)</span>. Una matriz, <span class="math inline">\(\mathbf{B}\)</span>, de <span class="math inline">\(n \times n\)</span>; se dice que es la <strong>inversa</strong> de <span class="math inline">\(\mathbf{A}\)</span> si:</p>
+<p><span class="math display">\[ \mathbf{A} \mathbf{B} = \mathbf{B} \mathbf{A} = \mathbf{I} \]</span></p>
+<p>en donde <span class="math inline">\(\mathbf{I}\)</span> es la matriz identidad de tamaño <span class="math inline">\(n \times n\)</span>. En este caso decimos que <span class="math inline">\(\mathbf{A}\)</span> es <strong>invertible</strong> o <strong>no singular</strong>. Denotaremos a la inversa de <span class="math inline">\(\mathbf{A}\)</span> como <span class="math inline">\(\mathbf{A}^{-1}\)</span>. Si una matriz no tiene inversa, decimos que es <strong>no invertible</strong> o <strong>singular</strong>.</p>
+</section><section id="section-15" class="slide level2">
+<h2></h2>
+<p>con <em>numpy</em> se puede obtener la matriz inversa con la función <em>inv</em> del módulo <em>linalg</em></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="im">from</span> numpy.linalg <span class="im">import</span> inv</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">A <span class="op">=</span> np.array([ [<span class="dv">975</span>, <span class="dv">875</span>], [<span class="dv">740</span>, <span class="dv">875</span>] ])</a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="co">#también puede ser np.linalg.inv</span></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6">A_inv <span class="op">=</span> inv(A)</a>
+<a class="sourceLine" id="cb11-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb11-8" data-line-number="8"><span class="co">#validamos</span></a>
+<a class="sourceLine" id="cb11-9" data-line-number="9">identidad <span class="op">=</span> np.identity(A.shape[<span class="dv">0</span>])</a>
+<a class="sourceLine" id="cb11-10" data-line-number="10">np.allclose(A <span class="op">@</span> A_inv, identidad)</a>
+<a class="sourceLine" id="cb11-11" data-line-number="11">np.allclose(A_inv <span class="op">@</span> A, identidad)</a></code></pre></div>
+</section><section id="teoremas" class="slide level2">
+<h2><strong>Teoremas</strong></h2>
+<p>Sean <span class="math inline">\(\mathbf{A}\)</span> y <span class="math inline">\(\mathbf{B}\)</span> matrices cuadradas del mismo tamaño, entonces tenemos que: <span class="math display">\[ (\mathbf{A} \mathbf{B})^{-1} = \mathbf{B}^{-1} \mathbf{A}^{-1}\]</span></p>
+<p>Si <span class="math inline">\(\mathbf{A}\)</span> es una matriz invertible, entonces su inversa es única.</p>
+</section><section id="ejercicio-4" class="slide level2">
+<h2><strong>Ejercicio</strong></h2>
+<p>Demuestre los teoremas anteriores.</p>
+</section><section id="determinante-matriz-2-times-2" class="slide level2">
+<h2><strong>Determinante matriz <span class="math inline">\(2 \times 2\)</span></strong></h2>
+<p>Sea</p>
+<p><span class="math display">\[
+\mathbf{A} = 
+\begin{pmatrix}
+a &amp; b \\
+c &amp; d
+\end{pmatrix}
+\]</span></p>
+<p>una matriz de <span class="math inline">\(2 \times 2\)</span>, el determinante de <span class="math inline">\(\mathbf{A}\)</span>, se define como:</p>
+<p><span class="math display">\[det(\mathbf{A}) = \left| \mathbf{A} \right| =
+\begin{vmatrix}
+a &amp; b \\
+c &amp; d
+\end{vmatrix}
+= ad -bc.
+\]</span> De forma recursiva, es posible obtener el determinante de una matriz de <span class="math inline">\(n \times n\)</span>.</p>
+</section><section id="propiedades-del-determinante" class="slide level2">
+<h2><strong>Propiedades del determinante</strong></h2>
+<p>Para una matriz de <span class="math inline">\(n \times n\)</span> <span class="math inline">\(\mathbf{A}\)</span>, el determinante cumple lo siguiente:</p>
+<ul>
+<li><p><span class="math inline">\(\mathbf{A}\)</span> es no singular si y sólo si <span class="math inline">\(|\mathbf{A}| \neq 0\)</span></p></li>
+<li><p><span class="math inline">\(|\mathbf{A}^{T}| = |\mathbf{A}|\)</span></p></li>
+<li><p><span class="math inline">\(|\mathbf{A}^{-1}| = |\mathbf{A}|^{-1}\)</span></p></li>
+</ul>
+</section><section id="section-16" class="slide level2">
+<h2></h2>
+<ul>
+<li><p><span class="math inline">\(|\mathbf{A}| = 0\)</span> para <span class="math inline">\(\mathbf{A}\)</span> singular.</p></li>
+<li><p><span class="math inline">\(|c\mathbf{A}| = c^{n}|\mathbf{A}|\)</span> para <span class="math inline">\(c\)</span> un escalar.</p></li>
+<li><p><span class="math inline">\(|\mathbf{A}\mathbf{B}| = |\mathbf{A}| |\mathbf{B}|\)</span> con <span class="math inline">\(\mathbf{B}\)</span> una matriz de </p></li>
+</ul>
+</section><section id="section-17" class="slide level2">
+<h2></h2>
+<p>con <em>numpy</em> es posible calcular el determinante de una matriz con la función <em>det</em> del módulo <em>linalg</em></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="im">from</span> numpy.linalg <span class="im">import</span> det</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3">A <span class="op">=</span> np.array([ [<span class="dv">975</span>, <span class="dv">875</span>], [<span class="dv">740</span>, <span class="dv">875</span>] ])</a>
+<a class="sourceLine" id="cb12-4" data-line-number="4">det_A <span class="op">=</span> det(A)</a></code></pre></div>
+</section></section>
+    </div>
+  </div>
+
+  <script src="../../assets/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="../../assets/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: true,
+        // Enables touch navigation on devices with touch input
+        touch: true,
+        // Transition style
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+
+
+        chalkboard: {
+        },
+
+        keyboard: {
+          67: function() { RevealChalkboard.toggleNotesCanvas() },    // toggle notes canvas when 'c' is pressed
+          66: function() { RevealChalkboard.toggleChalkboard() }, // toggle chalkboard when 'b' is pressed
+          46: function() { RevealChalkboard.clear() },    // clear chalkboard when 'DEL' is pressed
+           8: function() { RevealChalkboard.reset() },    // reset chalkboard data on current slide when 'BACKSPACE' is pressed
+          68: function() { RevealChalkboard.download() }, // downlad recorded chalkboard drawing when 'd' is pressed
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: '../../assets/reveal.js-3.3.0.1/plugin/chalkboard/chalkboard.js', async: true },
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>
