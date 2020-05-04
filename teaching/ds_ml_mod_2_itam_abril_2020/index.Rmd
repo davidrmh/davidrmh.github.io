@@ -18,7 +18,7 @@ Seguiremos utilizando el lenguaje **python** como lenguaje de programación, as�
 
 Además, este módulo depende fuertemente del la librería **numpy**
 
-```{python, eval = FALSE, python.reticulate = FALSE}
+```python
 import numpy as np
 ```
 
@@ -33,7 +33,8 @@ Las referencias serán compartidas por el profesor a tráves de una liga de **on
 |Fecha|Tema|Presentación|Notebook|Ejercicios|Soluciones|
 |:-----:|:-----|:------------|:--------|:----------|:--|
 |27 abril 2020|Espacios vectoriales|[Espacios vectoriales](./presentaciones/espacios_vectoriales.html)|--|En la presentación|Vistas en clase|
-|29 abril 2020|Matrices y sistemas de ecuaciones|[Matrices y sistemas de ecuaciones](./presentaciones/matrices_sistemas_ecuaciones.html)|--|Notebook|[Producto matrices](./ejercicios/producto_matrices.ipynb)|
+|29 abril 2020|Matrices y sistemas de ecuaciones|[Matrices y sistemas de ecuaciones](./presentaciones/matrices_sistemas_ecuaciones.html)|--|En la presentación|[Producto matrices](./ejercicios/producto_matrices.ipynb)|
+|4 de mayo 2020|Producto escalar y valores característicos|[Producto escalar y valores característicos](./presentaciones/producto_escalar_eig_valores.html)|--|En la presentación|--|
 
 # **Contacto**
 [david.montalvan@itam.mx](mailto:david.montalvan@itam.mx)
