@@ -1,0 +1,307 @@
+---
+title: "PCA y SVD"
+author: "David R. Montalván Hernández"
+subtitle: "Módulo 2"
+output: 
+  revealjs::revealjs_presentation:
+    theme: sky
+    highlight: kate
+    transition: fade
+    incremental: false
+    center: true
+    self_contained: true
+---
+
+En estas notas se presentan dos de las metodologías más famosas para reducir la dimensión en un conjunto de datos.
+
+# **Análisis de componentes principales (PCA)**
+
+## **Formas cuadráticas**
+
+Sea $\mathbf{A}$ una matriz de $n \times n$, la **forma cuadrática** asociada a $\mathbf{A}$, es la expresión
+
+$$ \mathbf{x}^{T} \mathbf{Ax}$$
+
+en donde $\mathbf{x}$ es un vector (columna) de dimensión $n$.
+
+¿Que dimensión tiene la forma cuadrática de una matriz?
+
+## **Matrices definidas**
+
+* $\mathbf{A}$ una matriz de $n \times n$, es una matriz **definida positiva** si $\mathbf{x}^{T} \mathbf{Ax} > 0$ para todo vector $n-$dimensional $\mathbf{x} \neq \mathbf{0}$.
+
+* Si $\mathbf{x}^{T} \mathbf{Ax} < 0$ para todo vector $\mathbf{x} \neq \mathbf{0}$, decimos que es **definida negativa**.
+
+* $\mathbf{x}^{T} \mathbf{Ax} \geq 0$ para todo vector $\mathbf{x} \neq \mathbf{0}$, decimos que es **semidefinida positiva**.
+
+* $\mathbf{x}^{T} \mathbf{Ax} \leq 0$ para todo vector $\mathbf{x} \neq \mathbf{0}$, decimos que es **semidefinida negativa**.
+
+## **Proposición**
+
+Para una matriz, $\mathbf{A}$ de $n \times n$, las siguientes condiciones son equivalentes:
+
+a) $\mathbf{A}$ es una matriz simétrica definida positiva.
+
+b) $\mathbf{x}^{T} \mathbf{Ax} > 0$ para todo $\mathbf{x} \neq \mathbf{0}$.
+
+c) Todos los valores característicos de $\mathbf{A}$ son positivos.
+
+## **Proposición**
+
+Para una matriz, $\mathbf{A}$ de $n \times n$, las siguientes condiciones son equivalentes:
+
+a) $\mathbf{A}$ es una matriz simétrica semidefinida positiva.
+
+b) $\mathbf{x}^{T} \mathbf{Ax} \geq 0$ para todo $\mathbf{x} \neq \mathbf{0}$.
+
+c) Todos los valores característicos de $\mathbf{A}$ son no negativos.
+
+## **Matriz de varianzas y covarianzas**
+
+Si $\mathbf{X} = (X_1, X_2, \ldots, X_n)$ representa un vector aleatorio, la matriz de varianzas y covarianzas de $\mathbf{X}$ está dada por
+
+$$
+\mathbf{\Sigma} =
+\begin{pmatrix}
+Var(X_1) & Cov(X_1, X_2) & \ldots & Cov(X_1, X_n)\\
+Cov(X_2, X_1) & Var(X_2) & \ldots & Cov(X_2, X_n)\\
+\vdots & \vdots & \vdots & \vdots \\
+Cov(X_n, X_1) & Cov(X_n, X_2) & \ldots & Var(X_n)
+\end{pmatrix}
+$$
+
+##
+
+La **matriz de varianzas y covarianzas** es una matriz simétrica, por lo tanto sus valores característicos pertenecen a $\mathbb{R}$, además es posible  demostrar que esta matriz es semidefinida positiva, en consecuencia, todos sus valores característicos son no negativos.
+
+## **Componentes principales**
+
+Se tiene una matriz $\mathbf{X}_{m \times n}$  $m$ observaciones, $n$ variables y con valores en $\mathbb{R}$. Cada columna, $\mathbf{x_1}, \ldots, \mathbf{x_n}$ tiene media igual a cero y desviación estándar igual a uno.
+
+Los **componentes principales** son vectores obtenidos a través de una combinación lineal de las columnas de $\mathbf{X}$ y se construyen de tal forma que:
+
+* Cada componente principal no está correlacionado con los demás.
+
+* El primer componente explica la mayor variabilidad en los datos, el segundo la variabilidad no explicada por el primero y así sucesivamente.
+
+## **Primer componente principal**
+
+Se busca un vector $\mathbf{\alpha_1}$ que maximice la varianza $var \left[ \mathbf{\alpha_1}^{T} \mathbf{x} \right] = \mathbf{\alpha_1}^{T} \Sigma \mathbf{\alpha_1}$ con la restricción de que $\mathbf{\alpha_1}^{T} \mathbf{\alpha_1} = 1$.
+
+El vector $\mathbf{x}$ es un vector aleatorio con la distribución de nuestros datos y $\Sigma$ su matriz de varianzas y covarianzas.
+
+##
+
+Utilizando multiplicadores de Lagrange, este problema puede resolverse maximizando la expresión
+
+$$
+\mathbf{\alpha_1}^{T} \Sigma \mathbf{\alpha_1} - \lambda_{1} (\mathbf{\alpha_1}^{T} \mathbf{\alpha_1} - 1 )
+$$
+en donde $\lambda_{1}$ es el multiplicador de Lagrange.
+
+## 
+
+Derivando la expresión anterior respecto a $\mathbf{\alpha_1}$ e igualando a $0$
+
+$$
+\Sigma \mathbf{\alpha_1} - \lambda_{1} \mathbf{\alpha_1} = \left( \Sigma - \lambda_{1} \mathbf{I}  \right) \mathbf{\alpha_1} = 0.
+$$
+Es decir $\mathbf{\alpha_1}$ es un vector característico de la matriz $\Sigma$ y por lo tanto $var \left[ \mathbf{\alpha_1}^{T} \mathbf{x} \right] = \mathbf{\alpha_1}^{T} \Sigma \mathbf{\alpha_1} = \lambda_{1} \mathbf{\alpha_1}^{T} \mathbf{\alpha_1}$ y esta última expresión se maximiza si $\lambda_1$ es el valor característico más grande.
+
+## **Segundo componente principal**
+
+Se buscar maximizar la varianza $var \left[ \mathbf{\alpha_2}^{T} \mathbf{x} \right] = \mathbf{\alpha_2}^{T} \Sigma \mathbf{\alpha_2}$ 
+
+con la restricción de que $\mathbf{\alpha_2}^{T} \mathbf{\alpha_2} = 1$ y que 
+
+$cov\left[ \mathbf{\alpha_1}^{T} \mathbf{x}, \mathbf{\alpha_2}^{T} \mathbf{x} \right] = 0$.
+
+Esta última condición implica que
+
+$$
+\mathbf{\alpha_1}^{T} \Sigma \mathbf{\alpha_2} = \mathbf{\alpha_2}^{T} \Sigma \mathbf{\alpha_1} =  \lambda_{1} \mathbf{\alpha_1}^{T} \mathbf{\alpha_2} = 0
+$$
+
+##
+
+Utilizando multiplicadores de Lagrange
+
+$$
+\mathbf{\alpha_2}^{T} \Sigma \mathbf{\alpha_2} - \lambda_2 (\mathbf{\alpha_2}^{T}\mathbf{\alpha_2} - 1) - \phi \mathbf{\alpha_2}^{T}\mathbf{\alpha_1}
+$$
+
+Derivando con respecto a $\mathbf{\alpha_2}$ e igualando a cero
+
+$$
+\Sigma \mathbf{\alpha_2} - \lambda_2 \mathbf{\alpha_2} - \phi \mathbf{\alpha_1} = 0.
+$$
+
+Multiplicando por la izquierda por $\mathbf{\alpha_1}^{T}$
+
+$$
+\mathbf{\alpha_1}^{T} \Sigma \mathbf{\alpha_2} - \lambda_2 \mathbf{\alpha_1}^{T} \mathbf{\alpha_2} - \phi \mathbf{\alpha_1}^{T} \mathbf{\alpha_1} = 0.
+$$
+
+Utilizando la restricción de covarianza cero, sabemos que $\mathbf{\alpha_1}^{T} \Sigma \mathbf{\alpha_2} = \mathbf{\alpha_1}^{T} \mathbf{\alpha_2} = 0$ y por lo tanto $\phi = 0$.
+
+##
+
+Así, tenemos que 
+
+$$
+\Sigma \mathbf{\alpha_2} - \lambda_2 \mathbf{\alpha_2} = \left( \Sigma - \lambda\mathbf{I}  \right) \mathbf{\alpha_2} = 0
+$$
+
+$\mathbf{\alpha_2}$ es nuevamente un vector característico de la matriz $\Sigma$ y $var \left[ \mathbf{\alpha_2}^{T} \mathbf{x} \right] = \mathbf{\alpha_2}^{T} \Sigma \mathbf{\alpha_2} = \lambda_{2} \mathbf{\alpha_2}^{T} \mathbf{\alpha_2}$.
+
+Si $\lambda_2 = \lambda_1$, entonces $\mathbf{\alpha_2} = \mathbf{\alpha_1}$, lo que viola la restricción de correlación igual a cero.
+
+Para maximizar $var \left[ \mathbf{\alpha_2}^{T} \mathbf{x} \right]$ tomamos el segundo valor característico más grande.
+
+Con argumentos similares, es posible generalizar para los demás componentes.
+
+## **Matriz de componentes principales**
+
+Si $\mathbf{X}$ es nuestra matriz de datos (media cero, desviación estándar uno), entonces la matriz $\mathbf{P}$ cuyas columnas están formadas por los componentes principales, está dada por
+
+$$ \mathbf{P} = \mathbf{XW}$$
+
+en donde $\mathbf{W}$ es la matriz formada por los vectores característicos de la matriz de varianzas y covarianzas de $\mathbf{X}$.
+
+¿Cuál es la dimensión de cada matriz?
+
+## **Variación total**
+
+La variación total de la matriz $\mathbf{X}$, es la suma de los valores característicos de la matriz $\Sigma$. Es decir
+
+$$\lambda_1 + \ldots + \lambda_n.$$
+
+
+Así, podemos calcular la proporción de variación que es explicada por el $j-$ésimo componente principal
+
+$$
+\dfrac{\lambda_j}{\lambda_1 + \ldots + \lambda_n}
+$$
+
+## 
+
+Para reducir la dimensión de nuestros datos, en lugar de utilizar las $n$ columnas de la matriz $\mathbf{X}$ podemos utilizar las primeras $k$ columnas de la matriz $\mathbf{P}$.
+
+El número $k$ usualmente se determina estableciendo un umbral $r$ y tomando $k$ como
+
+$$
+k = min \left\lbrace k^*: \dfrac{\lambda_1 + \ldots + \lambda_{k^*} }{\lambda_1 + \ldots + \lambda_n} > r \right\rbrace
+$$
+
+##
+
+Podemos aproximar la matriz original de datos $\mathbf{X}$, seleccionando un valor apropiado de $k$ y tomando
+
+$$
+\mathbf{P}_{m \times k} \mathbf{W}_{k \times n}^{T} \approx \mathbf{X}_{m \times n}
+$$
+
+## **Ejercicios**
+
+* Compruebe que el $j-$ésimo componente principal, es decir, la columna $j-$ésima de $\mathbf{P}$, se escribe como una combinación lineal de las columnas de $\mathbf{X}$ en donde los coeficientes están dados por el $j-$ésimo vector propio de la matriz $\Sigma$.
+
+* Notebook **PCA.ipynb**
+
+# **Descomposición por valores singulares (SVD)**
+
+## **Rango de una matriz**
+
+El **rango de las columnas** de una matriz $\mathbf{A}$, es el número de columnas de $\mathbf{A}$ que son linealmente independientes.
+
+El **rango de los renglones** de una matriz $\mathbf{A}$, es el número de renglones de $\mathbf{A}$ que son linealmente independientes.
+
+Es posible demostrar que estos rangos son iguales.
+
+## **SVD**
+
+Sea $\mathbf{A}$ una matriz de $m \times n$ sobre el campo $\mathbb{R}$ con un rango $r \leq min(m,n)$. Existen matrices **ortonormales** $\mathbf{U}$ de $m \times m$ y $\mathbf{V}$ de $n \times n$, tales que
+
+$$
+\mathbf{A} = \mathbf{U\Sigma}\mathbf{V}^{T}   \text{ en donde}
+$$
+$$
+\mathbf{\Sigma}_{m \times n} = 
+\begin{pmatrix}
+\mathbf{D} & \mathbf{O} \\
+\mathbf{O} & \mathbf{O}
+\end{pmatrix}
+$$
+
+##
+
+$$
+\mathbf{D}_{r \times r} = 
+\begin{pmatrix}
+\sigma_1 & 0 & \ldots & 0 \\
+0 & \sigma_2 & \ldots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \ldots & \sigma_r
+\end{pmatrix}
+$$
+
+los $\sigma_i$'s son números reales tales que $\sigma_1 \geq \sigma_2 \ldots \geq \sigma_r \geq 0$ estos números son llamados **valores singulares** de la matriz $\mathbf{A}$.
+
+##
+
+* Las columnas de la matriz $\mathbf{U}_{m \times m}$ (left singular vectors) son los vectores característicos ortonormales de la matriz $\mathbf{A}\mathbf{A}^{T}$.
+
+* Las columnas de la matriz $\mathbf{V}_{n \times n}$ (right singular vectors) son los vectores característicos ortonormales de la matriz $\mathbf{A}^{T}\mathbf{A}$.
+
+* Los valores singurales $\sigma_i$ corresponde a la raíz cuadrada de los valores caraterísticos, $\lambda_i$, de la matriz $\mathbf{A}^{T}\mathbf{A}$ (que son los mismos valores característicos de la matriz $\mathbf{A}\mathbf{A}^{T}$).
+
+$$
+\sigma_i = \sqrt{\lambda_i}
+$$
+
+## 
+
+En numpy es posible obtener la descomposición por valores singulares con la función ```svd``` del módulo ```linalg```
+```python
+import numpy as np
+help(np.linalg.svd)
+```
+
+## **Teorema**
+
+Suponga que la matriz $\mathbf{A} \in \mathbb{R}^{m \times n}$ tiene rango $r > k$. 
+
+El problema 
+
+$$
+\min_{rango(\mathbf{Z}) = k} ||\mathbf{A} - \mathbf{Z}||_{Frobenius}
+$$
+
+Tiene la solución
+
+$$
+\mathbf{Z} = \mathbf{A_k} = \mathbf{U}_{k} \mathbf{\Sigma}_{k}  \mathbf{V}_{k}^{T}
+$$
+
+en donde $\mathbf{U}_{k} = (u_1,\ldots,u_k)$,  $\mathbf{V}_{k} = (v_1,\ldots,v_k)$ y $\mathbf{\Sigma}_{k} = diag(\sigma_1, \ldots, \sigma_k)$.
+
+Los vectores $u_i, v_i$ son vectores columna.
+
+## 
+
+Otra forma de calcular la matriz $\mathbf{A}_k$, es utilizando la expresión
+
+$$
+\mathbf{A}_k = \sum_{i = 1}^{k} \sigma_{i} \mathbf{u}_{i} \mathbf{v}_{i}^{T}
+$$
+
+Con esta expresión, vemos que en lugar de almacenar en memoria $m \times n$  números, podemos utilizar una aproximación que requiere de $k (m + n + 1)$ números.
+
+Podemos obtener el número $k$ con la siguiente heurística
+$$
+k = min \left\lbrace k^*: \dfrac{\sigma_1 + \ldots + \sigma_{k^*} }{\sigma_1 + \ldots + \sigma_n} > umbral \right\rbrace
+$$
+
+
+## **Ejercicios**
+
+* Notebook **SVD.ipynb**.
