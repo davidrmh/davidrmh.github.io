@@ -34,8 +34,8 @@ Las referencias serán compartidas por el profesor a tráves de una liga de **on
 |:-----:|:-----|:------------|:--------|:----------|:--|
 |27 abril 2020|Espacios vectoriales|[Espacios vectoriales](./presentaciones/espacios_vectoriales.html)|--|En la presentación|Vistas en clase|
 |29 abril 2020|Matrices y sistemas de ecuaciones|[Matrices y sistemas de ecuaciones](./presentaciones/matrices_sistemas_ecuaciones.html)|--|En la presentación|[Producto matrices](./ejercicios/producto_matrices.ipynb)|
-|4 de mayo 2020|Producto escalar y valores característicos|[Producto escalar y valores característicos](./presentaciones/producto_escalar_eig_valores.html)|--|En la presentación|[Normas](./ejercicios/normas.ipynb)|
-|6 de mayo 2020|PCA y SVD|[PCA y SVD](./presentaciones/pca_svd.html)|--|[PCA](./notebooks/PCA_ejercicio.ipynb) <br> [SVD](./notebooks/SVD_ejercicio.ipynb) <br> [Proyecto 1 PCA (Entrega miércoles 13 de mayo 2020 antes de clase)](./proyectos/Proyecto_PCA.ipynb) <br> [indices.csv](./datos/indices.csv)|--|
+|4 de mayo 2020|Producto escalar y valores característicos|[Producto escalar y valores característicos](./presentaciones/producto_escalar_eig_valores.html)|--|En la presentación|[* Normas](./ejercicios/normas.ipynb) <br>[* Cálculo eig vectores](./soluciones/eig_vectores.ipynb)|
+|6 de mayo 2020|PCA y SVD|[PCA y SVD](./presentaciones/pca_svd.html)|--|[* PCA](./notebooks/PCA_ejercicio.ipynb) <br> [* SVD](./notebooks/SVD_ejercicio.ipynb) <br> [* Proyecto 1 PCA (Entrega miércoles 13 de mayo 2020 antes de clase)](./proyectos/Proyecto_PCA.ipynb) <br> [* indices.csv](./datos/indices.csv)|[* PCA](./soluciones/PCA_soluciones.ipynb) <br> [* SVD](./soluciones/SVD_soluciones.ipynb)|
 
 # **Contacto**
 [david.montalvan@itam.mx](mailto:david.montalvan@itam.mx)
