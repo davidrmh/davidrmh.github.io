@@ -1,0 +1,244 @@
+---
+title: "Conceptos básicos de probabilidad"
+author: "David R. Montalván Hernández"
+subtitle: "Módulo 2"
+output: 
+  revealjs::revealjs_presentation:
+    theme: sky
+    highlight: kate
+    transition: fade
+    incremental: false
+    center: true
+    self_contained: true
+---
+
+En estas notas se introducen los conceptos relacionados a las medidas y espacios de probabilidad.
+
+# **Espacios y medidas de probabilidad**
+
+## **Espacio muestral**
+
+Para modelar un fenómeno en particular, lo primero que se debe considerar es el conjunto de posibles resultados que se podrían observar.
+
+Sea $\omega$ un resultado posible de un experimento, al conjunto de todos los posibles resultados de este experimento se le llama **espacio muestral**.
+
+Este espacio usualmente es denotado como $\Omega$.
+
+
+## **Ejemplo de espacio muestral**
+
+Si se tira una moneda dos veces, entonces
+
+$$
+\Omega = \{\left(A, A\right), \left(A, S\right),\left(S, A\right), \left(S, S\right)  \}
+$$
+
+## 
+
+El espacio muestral, $\Omega$, puede ser un conjunto finito, numerable infinito o no numerable y cada elemento de este conjunto se denota con la letra $\omega$.
+
+¿Cuál sería el espacio muestral si se buscar modelar el precio de una acción?
+
+## **Evento**
+
+Sea $\Omega$ un espacio muestral. Cualquier subconjunto $A \subseteq \Omega$, incluyendo el conjunto vacío $\emptyset$ y el mismo conjunto $\Omega$, es llamado un **evento**
+
+En el caso de tirar una moneda dos veces, el obtener al menos una águila es un evento
+
+$$
+\{\left(A, A\right), \left(A, S\right),\left(S, A\right) \} \subset \Omega
+$$
+
+## **Sigma álgebra - intuición**
+
+Una vez teniendo la definición de evento, necesitamos crear un conjunto de eventos a los cuales nos interesa asignar probabilidades.
+
+Si $A, B$ son eventos, tiene sentido poder hablar de la probabilidad de cada uno de ellos.
+
+Tiene sentido también poder hablar de la probabilidad de que alguno ocurra, $A \cup B$ o que ambos ocurran $A \cap B$.
+
+Finalmente, tiene sentido hablar de la probabilidad de que no ocurran $A^{c}, B^{c}$.
+
+## **Sigma álgebra**
+
+Una colección, $\mathcal{F}$, no vacía de subconjuntos de un conjunto $\Omega$, se llama una **sigma álgebra** ($\sigma$-álgebra) de subconjuntos de $\Omega$ si las siguientes propiedades se cumplen:
+
+* Si $A \in \mathcal{F}$, entonces $A^{c} \in \mathcal{F}$.
+
+* Si $A_n \in \mathcal{F}$, $n = 1,2, \ldots$, entonces $\cup_{n=1}^{\infty}A_n \in \mathcal{F}$ y $\cap_{n=1}^{\infty}A_n \in \mathcal{F}$.
+
+## **Ejercicio**
+
+Demuestre que si $\mathcal{F}$ es una sigma álgebra y $A_n, B_n$, $n=1,2,\ldots$ son una sucesión de eventos de $\mathcal{F}$, entonces el conjunto
+$$
+\left(\cap_{n = 1}^{\infty} A_{n}^{c}  \right) \cup \left(\cup_{n = 1}^{\infty} B_{n}^{c}  \right)
+$$
+pertenece a $\mathcal{F}$.
+
+## **Ejercicio**
+
+* Demuestre que si $\mathcal{F}$ es una sigma álgebra, entonces $\Omega \in \mathcal{F}$ y $\emptyset \in \mathcal{F}$.
+
+* Demuestre que una sigma álgebra es cerrada bajo intersecciones y uniones finitas.
+
+## **Probabilidad frecuentista**
+
+Sea $\Omega$ un espacio muestral y $\mathcal{F}$ una $\sigma$-álgebra de subconjuntos de $\Omega$. La probabilidad de un evento $A \in \mathcal{F}$, está dada por el límite
+$$
+\mathbb{P}(A) = \lim_{n \rightarrow \infty} \dfrac{n_A}{n}
+$$
+en donde $n$ es el número total de ensayos y $n_A$ es el número de veces que ocurre el evento $A$.
+
+
+## **Probabilidad axiomática**
+
+Una medida de probabilidad $\mathbb{P}$, es una función $\mathbb{P}:\mathcal{F} \rightarrow [0,1]$ que cumple lo siguiente:
+
+* $\mathbb{P}(\Omega) = 1$.
+
+* $\mathbb{P}(A) \geq 0$ para todo $A \in \mathcal{F}$.
+
+* Si $A_n$, $n=1,2,\ldots$ son eventos mutuamente excluyentes ($A_i \cap A_j = \emptyset$ para $i \neq j$), entonces 
+
+$$
+\mathbb{P}\left(\cup_{n=1}^{\infty}A_n \right) = \sum_{n=1}^{\infty}\mathbb{P}(A_n)
+$$
+
+## **Espacio de probabilidad**
+
+Un **espacio de probabilidad** es una $3$-tupla $\left( \Omega, \mathcal{F}, \mathbb{P} \right)$ en donde $\Omega$ es un conjunto, $\mathcal{F}$ es una sigma álgebra de subconjuntos de $\Omega$ y $\mathbb{P}$ es una medida de probabilidad definida sobre $\mathcal{F}$.
+
+## **Propiedades de una probabilidad**
+
+* $\mathbb{P}(B) = \mathbb{P}(A \cap B) + \mathbb{P}(A^c \cap B)$.
+
+* $\mathbb{P}(A^c) = 1 - \mathbb{P}(A)$, en particular $\mathbb{P}(\emptyset) = 1 - \mathbb{P}(\Omega)$.
+
+* Si $A \subset B$, entonces $\mathbb{P}(B) \geq \mathbb{P}(A)$.
+
+
+$$
+\begin{align}
+\mathbb{P}(\cup_{i=1}^{n}A_i)  = & \sum_{i=1}^{n}\mathbb{P}(A_i) - \sum_{1 \leq i < j \leq n} \mathbb{P}(A_i \cap A_j) \\
++ & \sum_{1 \leq i < j < k \leq n} \mathbb{P}(A_i \cap A_j \cap A_k) \\
+- & \ldots + (-1)^{n + 1}\mathbb{P}(A_1 \cap A_2 \cap \ldots \cap A_n)
+\end{align}
+$$
+
+## 
+
+Como consecuencia de la última expresión
+
+$$
+\mathbb{P}(A \cup B) \leq \mathbb{P}(A) + \mathbb{P}(B) - \mathbb{P}(A \cap B)
+$$
+
+## **Ejercicios**
+
+Considera una caja con 4 cartas enumeradas del 1 al 4, suponga que extrae al azar dos cartas
+
+a) ¿Cuál es el espacio muestral $S_1$ si las extracciones se realizan con reemplazo?
+
+b) ¿Cuál es el espacio muestral $S_2$ si las extracciones se realizan sin reemplazo?
+
+c) Utilizando simulación, calcule en ambos casos la probabilidad de que la primera carta sea un 3. Utilice $100,000$ simulaciones.
+
+```python
+import numpy as np
+help(np.random.choice)
+``` 
+
+## 
+
+Suponga que tira dos dados (justos) al azar. Calcule y grafique las probabilidades que la suma de sus caras sea $2, 3, \ldots, 12$. Utilice $100,000$ simulaciones.
+
+```python
+import matplotlib.pyplot as plt
+help(plt.bar)
+```
+
+## 
+
+Se tira una moneda $6$ veces, calcule las siguientes probabilidades:
+
+* El número de águilas y soles sea el mismo.
+
+* Exactamente aparecen dos águilas.
+
+* Al menos dos águilas han aparecido.
+
+Utilice $100,000$ simulaciones.
+
+
+# **Probabilidad condicional**
+
+
+## **Probabilidad condicional**
+
+
+Sean $A,B$ dos eventos tales que $\mathbb{P}(A) > 0$. La probabilidad condicional de $B$ dado el evento $A$, se define como
+$$
+\mathbb{P}(B | A) = \dfrac{\mathbb{P}(B \cap A) }{\mathbb{P}(A)}
+$$
+
+Si $N_n(A)$ denota el número de veces que ocurre el evento $A$ en $n$ ensayos, esta probabilidad puede aproximarse con la expresión
+
+$$
+\dfrac{N_n(A \cap B)}{N_n(A)} \approx \dfrac{\mathbb{P}(A \cap B)}{\mathbb{P}(A)}
+$$
+
+## **Probabilidad total**
+
+Si $A_1, \ldots, A_k$ forman una partición del espacio muestral $\Omega$, es decir, $A_i \cap A_j = \emptyset$ para $i \neq j$ y $\cup_{i=1}^{k}A_i = \Omega$ y si $0 < \mathbb{P}(A_i) < 1$ para toda $i$, entonces para todo evento $B$
+
+$$
+\mathbb{P}(B) = \sum_{i=1}^{k}\mathbb{P}(B|A_i)\mathbb{P}(A_i)
+$$
+
+
+Utilizando este resultado, puede obtenerse la fórmula de Bayes
+
+## **Fórmula de Bayes**
+
+$$
+\mathbb{P}(A_i|B) = \dfrac{\mathbb{P}(A_i) \mathbb{P}(B|A_i) }{\sum_{j=1}^{k} \mathbb{P}(A_j) \mathbb{P}(B|A_j)}
+$$
+
+##
+
+Puede obtenerse también lo siguiente:
+$$
+\mathbb{P}(B) = \mathbb{P}(B|A)\mathbb{P}(A) + \mathbb{P}(B|A^c)\mathbb{P}(A^c)
+$$
+
+## 
+
+Sean $A_1, \ldots, A_k$ eventos cualesquiera, entonces
+
+$$
+\begin{align}
+\mathbb{P}(A_1 \cap A_2 \cap \ldots \cap A_k)  = & \mathbb{P}(A_1)\mathbb{P}(A_2|A_1)\mathbb{P}(A_3|A_1 \cap A_2)\ldots \\
+ \times & \mathbb{P}(A_k|A_1 \cap A_2 \cap \ldots \cap A_{k-1})
+\end{align}
+$$
+
+## **Eventos independientes**
+
+Una colección de eventos $A_1, \ldots, A_n$ se dice que es **mutuamente independiente** si para cada $k, 1 \leq k \leq n$, y cualesquiera $k$ eventos, $A_{i_1}, \ldots A_{i_k}$, se tiene que $\mathbb{P}(A_{i_1} \cap \ldots A_{i_k}) = \mathbb{P}(A_{i_1}) \times \ldots \times \mathbb{P}(A_{i_k})$.
+En particular, dos eventos son independientes si
+
+$$
+\mathbb{P}(A \cap B) = \mathbb{P}(A)\mathbb{P}(B)
+$$
+
+En este caso
+
+$$
+\mathbb{P}(B|A) = \dfrac{\mathbb{P}(A \cap B)}{\mathbb{P}(A)} = \mathbb{P}(B)
+$$
+
+## **Ejercicio**
+
+Supongamos que la población de una ciudad está compuesta por $40\%$ hombres y $60\%$ mujeres. Supongamos también que $50\%$ de los hombres y $30\%$ de las mujeres fuman. Encuentre la probabilidad de que un fumador sea hombre.
+
+Resuelva este ejercicio de manera analítica y utilizando simulación con $100,000$ simulaciones.
