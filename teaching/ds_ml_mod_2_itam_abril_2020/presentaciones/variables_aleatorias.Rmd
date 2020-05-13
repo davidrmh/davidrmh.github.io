@@ -25,7 +25,7 @@ Es decir, una variable aleatoria es realmente una función $X: \Omega \rightarro
 
 Dado un espacio de probabilidad $(\Omega, \mathcal{F}, \mathbb{P})$, una **variable aleatoria** es una función $X$ de $\Omega$ a los números reales $\mathbb{R}$ tal que
 $$
-X(]\infty, x])^{-1} = \{\omega  \in \Omega: X(\omega) \leq x  \} \in \mathcal{F}, \, \, \mbox{para todo } x \in \mathbb{R}
+X(]-\infty, x])^{-1} = \{\omega  \in \Omega: X(\omega) \leq x  \} \in \mathcal{F}, \, \, \mbox{para todo } x \in \mathbb{R}
 $$
 
 En otras palabras, $X$ es una función $\mathcal{F}$-medible.
@@ -35,7 +35,7 @@ En otras palabras, $X$ es una función $\mathcal{F}$-medible.
 Generalmente se utiliza la siguiente notación:
 
 $$
-\mathbb{P}[X(]\infty, x])^{-1}] :=\mathbb{P}[X \leq x]
+\mathbb{P}[X(]-\infty, x])^{-1}] :=\mathbb{P}[X \leq x]
 $$
 
 y de manera más general
