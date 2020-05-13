@@ -1,0 +1,341 @@
+---
+title: "Variables aleatorias"
+author: "David R. Montalván Hernández"
+subtitle: "Módulo 2"
+output: 
+  revealjs::revealjs_presentation:
+    theme: sky
+    highlight: kate
+    transition: fade
+    incremental: false
+    center: true
+    self_contained: true
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# **Variables aleatorias**
+
+## **Variable aleatoria**
+
+Una variable aleatoria asigna un número o vector a cada posible resultado, $\omega$, en nuestro espacio muestral, $\Omega$.
+
+Es decir, una variable aleatoria es realmente una función $X: \Omega \rightarrow \mathbb{R}$ o $X: \Omega \rightarrow \mathbb{R}^n$.
+
+
+Dado un espacio de probabilidad $(\Omega, \mathcal{F}, \mathbb{P})$, una **variable aleatoria** es una función $X$ de $\Omega$ a los números reales $\mathbb{R}$ tal que
+$$
+X(]\infty, x])^{-1} = \{\omega  \in \Omega: X(\omega) \leq x  \} \in \mathcal{F}, \, \, \mbox{para todo } x \in \mathbb{R}
+$$
+
+En otras palabras, $X$ es una función $\mathcal{F}$-medible.
+
+## 
+
+Generalmente se utiliza la siguiente notación:
+
+$$
+\mathbb{P}[X(]\infty, x])^{-1}] :=\mathbb{P}[X \leq x]
+$$
+
+y de manera más general
+
+$$
+\mathbb{P}[X(A)^{-1}] :=\mathbb{P}[X \in A]
+$$
+
+para $A \in \mathcal{F}$.
+
+## **Caso discreto**
+
+Una variable aleatoria **discreta** con valores sobre el conjunto $\mathbb{R}$, es una función de $\Omega$ sobre un subconjunto finito o numerable infinito $\{x_1, x_2, \ldots\}$ de números reales, de tal manera que $\{\omega: X(\omega) = x_i \} \in \mathcal{F}$ para toda $i$.
+
+## **Función de densidad (Discreto)**
+
+Sea $X$ una variable aleatoria discreta con valores en $\mathbb{R}$. Si $f$ es una función tal que:
+
+* $f(x) = \mathbb{P}(X = x) \geq 0$ para todo $x \in \mathbb{R}$.
+
+* El conjunto $\Omega_{x} = \{x: f(x) \neq 0 \}$ es un subconjunto finito o numerable infinito de $\mathbb{R}$.
+
+* $\sum_{x \in \Omega_{x}} f(x) = 1$.
+
+entonces decimos que $f$ es una función de densidad (o función de masa) de $X$.
+
+## **Función de densidad (Continuo)**
+
+Sea $X$ una variable aleatoria discreta con valores en $\mathbb{R}$. Si $f$ es una función tal que:
+
+* $f(x) \geq 0$ para todo $x \in \mathbb{R}$.
+
+* $\int_{x \in \Omega_{x}} f(x) dx = 1$.
+
+entonces decimos que $f$ es una función de densidad de $X$.
+
+En este caso $\mathbb{P}(X = x) = 0$.
+
+## **Ejemplo de función de densidad (discreto)**
+
+```{r, echo=FALSE, fig.height=5}
+x <- seq(0, 12, by = 1)
+y <- dbinom(x, 12, prob = 0.5)
+par(bg = '#FFE9D6')
+plot(x, y, type='h', xlab = 'Valor de X', ylab = 'Probabilidad',
+     main = 'Ejemplo de función de densidad', lwd = 2.5)
+points(x, y, pch = 16, cex = 1.5)
+axis(1, at = x, labels = x)
+```
+
+## **Ejemplo de función de densidad (continuo)**
+```{r, echo=FALSE, fig.height=5}
+x <- seq(-4, 4, le = 200)
+y <- dnorm(x)
+par(bg = '#FFE9D6')
+plot(x, y, type='l', xlab = 'Valor de X', ylab = 'f(x)',
+     main = 'Ejemplo de función de densidad', lwd = 2.5)
+
+```
+
+## 
+
+De acuerdo al caso, podemos calcular $\mathbb{P}(X \in A)$ utilizando las siguientes fórmulas
+
+$$
+\mathbb{P}(X \in A) = \sum_{x_i \in A}f(x_i) \, \text{ Caso discreto}
+$$
+
+$$
+\mathbb{P}(X \in A) = \int_{A}f(x)dx \, \text{ Caso continuo}
+$$
+
+
+## **Función de distribución acumulativa**
+
+La función $F(t), -\infty < t < \infty$ definida por
+
+$$
+F(t) = \mathbb{P}(X \leq t) = \sum_{x \leq t} f(x) \, \text{ Caso discreto}
+$$
+
+$$
+F(t) = \mathbb{P}(X \leq t) = \int_{-\infty}^{t} f(x)dx \, \text{ Caso continuo}
+$$
+
+recibe el nombre de **función de distribución acumulativa** (o simplemente función de distribución) de la variable aleatoria $X$.
+
+## **Propiedades de la función de distribución**
+
+* Para toda $x \in \mathbb{R}$, $0 \leq F(x) \leq 1$.
+
+* $F(x) \rightarrow 0$ cuando $x \rightarrow -\infty$, y  $F(x) \rightarrow 1$ cuando $x \rightarrow \infty$.
+
+* Dado un número real $a$, $F(x) \downarrow F(a)$ cuando $x \downarrow a$ (continuidad por la derecha).
+
+* Para cualesquiera dos números reales $x < y$, $F(x) \leq F(y)$ (monótona creciente).
+
+## **Función de distribución (discreto)**
+
+```{r, echo = FALSE, fig.height = 5}
+eje_x <- seq(0, 12, by = 1)
+y <- rbinom(1e5, 12, 0.5)
+par(bg = '#FFE9D6')
+plot(ecdf(y), xlab = 'x', ylab = 'F(x)', 
+     main = 'Función de distribución', lwd = 2.5)
+axis(1, eje_x, eje_x)
+
+```
+
+## **Función de distribución (continuo)**
+
+```{r, echo = FALSE, fig.height = 5}
+eje_x <- seq(-4, 4, len = 200)
+y <- pnorm(eje_x)
+par(bg = '#FFE9D6')
+plot(x, y, type = 'l', xlab = 'x', ylab = 'F(x)', 
+     main = 'Función de distribución', lwd = 2.5)
+
+```
+
+## **Ejercicio**
+
+Demuestre que para cualesquiera numeros $a \leq b$
+$$
+\mathbb{P}(a < X \leq b) = F(b) - F(a)
+$$
+
+**Sugerencia**
+
+Considere los conjuntos $A = \{ \omega: X(\omega) \leq a\}, B = \{\omega: X(\omega) \leq b\}$ y recuerde que para todo conjunto $A$
+
+$$
+\mathbb{P}(A) = \mathbb{P}(A \cap B) + \mathbb{P}(A \cap B^c).
+$$
+
+## **Función de una variable aleatoria (discreto)**
+
+Sea $X$ una variable aleatoria discreta y sea $Y = g(X)$. Entonces
+
+$$
+\mathbb{P}(Y = y) = \sum_{x: g(x) = y} \mathbb{P}(X = x)
+$$
+
+## **Ejercicio**
+
+Si $X$ tiene función de densidad
+$$
+f(x) = \dfrac{c}{1 + x^2}
+$$
+
+para $x = 0, \pm 1, \pm 2, \pm 3$. Encuentre el valor de $c$ y la función de densidad de
+
+$$
+Y = sen\left( \dfrac{\pi}{2}X \right)
+$$
+
+# **Esperanza y varianzas**
+
+## **Esperanza de una variable aleatoria**
+
+El concepto de esperanza de una variable aleatoria está relacionado con la idea de promediar los posibles valores que la variable puede tomar. En lugar de utilizar un promedio común, en donde a cada posible valor se le da la misma ponderación, las ponderaciones son asignadas a través de la función de densidad de la variable.
+
+## **Esperanza**
+
+Sea $X$ una variable aleatoria. Si $\sum_{i} |x_i|f(x_i) < \infty$ ($\int_{\Omega_x} |x|f(x)dx < \infty$)  definimos la esperanza de $X$ como
+
+$$
+\mu = E[X] = \sum_{i}x_if(x_i) \, \text{ Caso discreto}
+$$
+
+$$
+\mu = E[X] = \int_{\Omega_x}xf(x)dx \, \text{ Caso continuo}
+$$
+
+## **Propiedades de la esperanza**
+
+* Si $\mathbb{P}(X = c) = 1$ para una constante $c$, entonces $E[X] = c$.
+
+* Si $X,Y$ son variables aleatorias definidas sobre el mismo espacio $\Omega$, ambas con esperanza finita y si $\mathbb{P}(X \leq Y) = 1$, entonces $E[X] \leq E[Y]$.
+
+* Si $X$ tiene esperanza finita y si $\mathbb{P}(X \geq c) = 1$, entonces $E[X] \geq c$. De la misma forma, si $\mathbb{P}(X \leq c) = 1$, entonces $E[X] \leq c$.
+
+## 
+
+* $|E[X]| \leq E[|X|]$.
+
+* Si $Y = g(X)$, entonces $E[Y] = \sum_{i}g(x_i)f(x_i)$ o $E[Y] = \int_{\Omega_x}g(x)f(x)dx$.
+
+* Si $X_1, X_2, \ldots, X_n$ son variables aleatorias definidas sobre el mismo espacio $\Omega$, con esperanza finita y si $c_1, \ldots, c_n$ son constantes, entonces
+
+$$
+E\left[ \sum_{i=1}^{n}c_{i}X_i \right] = \sum_{i=1}^{n}c_iE[X_i]
+$$
+
+## **Ejercicios**
+
+Demuestre que si $X$ es una variable aleatoria que toma los valores $0,1,2,\ldots$ y con esperanza finita, entonces
+
+$$
+E[X] = \sum_{n=0}^{\infty} \mathbb{P}(X > n)
+$$
+
+## 
+
+Sea $X$ una variable aleatoria con función de densidad
+
+$$
+\mathbb{P}[X = x] = \dfrac{1}{x(x + 1)}
+$$
+
+para $x=1,2,3,\ldots$.
+
+Demuestre que $E[X]$ no existe.
+
+## **Varianza y desviación estándar**
+
+Sea $X$ una variable con esperanza finita. La varianza de $X$ se define como
+
+$$
+\sigma^2 = Var[X] =  E[(X - \mu)^2]
+$$
+
+La desviación estándar de $X$ se define como $\sigma = \sqrt{\sigma^2}$.
+
+La varianza nos dice que tanta dispersión existe al rededor de la esperanza.
+
+## **Propiedades de la varianza**
+
+* Para toda constante $c \in \mathbb{R}$, $Var(cX) = c^2Var(X)$.
+
+* Para toda constante $c \in \mathbb{R}$, $Var(X + c) = Var(X)$.
+
+* $Var(X) \geq 0$, para toda variable aleatoria $X$. La igualdad se cumple sólo si $\mathbb{P}(X = c)=1$ para algún número $c$ constante.
+
+* $Var(X) = E(X^2) - (E[X])^2$.
+
+## **Sesgo y curtosis**
+
+Sea $X$ una variable aleatoria con $E[|X|^3]<\infty$. El sesgo de $X$ se define como
+$$
+\dfrac{E[(X- \mu)^3]}{\sigma^3}.
+$$
+
+Supongamos que $E[X^4] < \infty$. La curtosis (exceso) de $X$ está dada por
+
+$$
+\dfrac{E[(X - \mu)^4]}{\sigma^4} - 3.
+$$
+
+## 
+
+```{r, echo = FALSE, fig.height=5}
+x <- seq(0, 12, by = 1)
+y <- dbinom(x, 12, 0.9)
+par(bg = '#FFE9D6')
+plot(x, y, main ='Sesgo negativo', ylab = 'f(x)', type='h', lwd = 2.5)
+points(x,y, pch = 16, cex = 1.5)
+```
+
+##
+
+```{r, echo = FALSE, fig.height=5}
+x <- seq(0, 12, by = 1)
+y <- dbinom(x, 12, 0.10)
+par(bg = '#FFE9D6')
+plot(x, y, main ='Sesgo positivo', ylab = 'f(x)', type='h', lwd = 2.5)
+points(x,y, pch = 16, cex = 1.5)
+axis(1, x, x)
+
+```
+
+
+# **Teoremas límites**
+
+
+## **Ley fuerte de los grandes números**
+
+Sea $X_1, \ldots, X_n$ una secuencia de variables aleatorias independientes y con misma distribución, cada una con media $\mu$ y sea 
+$$
+\bar{X} = \dfrac{1}{n} \sum_{i = 1}^{n} X_i
+$$
+Entonces para todo $\epsilon > 0$
+
+$$
+\mathbb{P}\left( \lim_{n \rightarrow \infty} |\bar{X} - \mu |> \epsilon \right ) = 0
+$$
+
+## **Teorema del límite central**
+
+Sea $X_1, \ldots, X_n$ una secuencia de variables aleatorias independientes y con misma distribución, cada una con media $\mu$ y varianza $\sigma^2$. Sea
+
+$$
+Z = \dfrac{\bar{X} - \mu  }{ \sigma / \sqrt{n}}
+$$
+
+Entonces 
+
+$$
+\lim_{n \rightarrow \infty} \mathbb{P} (Z \leq z) = \Phi(z)
+$$
+en donde $\Phi(z)$ es la función de distribución de una variable aleatoria normal estándar $N(\mu = 0, \sigma = 1)$.
+
+
