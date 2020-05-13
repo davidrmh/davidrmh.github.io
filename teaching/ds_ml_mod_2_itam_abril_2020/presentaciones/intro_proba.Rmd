@@ -130,7 +130,7 @@ $$
 Como consecuencia de la última expresión
 
 $$
-\mathbb{P}(A \cup B) \leq \mathbb{P}(A) + \mathbb{P}(B) - \mathbb{P}(A \cap B)
+\mathbb{P}(A \cup B) = \mathbb{P}(A) + \mathbb{P}(B) - \mathbb{P}(A \cap B)
 $$
 
 ## **Ejercicios**
