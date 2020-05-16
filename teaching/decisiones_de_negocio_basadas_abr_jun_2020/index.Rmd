@@ -35,8 +35,8 @@ Las referencias serán compartidas por el profesor a tráves de una liga de **on
 |:-----:|:-----|:------------|:--------|:----------|:--|
 |18 abril 2020|01-Introducción a python|Sólo notebook|<a href="./notebooks/lec01-intro.ipynb" download>lec01-intro </a>  |En el notebook|<a href="./soluciones/lec01-intro-soluciones.ipynb" download>lec01-intro-soluciones </a>|
 |25 abril 2020|02-Colecciones|Sólo notebook|<a href="./notebooks/lec02-collections.ipynb" download>lec02-colecciones </a>|En el notebook|<a href="./soluciones/lec02-collections-soluciones.ipynb" download>lec02-colecciones-soluciones </a>|
-|2 mayo 2020|03 Control de flujo <br> 04 Cíclos|Sólo notebook|<a href="./notebooks/lec03-control-flow.ipynb" download>lec03-control-flow</a> <br> <a href="./notebooks/lec04-loops.ipynb" download>lec04-loops</a>|En el notebook|--|
-|9 mayo 2020|05 Funciones y librerías|Sólo notebook|<a href="./notebooks/lec05-functions.ipynb" download>lec05-functions</a>|En el notebook|--|
+|2 mayo 2020|03 Control de flujo <br> 04 Cíclos|Sólo notebook|<a href="./notebooks/lec03-control-flow.ipynb" download>lec03-control-flow</a> <br> <a href="./notebooks/lec04-loops.ipynb" download>lec04-loops</a>|En el notebook|* <a href="./soluciones/lec03-control-flow-soluciones.ipynb" download>lec03-control-flow-soluciones </a> <br> *<a href="./soluciones/lec04-loops-soluciones.ipynb" download>lec04-loops-soluciones </a>|
+|9 mayo 2020|05 Funciones y librerías|Sólo notebook|<a href="./notebooks/lec05-functions.ipynb" download>lec05-functions</a>|En el notebook|<a href="./soluciones/lec05-functions-soluciones.ipynb" download>lec05-functions-soluciones </a>|
 |16 mayo 2020|06 Archivos y fechas|<a href="./datos/16_mayo.zip" download>Material clase</a>|<a href="./notebooks/lec06-archivos-fechas.ipynb" download>lec06-archivos-fechas</a>|En el notebook|--|
 
 # **Contacto**
