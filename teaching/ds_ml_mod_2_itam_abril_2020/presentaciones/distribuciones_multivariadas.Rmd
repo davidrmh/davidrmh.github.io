@@ -1,0 +1,455 @@
+---
+title: "Distribuciones multivariadas"
+author: "David R. Montalván Hernández"
+subtitle: "Módulo 2"
+output: 
+  revealjs::revealjs_presentation:
+    theme: sky
+    highlight: kate
+    transition: fade
+    incremental: false
+    center: true
+    self_contained: true
+---
+# **Distribuciones multivariadas**
+
+
+## **Función de distribución bivariada**
+
+La función de distribución de dos variables $X,Y$ es la función $F_{XY}(x,y)$ tal que
+
+$$
+F_{XY}(x,y) = \mathbb{P}(X \leq x , Y \leq y)
+$$
+
+en donde $(X \leq x , Y \leq y)=(X \leq x \cap Y \leq y)$.
+
+## **Propiedades de $F_{XY}$**
+
+* $0 \leq F_{XY}(x,y) \leq 1$.
+
+* Si $x_1 \leq x_2$ y $y_1 \leq y_2$, entonces
+
+$$
+\begin{array}
+  FF_{XY}(x_1, y_1) & \leq & F(x_2, y_1) & \leq & F_{XY}(x_2, y_2)\\
+  F_{XY}(x_1, y_1) & \leq & F(x_1, y_2) & \leq & F_{XY}(x_2, y_2)
+\end{array}
+$$
+
+* $\lim_{x,y \rightarrow \infty} F_{XY}(x,y) = 1$
+
+##
+
+* $\lim_{x \rightarrow -\infty} F_{XY}(x,y) = \lim_{y \rightarrow -\infty} F_{XY}(x,y) = 0$
+
+* $\mathbb{P}(x_1 < X \leq x_2, Y \leq y) = F_{XY}(x_2, y) - F_{XY}(x_1, y)$
+
+* $\mathbb{P}(X \leq x,y_1 < Y \leq y_2) = F_{XY}(x, y_2) - F_{XY}(x, y_1)$
+
+* Si $x_1 \leq x_2$ y $y_1 \leq y_2$, entonces
+
+$$
+\begin{array}
+\mathbb{P}(x_1 < X \leq x_2, y_1 < Y \leq y_2) & = & F_{XY}(x_2, y_2) \\
+                                               & + & F_{XY}(x_1, y_1) \\
+                                               & - &  F_{XY}(x_1, y_2) \\
+                                               & - & F_{XY}(x_2, y_1) 
+\end{array}
+$$
+
+
+## **Distribución marginal**
+
+Las distribuciones marginales están dadas por
+
+$$
+\lim_{y \rightarrow \infty} F_{XY}(x, y) = F_{X}(x)
+$$
+
+$$
+\lim_{x \rightarrow \infty} F_{XY}(x, y) = F_{Y}(y)
+$$
+
+
+## **Densidad bivariada conjunta (discreto)**
+
+Sea $(X, Y)$ un par de variables aleatorias discretas que toman los valores $(x_i, y_j)_{i,j=1,2,\ldots}$ y definidas sobre un mismo espacio muestral $\Omega$. La función de densidad conjunta, $p$, se define como
+
+$$
+p(x_i, y_j) = \mathbb{P}\left(X = x_i, Y = y_j \right)
+$$
+
+## **Propiedades**
+
+La función de densidad conjunta cumple lo siguiente
+
+* $0 \leq p_{XY}(x_i, y_j) \leq 1$
+
+* $\sum_{x_i} \sum_{y_j} p_{XY}(x_i,y_j) = 1$
+
+* $\mathbb{P}\left[ \left(X,Y \right) \in A \right] = \sum_{(x_i, y_j) \in A} p_{XY}(x_i, y_j)$
+
+## **Densidades marginales (discreto)**
+
+Para obtener la densidad marginal de una variable, basta sumar sobre todos los valores de la otra variable, así:
+
+$$
+\mathbb{P}(X = x_i) = \sum_{y_j}p_{XY}(x_i, y_j)
+$$
+$$
+\mathbb{P}(Y = y_j) = \sum_{x_i}p_{XY}(x_i, y_j)
+$$
+
+
+## **Densidad bivariada conjunta (continuo)**
+
+Si $(X,Y)$ son variables continuas con función de distribución $F_{XY}(x,y)$, la función de densidad conjunta está dada por
+
+$$
+f_{XY}(x, y) = \dfrac{\partial^2 F_{XY}(x,y)}{\partial x \partial y}
+$$
+
+integrando lo anterior,  podemos ver que
+
+$$
+F_{XY}(x_0,y_0) = \int_{-\infty}^{x_0} \int_{-\infty}^{y_0} f_{XY}(x,y)dx dy
+$$
+
+## **Propiedades de $f_{XY}$**
+
+* $f_{XY}(x,y) \geq 0$.
+
+* $\int_{-\infty}^{\infty} \int_{-\infty}^{\infty} f_{XY}(x,y) dx dy = 1$
+
+* $f_{XY}(x,y)$ es continua excepto posiblemente en conjuntos de medida cero ($\mathbb{Q}, \mathbb{Z}, \mathbb{N}$)
+
+* $\mathbb{P}\left[ (X, Y) \in A \right] = \int \int \mathbb{I}_{A} f_{XY}(x,y)dxdy$
+
+* $\mathbb{P}(a < X \leq b, c < Y \leq d) = \int_{c}^{d} \int_{a}^{b} f_{XY}(x, y)dxdy$
+
+## **Densidades marginales (continuo)**
+
+$$
+F_{X}(x_0) = \int_{-\infty}^{x_0}\int_{-\infty}^{\infty}f_{XY}(x,y)dydx \\
+f_{X}(x_0) = \dfrac{d F_{X}(x_0)}{dx_0} = \int_{-\infty}^{\infty} f_{XY}(x_0, y)dy
+$$
+
+Similar para $F_{Y}$ y $f_{Y}$.
+
+
+## **Independencia de variables aleatorias**
+
+Sean $X_1, \ldots, X_n$ variables aleatorias, decimos que son independientes si
+
+$$
+F(x_1, \ldots, x_n) = \Pi_{i=1}^{n} F_{X_i}(x_i)
+$$
+
+equivalente a 
+
+$$
+f(x_1, \ldots, x_n) = \Pi_{i=1}^{n} f_{X_i}(x_i)
+$$
+
+Y por lo tanto $E[\Pi_{i = 1}^{n} X_i] = \Pi_{i=1}^{n}E[X_i]$
+
+## **Densidades condicionales**
+
+La función de densidad condicional de $X$ dado $Y$, está dada por
+
+$$
+f_{X|Y}(x|y) = \dfrac{f_{XY}(x,y) }{f_{Y}(y)} \, \text{ con } \, f_{Y}(y) > 0
+$$
+
+similar para $Y|X$.
+
+Esta función cumple lo siguiente
+
+* $f_{X|Y}(x|y) \geq 0$
+
+* $\int_{-\infty}^{\infty}f_{X|Y}(x|y)dx = 1$
+
+## **Ejercicio**
+
+Demuestre lo siguiente
+
+$$
+\begin{matrix}
+f(x_1, x_2 | x_3, x_4) & = & \dfrac{f(x_1, x_2, x_3 | x_4)}{f(x_3 | x_4)} \\
+f(x_1, x_2 | x_3, x_4) & = & f(x_1 | x_2, x_3, x_4) f(x_2 | x_3, x_4)
+\end{matrix}
+$$
+
+## **Ejercicio**
+
+Suponga que se tiran dos dados de $3$ caras. Sea $X$ la cara que muestra el primer dado y sea $Y$ la suma de los dos dados. Utilizando simulación encuentre $f_{XY}$ y a partir de esta densidad, encuentre las densidades marginales  $f_{X}$ y $f_{Y}$.
+
+Utilice $100,000$ simulaciones.
+
+```python
+import numpy as np
+help(np.random.choice)
+help(np.logical_and)
+```
+
+
+## **Esperanza condicional**
+
+La esperanza condicional de $Y$ dado $X = x$ se define como
+
+$$
+\begin{array}
+EE[Y | X = x] & = & \sum_{y \in \Omega_{Y}} y f_{Y|X}(y | x) \, \text { caso discreto}  \\
+             & = & \int_{\Omega_{Y}} y f_{Y|X}(y | x)dy \, \text { caso continuo}
+\end{array}
+$$
+
+**Nota:** 
+
+La esperanza condicional de $Y$ dado $X$, es una función de $X$. 
+
+Es posible demostrar que $E_{X}\left(E_{Y|X}[Y | X = x]\right) = E[X]$
+
+## **Varianza condicional**
+
+La varianza condicional de $Y$ dado $X=x$ está dada por:
+
+$$
+Var(Y|X=x)  =  E\left[ \left(Y - E[Y | X = x] \right)^2 | X=x \right]
+$$
+
+Es posible demostrar que $Var(Y|X=x) = E[Y^2|X=x] -  \left(E[Y|X=x] \right)^2$
+
+## **Método de la transformada inversa**
+
+Si una variable aleatoria $X$ tiene función de distribución $F$, es posible simular valores de $X$ utilizando el método de la transformada inversa.
+
+1. Obtener $F^{-1}$
+
+2. Simular una variable uniforme, $U$, en el intervalo $(0,1)$
+
+3. El número $F^{-1}(U)$ tendra la misma distribución que $X$
+
+##
+
+En el caso continuo $F^{-1}$ es la función inversa de $F$, en el caso discreto $F^{-1}(u) = \min \{x: F(x) \geq u\}$
+
+## **Ejercicio**
+
+Si $f(x,y) = 6(1 - y)$ para $0 < x < y < 1$, utilizando simulación compruebe que
+
+* $E\left[X | Y = 1 /2 \right] = 0.25$
+
+* $Var\left[X | Y = 1 /2 \right] = 0.021$
+
+Utilice $100,000$ simulaciones.
+
+```python
+import numpy as np
+help(np.random.uniform)
+```
+
+# **Covarianza y correlación**
+
+## **Covarianza**
+
+
+Sean $X,Y$ dos variables aleatorias con esperanza finita, la covarianza de $X$ y $Y$ está dada por
+
+$$
+Cov(X,Y) = E[(X - \mu_{X})(Y - \mu_{Y})]
+$$
+
+Esta cantidad buscar medir el grado relación lineal que tienen las variables.
+
+## **Correlación**
+
+Ya que la magnitud de la covarianza depende de las unidades de $X$ y $Y$, su interpretación es difícil ¿Qué indicaría una covarianza igual a $5$?
+
+El coeficiente de correlación busca solucionar este problema
+
+$$
+\rho(X,Y) = \dfrac{ Cov(X,Y)  }{ \sqrt{Var(X) Var(Y)} }.
+$$
+
+Es posible demostrar que $-1\leq \rho(X,Y) \leq 1$.
+
+## 
+
+```{r, echo=FALSE, fig.height=5}
+#Correlación = 1
+
+n_sim <- 1000
+rho <- 1
+x <- rnorm(n_sim)
+z <- rnorm(n_sim)
+y <- rho * x + sqrt(1 - rho^2) * z
+par(bg = "#FDF6E3")
+plot(x,y, main = paste('Correlación =', rho))
+```
+
+##
+
+```{r, echo=FALSE, fig.height=5}
+#Correlación = 0.8
+
+n_sim <- 1000
+rho <- 0.7
+x <- rnorm(n_sim)
+z <- rnorm(n_sim)
+y <- rho * x + sqrt(1 - rho^2) * z
+par(bg = "#FDF6E3")
+plot(x,y, main = paste('Correlación =', rho))
+```
+
+##
+
+
+
+```{r, echo=FALSE, fig.height=5}
+#Correlación = 0
+
+n_sim <- 1000
+rho <- 0
+x <- rnorm(n_sim)
+z <- rnorm(n_sim)
+y <- rho * x + sqrt(1 - rho^2) * z
+par(bg = "#FDF6E3")
+plot(x,y, main = paste('Correlación =', rho))
+```
+
+##
+
+```{r, echo=FALSE, fig.height=5}
+#Correlación = -0.7
+
+n_sim <- 1000
+rho <- -0.7
+x <- rnorm(n_sim)
+z <- rnorm(n_sim)
+y <- rho * x + sqrt(1 - rho^2) * z
+par(bg = "#FDF6E3")
+plot(x,y, main = paste('Correlación =', rho))
+```
+
+##
+
+```{r, echo=FALSE, fig.height=5}
+#Correlación = -0.7
+
+n_sim <- 1000
+rho <- -1
+x <- rnorm(n_sim)
+z <- rnorm(n_sim)
+y <- rho * x + sqrt(1 - rho^2) * z
+par(bg = "#FDF6E3")
+plot(x,y, main = paste('Correlación =', rho))
+```
+
+## **Propiedades de la covarianza**
+
+* $Cov(X, constante) = 0$
+
+* $Cov(X, X) = Var(X)$.
+
+* $Cov(\sum_{i = 1}^{n} a_i X_i, \sum_{j = 1}^{m} b_j Y_j ) = \sum_{i=1}^{n} \sum_{j=1}^{m} a_i b_j Cov(X_i, Y_j)$.
+
+Utilizando los últimos dos puntos, tenemos que
+
+* $Var(aX + bY) = a^{2} Var(X) + b^{2} Var(Y) + 2ab Cov(X,Y)$
+
+##
+
+y en general
+
+$$
+Var\left( \sum_{i=1}^{n} a_i X_i \right) = \sum_{i=1}^{n} a_{i}^{2} Var(X_i) + 2 \sum_{i} \sum_{j} a_{i} a_{j} Cov(X_i, X_j)
+$$
+
+Finalmente, si $X$ y $Y$ son independientes, entonces $Cov(X,Y) = 0$.
+
+## **Matriz de covarianzas**
+
+Si tenemos un conjunto de variables (vector aleatorio) $\mathbf{X} = (X_1, X_2, \ldots, X_n)$, su matriz de varianzas y covarianzas está dada por:
+
+$$
+\Sigma_{n \times n} = 
+\begin{pmatrix}
+Var(X_1) & Cov(X_1, X_2) & \ldots & Cov(X_1, X_n)\\
+Cov(X_2, X_1) & Var(X_2) & \ldots & Cov(X_2, X_n)\\
+\vdots & \vdots & \ddots  & \vdots \\
+Cov(X_n, X_1) & \ldots & \ldots & Var(X_n)
+\end{pmatrix}
+$$
+
+
+## **Matriz de correlaciones**
+
+Si tenemos un conjunto de variables (vector aleatorio) $\mathbf{X} = (X_1, X_2, \ldots, X_n)$, su matriz de correlaciones está dada por:
+
+$$
+C_{n \times n} = 
+\begin{pmatrix}
+1 & \rho(X_1, X_2) & \ldots & \rho(X_1, X_n)\\
+\rho(X_2, X_1) & 1 & \ldots & \rho(X_2, X_n)\\
+\vdots & \vdots & \ddots  & \vdots \\
+\rho(X_n, X_1) & \ldots & \ldots & 1
+\end{pmatrix}
+$$
+
+Ya que $Cov(X,Y) = Cov(Y, X)$, tenemos entonces que la matriz de covarianzas y de correlaciones son simétricas.
+
+##
+
+Con numpy, podemos utilizar la función `cov` para obtner la matriz de covarianzas y la función `corrcoef` para obtener la matriz de correlaciones.
+
+**Nota:** En ambas funciones revise el parámetro `rowvar`.
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+help(np.cov)
+help(np.corrcoef)
+n_muestras = int(1e5)
+
+np.random.seed(1234)
+#Variables normales media cero desviación estándar 1
+x_1 = np.random.normal(size = n_muestras)
+
+#coeficiente de correlación
+rho = 0.7
+
+#x_2 tiene correlación rho con x_1 
+#y tiene distribución normal media 0 desviación estándar 2
+sig_2 = 2
+z = np.random.normal(size = n_muestras)
+x_2 = sig_2 * (rho * x_1 + np.sqrt(1 - rho**2) * z)
+
+#matriz de datos
+#en este caso cada cada renglón es una variable
+#y cada columna es una observación
+#Estructura default del parámetro rowvar
+mat_datos = np.array([x_1, x_2])
+print(mat_datos.shape)
+
+#matriz de covarianzas
+mat_cov = np.cov(mat_datos)
+
+
+#matriz de correlaciones
+mat_cor = np.corrcoef(mat_datos)
+
+print('La matriz de covarianzas es')
+print(mat_cov)
+print('-' * 50)
+print('La matriz de correlaciones es')
+print(mat_cor)
+
+plt.plot(x_1, x_2, '.')
+plt.xlabel('$X_1$')
+plt.ylabel('$X_2$')
+plt.show()
+```
+
+
