@@ -30,15 +30,15 @@ Las referencias serán compartidas por el profesor a tráves de una liga de **on
 
 # **Temario**
 
-|Fecha|Tema|Presentación|Notebook|Ejercicios|Soluciones|
-|:-----:|:-----|:------------|:--------|:----------|:--|
-|27 abril 2020|Espacios vectoriales|[Espacios vectoriales](./presentaciones/espacios_vectoriales.html)|--|En la presentación|Vistas en clase|
-|29 abril 2020|Matrices y sistemas de ecuaciones|[Matrices y sistemas de ecuaciones](./presentaciones/matrices_sistemas_ecuaciones.html)|--|En la presentación|[Producto matrices](./soluciones/producto_matrices.ipynb)|
-|4  mayo 2020|Producto escalar y valores característicos|[Producto escalar y valores característicos](./presentaciones/producto_escalar_eig_valores.html)|--|En la presentación|[* Normas](./soluciones/normas.ipynb) <br>[* Cálculo eig vectores](./soluciones/eig_vectores.ipynb)|
-|6  mayo 2020|PCA y SVD|[PCA y SVD](./presentaciones/pca_svd.html)|--|[* PCA](./ejercicios/PCA_ejercicio.ipynb) <br> [* SVD](./ejercicios/SVD_ejercicio.ipynb) <br> [* Proyecto 1 PCA (Entrega miércoles 13 de mayo 2020 antes de clase)](./proyectos/Proyecto_PCA.ipynb) <br> [* indices.csv](./datos/indices.csv)|[* PCA](./soluciones/PCA_soluciones.ipynb) <br> [* SVD](./soluciones/SVD_soluciones.ipynb) <br> [Solución proyecto 1](./soluciones/Proyecto_PCA_SOLUCION.ipynb)|
-|11 mayo 2020|Introducción a la probabilidad|[Intro proba](./presentaciones/intro_proba.html)|--|[Intro proba](./ejercicios/intro_proba.ipynb)|[Intro proba soluciones](./soluciones/intro_proba_soluciones.ipynb)|
-|13 mayo 2020|Variables aleatorias|[Variables aleatorias](./presentaciones/variables_aleatorias.html)|--|[LGN y TLC](./ejercicios/LGN_TLC.ipynb)|[LGN y TLC soluciones](./soluciones/LGN_TLC_soluciones.ipynb)|
-|18 mayo 2020|Distribuciones multivariadas|[Distribuciones Multivariadas](./presentaciones/distribuciones_multivariadas.html)|--|[Distribuciones multivariadas](./ejercicios/distribuciones_multivariadas.ipynb)|[Distribuciones multivariadas soluciones](./soluciones/distribuciones_multivariadas_soluciones.ipynb)|
+|Fecha|Tema|Presentación/Notebook|Ejercicios|Soluciones|
+|:-----:|:-----|:------------|:----------|:--|
+|27 abril 2020|Espacios vectoriales|[Espacios vectoriales](./presentaciones/espacios_vectoriales.html)|En la presentación|Vistas en clase|
+|29 abril 2020|Matrices y sistemas de ecuaciones|[Matrices y sistemas de ecuaciones](./presentaciones/matrices_sistemas_ecuaciones.html)|En la presentación|[Producto matrices](./soluciones/producto_matrices.ipynb)|
+|4  mayo 2020|Producto escalar y valores característicos|[Producto escalar y valores característicos](./presentaciones/producto_escalar_eig_valores.html)|En la presentación|[* Normas](./soluciones/normas.ipynb) <br>[* Cálculo eig vectores](./soluciones/eig_vectores.ipynb)|
+|6  mayo 2020|PCA y SVD|[PCA y SVD](./presentaciones/pca_svd.html)|[* PCA](./ejercicios/PCA_ejercicio.ipynb) <br> [* SVD](./ejercicios/SVD_ejercicio.ipynb) <br> [* Proyecto 1 PCA (Entrega miércoles 13 de mayo 2020 antes de clase)](./proyectos/Proyecto_PCA.ipynb) <br> [* indices.csv](./datos/indices.csv)|[* PCA](./soluciones/PCA_soluciones.ipynb) <br> [* SVD](./soluciones/SVD_soluciones.ipynb) <br> [Solución proyecto 1](./soluciones/Proyecto_PCA_SOLUCION.ipynb)|
+|11 mayo 2020|Introducción a la probabilidad|[Intro proba](./presentaciones/intro_proba.html)|[Intro proba](./ejercicios/intro_proba.ipynb)|[Intro proba soluciones](./soluciones/intro_proba_soluciones.ipynb)|
+|13 mayo 2020|Variables aleatorias|[Variables aleatorias](./presentaciones/variables_aleatorias.html)|[LGN y TLC](./ejercicios/LGN_TLC.ipynb)|[LGN y TLC soluciones](./soluciones/LGN_TLC_soluciones.ipynb)|
+|18 mayo 2020|Distribuciones multivariadas|[Distribuciones Multivariadas](./presentaciones/distribuciones_multivariadas.html)|[Distribuciones multivariadas](./ejercicios/distribuciones_multivariadas.ipynb)|[Distribuciones multivariadas soluciones](./soluciones/distribuciones_multivariadas_soluciones.ipynb)|
 
 
 # **Contacto**
