@@ -39,7 +39,7 @@ Las referencias serán compartidas por el profesor a tráves de una liga de **on
 |11 mayo 2020|Introducción a la probabilidad|[Intro proba](./presentaciones/intro_proba.html)|[Intro proba](./ejercicios/intro_proba.ipynb)|[Intro proba soluciones](./soluciones/intro_proba_soluciones.ipynb)|
 |13 mayo 2020|Variables aleatorias|[Variables aleatorias](./presentaciones/variables_aleatorias.html)|[LGN y TLC](./ejercicios/LGN_TLC.ipynb)|[LGN y TLC soluciones](./soluciones/LGN_TLC_soluciones.ipynb)|
 |18 mayo 2020|Distribuciones multivariadas|[Distribuciones Multivariadas](./presentaciones/distribuciones_multivariadas.html)|[Distribuciones multivariadas](./ejercicios/distribuciones_multivariadas.ipynb)|[Distribuciones multivariadas soluciones](./soluciones/distribuciones_multivariadas_soluciones.ipynb)|
-|20 mayo 2020|Máxima verosimilitud y derivados financieros|[MLE y derivados](./presentaciones/estimacion_puntual_valuacion_derivados.html)|[* MLE](./ejercicios/Ejercicios_MLE.ipynb) <br> [* Proyecto 2. Entrega miércoles 27 de mayo antes de las 7pm](./ejercicios/Proyecto_2.ipynb)|--|
+|20 mayo 2020|Máxima verosimilitud y derivados financieros|[MLE y derivados](./presentaciones/estimacion_puntual_valuacion_derivados.html)|[* MLE](./ejercicios/Ejercicios_MLE.ipynb) <br> [* Proyecto 2. Entrega viernes 29 de mayo máximo 23:59 hrs](./ejercicios/Proyecto_2.ipynb)|[* MLE Soluciones](./soluciones/Ejercicios_MLE_soluciones.ipynb) <br> [* MLE a mano](./soluciones/verosimilitud.pdf)|
 
 # **Contacto**
 [david.montalvan@itam.mx](mailto:david.montalvan@itam.mx)
