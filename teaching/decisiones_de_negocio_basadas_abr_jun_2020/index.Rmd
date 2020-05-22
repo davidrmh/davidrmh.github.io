@@ -38,6 +38,7 @@ Las referencias serán compartidas por el profesor a tráves de una liga de **on
 |2 mayo 2020|03 Control de flujo <br> 04 Cíclos|Sólo notebook|<a href="./notebooks/lec03-control-flow.ipynb" download>lec03-control-flow</a> <br> <a href="./notebooks/lec04-loops.ipynb" download>lec04-loops</a>|En el notebook|* <a href="./soluciones/lec03-control-flow-soluciones.ipynb" download>lec03-control-flow-soluciones </a> <br> *<a href="./soluciones/lec04-loops-soluciones.ipynb" download>lec04-loops-soluciones </a>|
 |9 mayo 2020|05 Funciones y librerías|Sólo notebook|<a href="./notebooks/lec05-functions.ipynb" download>lec05-functions</a>|En el notebook|<a href="./soluciones/lec05-functions-soluciones.ipynb" download>lec05-functions-soluciones </a>|
 |16 mayo 2020|06 Archivos y fechas|<a href="./datos/16_mayo.zip" download>Material clase</a>|<a href="./notebooks/lec06-archivos-fechas.ipynb" download>lec06-archivos-fechas</a>|En el notebook|<a href="./soluciones/lec06-archivos-fechas-soluciones.ipynb" download>lec06-archivos-fechas-soluciones </a>|
+|23 mayo 2020|07-Numpy|Sólo notebook|[lec 07 - Numpy](./notebooks/lec07-numpy.ipynb)|En el notebook|--|
 
 # **Contacto**
 Si desean contactarme pueden usar **Teams**.
