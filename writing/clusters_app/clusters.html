@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<!-- How to create Mouse Events for D3 -->
+<html>
+
+  <head>
+<style type="text/css">
+
+@font-face{
+    font-family: monserrat-reg;
+    src: url('../../fonts/Monserrat/Monserrat-Regular.ttf');
+}
+
+@font-face{
+    font-family: indie-flower-reg;
+    src: url('../../fonts/Indie_Flower/IndieFlower-Regular.ttf');
+}
+
+@font-face{
+    font-family: courgette-reg;
+    src: url('../../fonts/Courgette/Courgette-Regular.ttf');
+}
+
+:root{
+    --max-width: 95%;
+    --text-font: monserrat-reg;
+    --text-font-w: 400;
+    --text-font-s: 18px;
+    --head-font: courgette-reg;
+    --head-font-w: bold;
+    --head-font-s: 32px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #E8E1D0;
+  
+}
+
+.paper {
+  width: 100%;
+  max-width: var(--max-width);
+  word-wrap: break-word;
+  height: auto;
+  position: relative;
+  margin: 0px auto;
+  padding-top: 20px;
+  padding-bottom: 40px;
+  padding-left: 50px;
+  background-color: #E8E1D0;
+  box-shadow: 0px 0px 5px 0px gray;
+  font-family: var(--text-font);
+  font-weight: var(--text-font-w);
+  font-size: var(--text-font-s);
+  overflow: hidden;
+}
+
+
+/* Headers */
+h1, h2, h3, h4{
+  font-family: var(--head-font);
+  font-weight: var(--head-font-w);
+  font-size: var(--head-font-s);
+  background: linear-gradient(to right,
+  rgba(9,219,198,0.5), rgba(174,236,22,0.3));
+}
+
+</style>
+    <!-- Load D3 from site -->
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+    <!-- CSS (Styling) -->
+    <style type="text/css">
+
+      body {
+        margin: 0;
+        font-family: sans-serif;
+        font-size: 11px;
+      }
+
+      .axis path, .axis line {
+        fill: none;
+        stroke: black;
+        shape-rendering: crispEdges;  /* Round any decimal pixels so it'll render nicely */
+      }
+
+    </style>
+  </head>
+
+  <body>
+  <div class="paper">
+  
+    <h1>Create your dataset</h1>
+    <p> You can use this tool for creating datasets used for clustering or binary classification tasks</p>
+    
+    <h2> Instructions </h2>
+    
+    <ul>
+        <li> To activate/deactivate drawing click on the canvas</li>
+    </ul>
+    
+    
+    <p><b>Select the class label</b></p>
+    <input type="radio" id="class_positive" name="class_button" value="Positive" checked="true">
+        <label for="class_positive">Positive</label><br>
+    <input type="radio" id="class_negative" name="class_button" value="Negative">
+        <label for="class_negative">Negative</label><br>
+        
+    <button type="button" onclick="download_data();">Get your data!</button>
+  </div>
+  
+  <svg></svg>
+
+    <!-- Begin Javascript -->
+    <script type="text/javascript">
+      var w = window.innerWidth,
+          h = window.innerHeight,
+          margin = { top: 40, right: 20, bottom: 20, left: 40 },
+          radius = 6;
+
+      var svg = d3.select("svg").attr({
+        width: w,
+        height: h
+      });
+
+      var dataset = [];
+
+      // Set X Scale
+      var xScale = d3.scale.linear()
+          .domain([margin.left, w - margin.right])
+          .range([margin.left, w - margin.right]);  // Set margins for x specific
+
+      // Set Y Scale
+      var yScale = d3.scale.linear()
+          .domain([margin.top, h - margin.bottom])
+          .range([margin.top, h - margin.bottom]);  // Set margins for y specific
+
+      // Add a X and Y Axis (Note: orient means the direction that ticks go, not position)
+      var xAxis = d3.svg.axis().scale(xScale).orient("top");
+      var yAxis = d3.svg.axis().scale(yScale).orient("left");
+    
+      var circleAttrs = {
+          cx: function(d) { return xScale(d.x); },
+          cy: function(d) { return yScale(d.y); },
+          r: radius
+      };
+
+      // Adds X-Axis as a 'g' element
+      svg.append("g").attr({
+        "class": "axis",  // Give class so we can style it
+        transform: "translate(" + [0, margin.top] + ")"  // Translate just moves it down into position (or will be on top)
+      }).call(xAxis);  // Call the xAxis function on the group
+
+      // Adds Y-Axis as a 'g' element
+      svg.append("g").attr({
+        "class": "axis",
+        transform: "translate(" + [margin.left, 0] + ")"
+      }).call(yAxis);  // Call the yAxis function on the group
+
+      var bool_draw = false;
+      
+      svg.on('click', function () {
+            if(bool_draw){
+                bool_draw = false;
+            }
+            else{
+                bool_draw = true;
+            }
+      })
+
+      // Draw circles continously
+      svg.on("mousemove", draw_circle_cont)
+      
+        
+        function draw_circle_cont(){
+        if(bool_draw){
+            
+            //Get mouse position
+            var coords = d3.mouse(this);
+            
+            //Gets class label
+            //and color
+            option_class = document.getElementById("class_positive");
+            if (option_class.checked){
+                var label = 1;
+                var point_color = 'blue';
+            }
+            else{
+                var label = -1;
+                var point_color = 'red';
+            
+            }
+            
+            // collect new data
+            var newData= {
+                x: xScale.invert(coords[0]),
+                y: yScale.invert(coords[1]),
+                class: label
+            };
+            
+            // Push data to our array
+            dataset.push(newData);  
+
+            //Add new circle
+            svg.selectAll("circle") 
+                .data(dataset)
+                .enter()
+                .append("circle")
+                .attr(circleAttrs)  // Get attributes from circleAttrs var
+                .style('fill', point_color)
+            };    
+        }
+        //Download the data  
+        function download_data(){
+          //This string will collect the data
+          str_csv = "X,Y,Class\n";
+          
+          for(i = 0; i < dataset.length; i++){
+              str_csv = str_csv + String(dataset[i].x) +  "," + String(dataset[i].y) + "," + String(dataset[i].class) + "\n";
+          }
+          
+          var encodedUri = encodeURI(str_csv);
+          var link = document.createElement("a");
+          link.setAttribute("href", 'data:text/csv;charset=utf-8,' + encodedUri);
+          link.setAttribute("download", "dataset.csv");
+          //document.body.appendChild(link);
+          link.click();
+        };
+    </script>
+  </body>
+</html>
