@@ -107,7 +107,7 @@ h1, h2, h3, h4{
   <div class="paper">
   
     <h1>Create your dataset</h1>
-    <p> You can use this tool for creating datasets used for clustering or binary classification tasks</p>
+    <p> You can use this tool if you want to create datasets used for clustering or binary classification tasks</p>
     
     <h2> Instructions </h2>
     
@@ -125,15 +125,17 @@ h1, h2, h3, h4{
     <button type="button" onclick="download_data();">Get your data!</button>
     
     <button onclick="window.location.href = 'https://davidrmh.github.io';" id="home-button">Take me home</button>
+    <p id="aux"></p>
   </div>
   
   <svg></svg>
+  
 
     <!-- Begin Javascript -->
     <script type="text/javascript">
       var w = window.innerWidth,
           h = window.innerHeight,
-          margin = { top: 40, right: 20, bottom: 20, left: 40 },
+          margin = { top: 20, right: 60, bottom: 60, left: 60 },
           radius = 6;
 
       var svg = d3.select("svg").attr({
@@ -145,16 +147,16 @@ h1, h2, h3, h4{
 
       // Set X Scale
       var xScale = d3.scale.linear()
-          .domain([margin.left, w - margin.right])
+          .domain([0, 100])
           .range([margin.left, w - margin.right]);  // Set margins for x specific
 
       // Set Y Scale
       var yScale = d3.scale.linear()
-          .domain([margin.top, h - margin.bottom])
-          .range([margin.top, h - margin.bottom]);  // Set margins for y specific
+          .domain([0, 100])
+          .range([h - margin.bottom, margin.top]);  // Set margins for y specific
 
       // Add a X and Y Axis (Note: orient means the direction that ticks go, not position)
-      var xAxis = d3.svg.axis().scale(xScale).orient("top");
+      var xAxis = d3.svg.axis().scale(xScale).orient("bottom");
       var yAxis = d3.svg.axis().scale(yScale).orient("left");
     
       var circleAttrs = {
@@ -166,7 +168,7 @@ h1, h2, h3, h4{
       // Adds X-Axis as a 'g' element
       svg.append("g").attr({
         "class": "axis",  // Give class so we can style it
-        transform: "translate(" + [0, margin.top] + ")"  // Translate just moves it down into position (or will be on top)
+        transform: "translate(" + [0, h - margin.bottom] + ")"  // Translate just moves it down into position (or will be on top)
       }).call(xAxis);  // Call the xAxis function on the group
 
       // Adds Y-Axis as a 'g' element
@@ -220,13 +222,14 @@ h1, h2, h3, h4{
             dataset.push(newData);  
 
             //Add new circle
-            svg.selectAll("circle") 
+                svg.selectAll("circle") 
                 .data(dataset)
                 .enter()
                 .append("circle")
                 .attr(circleAttrs)  // Get attributes from circleAttrs var
                 .style('fill', point_color)
-            };    
+                
+            };
         }
         //Download the data  
         function download_data(){
