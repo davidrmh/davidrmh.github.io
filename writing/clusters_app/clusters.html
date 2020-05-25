@@ -3,6 +3,7 @@
 <html>
 
   <head>
+  <title>Create your clusters</title>
 <style type="text/css">
 
 @font-face{
@@ -115,7 +116,11 @@ h1, h2, h3, h4{
         <li> To activate/deactivate drawing click on the canvas</li>
     </ul>
     
-    
+    <label for="radio">Circle radio:</label>
+    <input id="radio_input" name="radio" type="number" value="3" min=1 max=20><br>
+    <p id="counter">You have plotted 0 points</p>
+    <p id="counter_pos">0 points of the positive class</p>
+    <p id="counter_neg">0 points of the negative class</p>
     <p><b>Select the class label</b></p>
     <input type="radio" id="class_positive" name="class_button" value="Positive" checked="true">
         <label for="class_positive">Positive</label><br>
@@ -123,9 +128,7 @@ h1, h2, h3, h4{
         <label for="class_negative">Negative</label><br>
         
     <button type="button" onclick="download_data();">Get your data!</button>
-    
     <button onclick="window.location.href = 'https://davidrmh.github.io';" id="home-button">Take me home!</button>
-    <p id="aux"></p>
   </div>
   
   <svg></svg>
@@ -136,14 +139,20 @@ h1, h2, h3, h4{
       var w = window.innerWidth,
           h = window.innerHeight,
           margin = { top: 20, right: 60, bottom: 60, left: 60 },
-          radius = 6;
+          radius = document.getElementById('radio_input').value;
 
       var svg = d3.select("svg").attr({
         width: w,
         height: h
       });
-
+      
+      //For storing the dataset
       var dataset = [];
+      
+      //For counting the number of points
+      var num_points = 0;
+      var num_pos = 0;
+      var num_neg = 0;
 
       // Set X Scale
       var xScale = d3.scale.linear()
@@ -228,7 +237,22 @@ h1, h2, h3, h4{
                 .append("circle")
                 .attr(circleAttrs)  // Get attributes from circleAttrs var
                 .style('fill', point_color)
+                .attr('r', document.getElementById('radio_input').value)
+            
+            //Increments the counter of points
+            num_points = num_points + 1;
+            document.getElementById('counter').innerHTML = 'You have plotted ' + String(num_points) + ' points';
+            if(label==1){
+                num_pos = num_pos + 1;
+            }
+            else{
+                num_neg = num_neg + 1;
                 
+            }
+            ratio_pos = 100 * num_pos/num_points;
+            ratio_neg = 100 * num_neg/num_points;
+            document.getElementById('counter_pos').innerHTML = String(ratio_pos.toFixed(2)) + '% points of the positive class';
+            document.getElementById('counter_neg').innerHTML = String(ratio_neg.toFixed(2)) + '% points of the negative class';
             };
         }
         //Download the data  
