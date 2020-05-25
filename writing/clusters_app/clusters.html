@@ -84,6 +84,22 @@ h1, h2, h3, h4{
         shape-rendering: crispEdges;  /* Round any decimal pixels so it'll render nicely */
       }
 
+    #home-button{
+    position: fixed;
+    top: 0px;
+    right: 10px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: rgba(0, 0, 255, 0.75);
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 4px;
+    transform: scale(var(--scale-factor), var(--scale-factor));
+    }
+
     </style>
   </head>
 
@@ -107,6 +123,8 @@ h1, h2, h3, h4{
         <label for="class_negative">Negative</label><br>
         
     <button type="button" onclick="download_data();">Get your data!</button>
+    
+    <button onclick="window.location.href = 'https://davidrmh.github.io';" id="home-button">Take me home</button>
   </div>
   
   <svg></svg>
