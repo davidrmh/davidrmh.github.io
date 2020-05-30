@@ -39,6 +39,7 @@ Las referencias serán compartidas por el profesor a tráves de una liga de **on
 |9 mayo 2020|05 Funciones y librerías|Sólo notebook|<a href="./notebooks/lec05-functions.ipynb" download>lec05-functions</a>|En el notebook|<a href="./soluciones/lec05-functions-soluciones.ipynb" download>lec05-functions-soluciones </a>|
 |16 mayo 2020|06 Archivos y fechas|<a href="./datos/16_mayo.zip" download>Material clase</a>|<a href="./notebooks/lec06-archivos-fechas.ipynb" download>lec06-archivos-fechas</a>|En el notebook|<a href="./soluciones/lec06-archivos-fechas-soluciones.ipynb" download>lec06-archivos-fechas-soluciones </a>|
 |23 mayo 2020|07-Numpy|Sólo notebook|[lec 07 - Numpy](./notebooks/lec07-numpy.ipynb)|En el notebook|[lec 07 - Numpy soluciones](./soluciones/lec07-numpy-soluciones.ipynb)|
+|30 mayo 2020|08-Scipy y matplotlib|[Datos bono](./datos/datos_bono.csv)|[lec 08 - Scipy y matplotlib](./notebooks/lec08-scipy-matplotlib.ipynb)|[Proyecto 1 Valuación de bonos](./proyectos/Valuacion_bono.ipynb)|--|
 
 # **Contacto**
 Si desean contactarme pueden usar **Teams**.
