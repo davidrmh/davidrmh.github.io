@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
+
+:root{
+    --max-width: 100%;
+    --n-cols: 1;
+    --text-font: 'Montserrat';
+    --text-font-w: 400;
+    --text-font-s: 16px;
+    --head-font: 'Courgette';
+    --head-font-w: bold;
+    --head-font-s: 26px;
+    --scale-factor: 0.9;
+}
+
+::selection{
+    background: #C0C0C0;
+    opacity: 0.4;
+}
+
+body {
+  margin: 5px;
+  padding: 0px;
+  background-color: #E8E1D0;
+  -webkit-column-count: var(--n-cols);
+  -moz-column-count: var(--n-cols);
+  column-count: var(--n-cols); 
+  font-family: var(--text-font);
+  font-weight: var(--text-font-w);
+  font-size: var(--text-font-s);
+}
+
+
+h1.title{
+    font-size: 50px;
+    color: blue;
+    opacity: 0.7;
+}
+/* Headers */
+h1, h2, h3, h4{
+  font-family: var(--head-font);
+  font-weight: var(--head-font-w);
+  font-size: var(--head-font-s);
+  color: blue;
+  opacity: 0.7;
+  background: linear-gradient(to right,
+  rgba(9,219,198,0.5), rgba(174,236,22,0.3));
+}
+
+pre, img{
+  width: auto;
+  max-width: var(--max-width);
+  box-shadow: 2px 1.5px 2px 1.5px rgba(0,0,255,0.3);
+  transform: scale(var(--scale-factor), var(--scale-factor));
+}
+
+.MathJax_Display{
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  margin-top: 5px;
+  border: 1.5px solid;
+  padding: 10px;
+  width: 100%;
+  max-width: var(--max-width);
+  box-shadow: 2px 1.5px 2px 1.5px #888888;
+  background: linear-gradient(to right,
+  rgba(0,0,255,0.1), rgba(0,0,255,0.3));
+  transform: scale(var(--scale-factor), var(--scale-factor));
+}
+
+.theorem{
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  margin-top: 5px;
+  border: 2px solid;
+  border-color: rgba(255, 0, 0, 0.7);
+  padding: 10px;
+  width: 100%;
+  max-width: var(--max-width);
+  box-shadow: 2px 1.5px 2px 1.5px #888888;
+  background: rgba(191,225,183,0.6);
+  transform: scale(var(--scale-factor), var(--scale-factor));
+    
+}
+
+#top-button{
+  display: none;
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  z-index: 99;
+  font-size: 14px;
+  border: none;
+  outline: none;
+  background-color: rgba(0, 0, 255, 0.25);
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 4px;
+  transform: scale(var(--scale-factor), var(--scale-factor));
+}
+
+#top-button:hover, #home-button:hover {
+  background-color: rgba(0, 0, 255, 0.7);
+}
+
+
+#home-button{
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  z-index: 99;
+  font-size: 14px;
+  border: none;
+  outline: none;
+  background-color: rgba(0, 0, 255, 0.25);
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 4px;
+  transform: scale(var(--scale-factor), var(--scale-factor));
+}
+
+/*
+pre:hover{
+  box-shadow: 2px 1.5px 2px 1.5px rgba(0,0,255,0.8);
+}
+*/
+
+/*
+img:hover{
+    transform: scale(var(--scale-factor) + 0.1, var(--scale-factor) + 0.1);
+    box-shadow: 2px 1.5px 2px 1.5px rgba(0,0,255,0.8);
+}
+*/
