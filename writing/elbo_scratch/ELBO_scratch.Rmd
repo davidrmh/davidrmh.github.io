@@ -1,0 +1,234 @@
+---
+title: "Maximizing ELBO from (almost) scratch"
+output:
+  html_document:
+    css: ../../css/css_notebook_one_col_r_markdown.css
+    highlight: pygments
+    toc: true
+    number_sections: true
+    toc_depth: 2
+    toc_float:
+      collapsed: false
+editor_options: 
+  chunk_output_type: console
+---
+
+<button onclick="window.location.href = 'https://davidrmh.github.io';" id="home-button" title="Go to top">Home</button>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+Here I'll  show you a little toy example on how to maximize the so called **Evidence Lower Bound (ELBO)** from (almost) scratch.
+
+This quantity turns out to be the objective function if we want to do variational inference.
+
+I'll not deal with the mathematical results since they can be found in other places (see the references), I'll just show you how to implement the optimization problem without using any probabilistic programming framework such as *pyro, stan, pymc3...*
+
+I'm assuming that you are familiar with:
+
+* Likelihood functions.
+
+* Conjugate densities.
+
+* Bayes rule.
+
+* Monte Carlo simulation.
+
+# Problem
+
+The following problem is a classical one in Bayesian inference.
+
+Suppose we want to know if a coin is fair or not, that is, if it has the same probability of coming up tails or heads.
+
+Given a probability, $z$, each throw can be modeled as a Bernoulli distributed random variable $X$, thus our likelihood function $p(x|z)$ is the Bernoulli density (mass) function.
+
+Now, in a Bayesian setting, the probability $z$ can be modeled as a Beta random variable. Let's say that $z$ has distribution $Beta(10,10)$, this is the prior distribution which we will denote as $p(z)$.
+
+Having observed some data from $X$, we would like to obtain the posterior density $p(z|x)$. This density will give us some information about the distribution of the values for the probability $z$.
+
+# ELBO
+
+In order to approximate $p(z|x)$, we use the variational distribution $q_{\phi}(z)$ which is parameterized according to the parameters vector $\phi$.
+
+Here we'll take $q_{\phi}(z)$ as a $Beta(\alpha, \beta)$ distribution with initial values $\alpha = 8, \beta = 5$.
+
+We would like to find the values of $\alpha, \beta$ that make $q_{\phi}(z)$ close (in a certain sense) to $p(z|x)$. For this, we can maximize the Evidence Lower Bound (ELBO) given by
+
+$$
+ELBO := E_{q_{\phi}(z)} \left[\log p(x, z)  - \log q_{\phi}(z)\right]
+$$
+
+or 
+
+$$
+ELBO = E_{q_{\phi}(z)} \left[\log p(x|z)p(z)  - \log q_{\phi}(z)\right]
+$$
+
+Where the expectation is calculated using samples from $q_{\phi}(z)$.
+
+# Recipe
+
+In order to maximize the ELBO, we can use Monte Carlo simulation and the following recipe
+
+1. For $j=1,\ldots, M$, sample $z_j$ from $q_{\phi}$.
+
+2. Using the data and assuming that each observed value $x_i$ is independent and identically distributed given $z$, calculate
+$$
+\sum_{i=1}^{N}\log p(x_i|z_j) + \log p(z_{j})  - \log q_{\phi}(z_{j})
+$$
+
+where $N$ is the number of observed values.
+
+3. Average the numbers obtained in 2 in order to approximate the expectation.
+
+$$
+\dfrac{1}{M}\sum_{j=1}^{M}\left[\sum_{i=1}^{N}\log p(x_i|z_j) + \log p(z_{j})  - \log q_{\phi}(z_{j})\right]
+$$
+
+4. Maximize over $\phi$ and repeat until convergence.
+
+# Implementation
+
+I'm going to use only base R functions in order to solve the problem, in particular, I'm using  the `optim` function with `L-BFGS-B`method, to solve the optimization problem with respect to $\phi$.
+
+```{r}
+### log Likelihood function
+log_likelihood <- function(x, z){
+  val <- dbinom(x, size = 1, prob = z, log = TRUE)
+  
+  #To avoid -Inf or Inf
+  if(any(val == -Inf)){
+    val <- rep(-10000, length(val))
+  }
+  else if(any(val == Inf)){
+    val <- rep(10000, length(val))
+  }
+  val
+}
+```
+
+```{r}
+### log prior function
+log_prior <- function(z){
+  val <- dbeta(z, shape1 = 10, shape2 = 10, log = TRUE)
+  
+  #To avoid -Inf or Inf
+  if(any(val == -Inf)){
+    val <- rep(-10000, length(val))
+  }
+  else if(any(val == Inf)){
+    val <- rep(10000, length(val))
+  }
+  val
+}
+```
+
+```{r}
+### log variational density
+log_variational <- function(z, phi){
+  alpha <- phi[1]
+  beta <- phi[2]
+  val <- dbeta(z, shape1 = alpha, shape2 = beta, log = TRUE)
+  
+  #To avoid -Inf or Inf
+  if(any(val == -Inf)){
+    val <- rep(-10000, length(val))
+  }
+  else if(any(val == Inf)){
+    val <- rep(10000, length(val))
+  }
+  val
+}
+```
+
+```{r}
+### ELBO
+ELBO <- function(phi, x, n_samples = 10000){
+  set.seed(1)
+  sum <- 0
+  alpha <- phi[1]
+  beta <- phi[2]
+  for(i in 1:n_samples){
+    #simulates z
+    z <- rbeta(1, alpha, beta)
+    
+    #sum of log likelihoods
+    sum_log_lik <- sum(log_likelihood(x, z))
+    
+    #log prior
+    log_pr <- log_prior(z)
+    
+    #log variational
+    log_var <- log_variational(z, phi)
+    sum <- sum + sum_log_lik + log_pr - log_var
+    
+  }
+  
+  #average (approximates expectation)
+  sum / n_samples
+}
+```
+
+```{r}
+### Optimization
+optim_ELBO <- function(phi0, x_sample, true_prob, n_samples){
+  
+#fnscale -1 is used for specifying a maximization problem
+phi_opt <- optim(par = phi0, fn = ELBO,
+                 method = "L-BFGS-B", 
+                 lower = c(0.00001, 0.00001), 
+                 upper = c(100, 100),
+                 control = list(fnscale = -1),
+                 x = x_sample,
+                 n_samples = n_samples)
+phi_opt
+}
+```
+
+```{r}
+plot_posterior <- function(phi_opt, true_prob, n_tos){
+  cur <- curve(dbeta(x, phi_opt$par[1], phi_opt$par[2]),
+             from = 0, to = 1, xlab = 'z',
+             ylab = 'q(z)',
+             main = paste('With', n_tos, 'tosses'))
+  abline(v = true_prob, col = 'blue', lw = 1.6)
+}
+```
+
+```{r, fig.height=10}
+#True probability of heads
+true_prob <- 0.6
+
+#Initial values for alpha and beta
+phi0 <- c(8, 5)
+
+#Number of samples from 
+#the variational distribution
+n_samples <- 2000
+
+#Number of tosses
+n_tos <- 100
+par(mfrow = c(3,2))
+for(i in seq(20, 120, by = 20)){
+  x_sample <- rbinom(i, 1, true_prob)
+
+  phi_opt <- optim_ELBO(phi0, x_sample,
+                      true_prob, n_samples)
+
+  plot_posterior(phi_opt, true_prob, i)
+}
+```
+
+As we can see, the more tosses we have the more centered the variational distribution is around the true probability.
+
+# References
+
+I basically reproduced what is in [this page](https://pyro.ai/examples/svi_part_i.html) which is done using *pyro* framework for *python*.
+
+Please check the references in that link if you are interested in more details about **ELBO**.
+
+Thanks for reading, hope you find it useful!
