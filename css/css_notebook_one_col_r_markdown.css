@@ -16,14 +16,14 @@
 }
 
 ::selection{
-    background: #C0C0C0;
+    background: #97EB45;
     opacity: 0.4;
 }
 
 body {
   margin: 5px;
   padding: 0px;
-  background-color: #E8E1D0;
+  background-color: #EEEEEC;
   -webkit-column-count: var(--n-cols);
   -moz-column-count: var(--n-cols);
   column-count: var(--n-cols); 
@@ -45,8 +45,8 @@ h1, h2, h3, h4{
   font-size: var(--head-font-s);
   color: blue;
   opacity: 0.7;
-  background: linear-gradient(to right,
-  rgba(9,219,198,0.5), rgba(174,236,22,0.3));
+  /*background: linear-gradient(to right,
+  rgba(9,219,198,0.5), rgba(174,236,22,0.3));*/
 }
 
 pre, img{
@@ -65,9 +65,10 @@ pre, img{
   padding: 10px;
   width: 100%;
   max-width: var(--max-width);
-  box-shadow: 2px 1.5px 2px 1.5px #888888;
-  background: linear-gradient(to right,
-  rgba(0,0,255,0.1), rgba(0,0,255,0.3));
+  box-shadow: 2px 1.5px 2px 1.5px #4223F5;
+  background:#FFFFFF;
+  /*background: linear-gradient(to right,
+  rgba(0,0,255,0.1), rgba(0,0,255,0.3));*/
   transform: scale(var(--scale-factor), var(--scale-factor));
 }
 
