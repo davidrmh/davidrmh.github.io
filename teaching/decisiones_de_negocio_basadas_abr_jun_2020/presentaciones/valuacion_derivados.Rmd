@@ -1,0 +1,240 @@
+---
+title: "Valuación de derivados"
+author: "David R. Montalván Hernández"
+output: 
+  revealjs::revealjs_presentation:
+    theme: serif
+    highlight: kate
+    transition: slide
+    incremental: false
+    center: true
+    self_contained: true
+---
+
+## **Instrumento derivado**
+
+Un instrumento derivado es un contrato entre dos o más partes y cuyo valor se deriva a partir del valor de un activo subyacente.
+
+## **Opciones sobre acciones**
+
+Una opción nos da el **derecho** de comprar (opción call) o vender (opción put) a un precio determinado (el precio strike) una unidad de la acción a la cual está referenciada.
+
+## **Opción europea**
+
+Una opción **europea** es una opción que se puede ejercer únicamente en una fecha determinada.
+
+## **Opción americana**
+
+Una opción **americana** es una opción que se puede ejercer en cualquier fecha dentro de un periodo de tiempo determinado.
+
+## **Payoff de opciones europeas**
+
+Sea $T$ el momento en que se establece que la opción se puede ejecutar y sea $K$ el precio strike. El payoff de una opción call europea con subyacente $S$, está dado por:
+
+$$
+Call_{T}(S,K) = \max(S_T - K, 0)
+$$
+
+Por otra parte, el payoff de una opción put europea es
+
+$$
+Put_{T}(S,K) = \max(K - S_T, 0)
+$$
+
+Un call es una apuesta a una tendencia a la alza en los precios, mientras que un put es una apuesta a una tendencia a la baja.
+
+## 
+
+```{r, echo = FALSE, fig.height=5}
+st <- seq(100, 200, le = 100)
+strike <- 150
+payoff <- pmax(st - strike, 0)
+par(bg = "#FDF6E3")
+plot(st, payoff, type = 'l', xlab = 'S_T', ylab = 'Payoff',
+     main = 'Payoff de un call europeo', sub = 'Strike = 150', lwd = 4)
+grid(col = 'blue', lw = 2.0)
+```
+
+## 
+
+```{r, echo = FALSE, fig.height=5}
+st <- seq(100, 200, le = 100)
+strike <- 150
+payoff <- pmax(strike - st, 0)
+par(bg = "#FDF6E3")
+plot(st, payoff, type = 'l', xlab = 'S_T', ylab = 'Payoff',
+     main = 'Payoff de un put europeo', sub = 'Strike = 150', lwd = 4)
+grid(col = 'blue', lw = 2.0)
+```
+
+## **Movimiento browniano**
+
+Un movimiento browniano (formalmente un proceso de Wiener) es un proceso estocástico $\{W\}_{t\geq 0}$ que satisface lo siguiente:
+
+1. $W_0 = 0$.
+
+2. El mapeo $t \rightarrow W_t$ es una función continua.
+
+3. Los incrementos $\{W_{t_1} - W_{t_0}, W_{t_2} - W_{t_1}, \ldots, W_{t_k} - W_{t_{k-1}} \}$ son variables aleatorias independientes.
+
+4. Para $s < t$, $W_t - W_s \sim N(0, \sigma^2 = t - s)$.
+
+## **Modelo Black-Scholes-Merton**
+
+En el modelo de Black-Scholes-Merton, se tiene un mercado en el cual existen únicamente tres instrumentos:
+
+1. Acción $S$.
+
+2. Cuenta de ahorro, $B_t$ que gana una tasa libre de riesgo $r$.
+
+$$
+\dfrac{B_t}{B_t} = rdt \implies B_t = e^{rt}
+$$
+3. Instrumento derivado $V$ cuyo subyacente es $S$.
+
+## 
+
+El precio de la acción se modela utilizando un movimiento browniano geométrico
+
+$$
+dS_t = rS_tdt + \sigma S_tdW_t
+$$
+
+**Nota:**
+
+Realmente esta es la dinámica que sigue $\{S_t\}_{t\geq 0}$ bajo una medidad de probabilidad, $\mathbb{Q}$, llamada medida neutral al riesgo.
+
+## **Valuación de derivados**
+
+Bajo ciertas condiciones, el precio en el tiempo $t$ de un producto financiero derivado con función de payoff $H$ y cuyo subyacente es $S$ está dado por:
+
+$$
+Precio_H(S,t) = e^{-r(T-t)}E_{Q}[H(S,T)]
+$$
+
+en donde $Q$ es la medida neutral al riesgo.
+
+En particular para un call europeo
+
+$$
+Call(S,K,t,T,r,\sigma) = e^{-r(T-t)}E_{Q}[\max(S_T - K, 0)]
+$$
+
+## **Monte Carlo para valuar derivados**
+
+1. Simula trayectorias del subyacente.
+
+2. Para cada trayectoria calcula el payoff del derivado $H(S,T)$.
+
+3. Aproxima $E_{Q}[H(S,T)]$ promediando el payoff de cada una de las trayectorias.
+
+4. Aplica el factor de descuento apropiado, en este caso $e^{-r(T-t)}$, a la cantidad obtenida en el punto anterior.
+
+## **Esquema de Euler para simular $S_t$**
+
+Para simular el proceso dado por la ecuación diferencial estocástica
+
+$$
+dS_t = rS_tdt + \sigma S_t dW_t
+$$
+
+1. Crear una partición, $\Pi = \{t_0 = 0, t_1, \ldots, t_N = T \}$ del intervalo $[0, T]$ dividiéndolo en $N$ partes iguales (número de pasos) y haciendo $\Delta = \dfrac{\frac{T - t_0}{Y}}{N}$ en donde $Y$ es el número de días en el año.
+
+2. Sustituir $dt$ por $\Delta$ y $dW_t$ por $\sqrt{\Delta}Z$ en donde $Z \sim N(0,1)$ (número aleatorio normal media cero desviación estándar 1)
+
+
+##
+
+3. Calcular los siguientes precios utilizando la discretización
+
+$$
+S_{t_{i+1}} = S_{t_{i}} + r S_{t_{i}} \Delta + \sigma S_{t_{i}}\sqrt{\Delta}Z_{i+1} 
+$$
+
+```{r, echo = FALSE, fig.height=5}
+#Tasa libre de riesgo
+r <- 0.01
+
+#Precio spot del subyacente
+s0 <- 100
+
+#precio strike
+k <- 110
+
+#volatilidad
+sig <- 0.2
+
+#Fecha valuación
+t  <- as.Date("2020/06/10", format = "%Y/%m/%d")
+
+#Fecha de vencimiento
+fecha_ven <- as.Date("2021/12/28", format = "%Y/%m/%d")
+
+#Días en el año
+dias_an <- 360
+
+#Número de pasos
+N <- 365
+
+#Delta y su raiz
+delta <- ((fecha_ven - t) / dias_an) / N
+delta <- as.numeric(delta)
+sqr_del <- sqrt(delta)
+
+#Vector para almacenar precios
+vect_s <- c(s0)
+
+#Aplica esquema de Euler
+set.seed(54321)
+for(i in 2:N){
+  #número normal(0,1)
+  z <- rnorm(1)
+  #Nuevo precio
+  vect_s[i] <- vect_s[i - 1] * (1 + r * delta + sig * sqr_del * z)
+}
+
+#Grafica trayectoria
+par(bg = "#FDF6E3")
+eje_x <- seq(t, fecha_ven, le = N)
+titulo <- "Simulación de una trayectoria"
+plot(eje_x, vect_s, type = "l", xlim = c(eje_x[1], eje_x[N]),
+     xlab = "Fecha", ylab = "Precio de S", xaxt = 'n', lwd = 4, main = titulo)
+axis(1, at = eje_x[seq(1, N, by = 50)], labels = eje_x[seq(1, N, by = 50)])
+grid(col = "blue", lwd = 2.5)
+```
+
+## **Fórmulas analíticas**
+
+Bajo el modelo de Black-Scholes, el precio, en el tiempo $t$, de un call del tipo europeo está dado por
+
+$$
+Call(S,K,t,T,r,\sigma) = S_t\mathbf{N}(d_1) - e^{-r(T-t)}K\mathbf{N}(d_2)
+$$
+
+* $\mathbf{N}$ Es la **función de distribución acumulada** de una variable aleatoria $N(0,1)$.
+
+* $d_1 = \dfrac{ \ln \dfrac{S_t}{K} +  (r + 0.5\sigma^2) (T-t) }{\sigma \sqrt{T-t}}$
+
+
+##
+
+* $d_2 = \dfrac{ \ln \dfrac{S_t}{K} +  (r - 0.5\sigma^2) (T-t) }{\sigma \sqrt{T-t}}$
+* $T$ es la fecha de vencimiento.
+
+* $t$ es la fecha de valuación.
+
+* $T - t$ es el plazo para el vencimiento (**en fracción de años**).
+
+* $r$ es la tasa libre de riesgo (continua anual)
+
+* $\sigma$ volatilidad del subyacente.
+
+* $K$ precio strike.
+
+##
+
+En el caso de un put, se tiene
+
+$$
+Put(S,K,t,T,r,\sigma) = e^{-r(T-t)}K\mathbf{N}(-d_2) - S_t\mathbf{N}(-d_1)
+$$
