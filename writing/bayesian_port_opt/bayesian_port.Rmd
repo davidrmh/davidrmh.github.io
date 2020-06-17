@@ -1,0 +1,409 @@
+---
+title: "Bayesian Portolio Optimization a use case for RStan"
+output:
+  html_document:
+    css: ../../css/css_notebook_one_col_r_markdown.css
+    highlight: pygments
+    toc: true
+    number_sections: true
+    toc_depth: 2
+    toc_float:
+      collapsed: false
+editor_options: 
+  chunk_output_type: console
+---
+
+<button onclick="window.location.href = 'https://davidrmh.github.io';" id="home-button" title="Go to top">Home</button>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+Here I'll show you how to obtain a portfolio's efficient frontier (actually frontiers) under the bayesian framework for portfolio allocation and using the mean-variance setting.
+
+I'm assuming that you are familiarized with the basic concepts of bayesian inference and are comfortable with R programming and know a little bit about `Stan`.
+
+**Disclaimer**
+
+This is just a toy example and should not be taken as an investment advice. 
+
+My main objective in writing this post was to show a basic use case for `Stan`.
+
+# Classical portfolio optimization
+
+**Definition (Portfolio)**
+
+In simple terms, a portfolio is just a set of assets, each having a weight $w_i$ which can be interpreted as the proportion of total capital that is invested in asset $i$.
+
+The portfolio optimization problem consists in finding the optimal vector $\mathbf{w} = (w_1, \ldots, w_N)$ of assets weights.
+
+Optimality is expressed in terms of the mean and the variance of the portfolio, we are trying to find the vector $\mathbf{w}$ that minimizes the portfolio's  returns variance while at the same time achieving certain target level of return.
+
+## A little bit of finance
+
+**Definition (log-returns)**
+
+If $P_{\{t \geq 0\}}$ is a time series that denotes the price of an asset, then its log-return at time $t$ is defined as
+
+$$
+R_t = \ln \left( \dfrac{P_t}{P_{t - 1 }} \right)
+$$
+
+If we have data for $N$ assets then we can create the following vector of log-returns:
+
+$$
+\mathbf{R}_{t} = \left(R_{1,t}, \ldots, R_{N, t} \right)
+$$
+
+where $R_{i,t}$ is the log return of asset $i$ at time $t$.
+
+For the rest of this post let's assume that $\mathbf{R}$ follows a multivariate normal distribution with mean vector $\mathbf{\mu}$ and covariance matrix $\mathbf{\Sigma}$.
+
+$$
+p(\mathbf{R}_t| \mathbf{\mu}, \mathbf{\Sigma}) = N(\mathbf{\mu}, \mathbf{\Sigma})
+$$
+
+with $\mathbf{\mu}$ a $N \times 1$ vector and $\mathbf{\Sigma}$ a $N \times N$ matrix.
+
+**Definition (Portfolio's return and variance)**
+
+If $\mathbf{w} = (w_1, \ldots, w_N)$ is the vector of weigths, then the portfolio's return at time $t$ is given by
+
+$$
+R_{p,t} = \sum_{i=1}^{N} w_{i} R_{i,t} = \mathbf{w}^{'}\mathbf{R}_t
+$$
+
+Its **expected return** is defined as
+
+$$
+\mu_{p} = \sum_{i=1}^{N} w_{i} \mu_{i} = \mathbf{w}^{'} \mathbf{\mu}
+$$
+
+with $\mu_{i}$ the expected return for asset $i$.
+
+Finally, the portfolio's variance is 
+
+$$
+\sigma_{p}^{2} = \sum_{i=1}^{N}\sum_{i=1}^{N}w_{i}w_{j}Cov(R_i, R_j) = \mathbf{w}^{'}\mathbf{\Sigma}\mathbf{w}
+$$
+where $Cov(R_i, R_j)$ is the covariance between the (log) returns on assets $i$ and $j$.
+
+In the classical frameworks, $\mathbf{\mu}$ and $\mathbf{\Sigma}$ are unknow but fixed quantities and thus they are usually estimated using their sample estimates
+
+$$
+\mathbf{\widehat{\mu}} = \dfrac{1}{T} \sum_{i=1}^{T} \mathbf{R}_t
+$$
+
+and
+
+$$
+\mathbf{\widehat{\Sigma}} = \dfrac{1}{T - 1}\sum_{i=1}^{T}\left(\mathbf{R}_t - \mathbf{\widehat{\mu}} \right)\left(\mathbf{R}_t - \mathbf{\widehat{\mu}} \right)^{'} 
+$$
+
+## Mean variance principle
+
+Under the mean-variance principle, the portfolio optimization problem can be expressed as
+
+$$
+\min_{\mathbf{w}} \sigma_{p}^{2} = \mathbf{w}^{'}\mathbf{\widehat{\Sigma} }\mathbf{w}
+$$
+
+subject to 
+
+$$
+\mathbf{w}^{'} \mathbf{\widehat{\mu}} \geq \mu^{*}
+$$
+and $\mathbf{w}^{'} \mathbb{1} = 1$, where $\mu^{*}$ is a desired level of return.
+
+We can obtain the so called **efficient frontier** by ploting the minimum value of $\sigma_{p}^{w}$ against the desired return level $\mu^{*}$.
+
+
+# Bayesian framework for portfolio optimization
+
+In the Bayesian framework, $\mathbf{\mu}$ and $\mathbf{\Sigma}$ are considered stochastic quantities and we are going to assume the following distributional assumptions
+
+$$
+\mathbf{\mu}|\mathbf{\Sigma} \sim N(\mathbf{\eta}, \dfrac{1}{\tau} \mathbf{\Sigma} )
+$$
+and
+$$
+\mathbf{\Sigma} \sim IW(\mathbf{\Omega}, \nu)
+$$
+where $\mathbf{\eta}, \tau, \mathbf{\Omega}$ amd $\nu$ are hyperparameters and $IW$ is the inverse Wishart distribution.
+
+Thus, we would like to obtain the posterior distribution of $\mathbf{\mu}$ and $\mathbf{\Sigma}$ given the observed returns $\mathbf{R}$ up to time $T$.
+
+# The Data
+
+We'll be using the data from three exchange rates^[Data obtained from Yahoo Finance]
+
+* US Dollar / Mexican Peso [Download](./data/USD_MXN.csv)
+
+* Euro / Mexican Peso [Download](./data/EUR_MXN.csv)
+
+* Pound sterling / Mexican Peso [Download](./data/GBP_MXN.csv)
+
+The data encompasses a period of time starting in *2015-06-12* with last date in *2020-06-12* (YYYY-MM-DD).
+
+We'll be using *Adjusted close* prices so I prepared [this data set](./data/log_ret.csv) that contains the log returns.
+
+ 
+# Implementation
+
+You can [download](./bay_port_opt.R) the whole code of this post that contains all the data preprocessing I did (be warned, the code is a little bit messy).
+
+If you have read up to this point congratulations, it's time of implementing all those weird formulas.
+
+## Hyperparameters
+
+I'm using the following hyperparameters
+
+* $\tau = 200$.
+
+* $\nu = 12$.
+
+* $\eta = \mathbf{\widehat{\mu} }$
+
+* $\mathbf{\Omega} = \mathbf{\widehat{\Sigma}}\left(\nu - N -1 \right)$
+
+```{r message=FALSE, warning=FALSE}
+library(tidyr)
+library(dplyr)
+library(rstan)
+library(tibble)
+library(readr)
+library(quadprog)
+library(ggplot2)
+
+#Reads the data with
+#the log returns
+ret <- read_csv('./data/log_ret.csv')
+
+#Vector of mean returns
+mean_ret <- apply(ret, 2, mean)
+
+#Covariance matrix
+cov_mat <- cov(ret)
+
+#Data for STAN
+T <- nrow(ret)
+N <- ncol(ret)
+nu <- 12
+data_stan <- list(
+  T = T,
+  N = N,
+  nu = nu,
+  tau = 200,
+  eta = mean_ret,
+  R = as.matrix(ret),
+  omega = cov_mat * (nu - N -1)
+)
+```
+This is the *stan* file [download](./bay_port.stan)
+
+**IMPORTANT THING TO NOTICE**
+
+* When using covariance matrices you must use `cov_matrix`. If you only use `matrix` you will have an error saying that something went wrong with the sampling procedure.
+
+
+
+```
+//https://mc-stan.org/docs/2_23/stan-users-guide/index.html
+//https://mc-stan.org/docs/2_23/reference-manual/index.html
+
+/*
+IMPORTANT THING TO NOTICE
+-> Be aware of the use of cov_matrix: If you only use
+matrix you will have an error saying that
+something went wrong with the sampling procedure
+*/
+
+data {
+  //5 is arbitrary
+  int<lower = 5> T;
+  int<lower= 2> N;
+  real<lower = N - 1> nu;
+  real<lower = 0> tau;
+  vector[N] eta;
+  matrix[T, N] R;
+  cov_matrix[N] omega;
+}
+
+parameters {
+  vector[N] mu;
+  cov_matrix[N] sigma;
+}
+
+transformed parameters{
+  cov_matrix[N] sigma_scaled;
+  sigma_scaled = (1 / tau) * sigma;
+}
+
+model {
+  
+  target += inv_wishart_lpdf(sigma | nu, omega);
+  target += multi_normal_lpdf(mu | eta, sigma_scaled);
+  for(t in 1:T){
+    target += multi_normal_lpdf(R[t]| mu, sigma);
+  }
+  
+}
+```
+
+Fitting the model took a while, so I saved it in a *rds* file that you can [download](./stan_fit.rds)
+
+```{r, eval = FALSE}
+#Fitting the model
+#This takes a while!
+fit <- stan(
+  file = "bay_port.stan",
+  data = data_stan,
+  chains = 4,
+  warmup = 1000,
+  iter = 2000,
+  cores = 2
+)
+#Saves the fitted model
+saveRDS(fit, 'stan_fit.rds')
+```
+
+
+Some diagnostics
+
+```{r}
+fit <-readRDS('stan_fit.rds')
+
+#Some diagnostics
+traceplot(fit, nrow = 4, pars = c('mu', 'sigma'))
+```
+
+Now, lets draw some realizations for $\mathbf{\mu}$ and $\mathbf{\Sigma}$ from the posterior distribution, and for each draw calculate the  **efficient frontier**.
+
+The last of these frontiers will correspond to the classical mean-variance framework.
+
+```{r, fig.width=5}
+#Extract draws from the posterior
+list_of_draws <- extract(fit)
+#draws from the posterior distribution of sigma
+sigma_post <- list_of_draws$sigma
+#draws from the posterior distribution of mu
+mu_post <- list_of_draws$mu
+
+#Solves the optimization
+#problem for distinct
+#draws of the posterior
+#parameters.
+#Each draw will have an
+#efficient frontier associated
+#with it
+n_frontiers <- 10
+n_draws <- nrow(mu_post)
+sample_index <- sample(n_draws,
+                        size = n_frontiers,
+                        replace = FALSE)
+
+#target return
+mu_target <- seq(0.001,
+                 #max(apply(mu_post, 2, max)),
+                 0.01,
+                 le = 100)
+
+#for the table that will
+#be use to create the graph
+mu_tib <-  c()
+var_opt <- c()
+front_id <- c()
+aux_id <- 1
+cont_aux <- 0
+
+#to store the optimal
+#weights
+w_opt <- matrix(0, ncol = N)
+
+#Number of assets
+N <- ncol(mu_post)
+
+for(idx in sample_index){
+  #draw from mu
+  mu_draw <- mu_post[idx,]
+  
+  #draw from sigma
+  sig_draw <- sigma_post[idx, ,]
+  
+  #last iteration is for the classical
+  #frontier
+  if(cont_aux == n_frontiers){
+    mu_draw <- mean_ret
+    sig_draw <- cov(ret)
+  }
+  
+  #Solves the optimization
+  #problem for each target value
+  for(val in mu_target){
+    A <- matrix(0, nrow = N,ncol = 2)
+    #sum of weights equals 1
+    A[,1] <- 1
+    
+    #At least the target return
+    A[,2] <- mu_draw
+    
+    b0 <- c(1, val)
+    sol <- solve.QP(2 * sig_draw,
+                    dvec = rep(0, N),
+                    Amat = A,
+                    bvec = b0,
+                    meq = 1)
+    mu_tib <- c(mu_tib, val)
+    var_opt <- c(var_opt, sol$value)
+    front_id <- c(front_id, aux_id)
+    w_opt <- rbind(w_opt, sol$solution)
+  }
+  aux_id <- aux_id + 1
+  
+}
+w_opt <- w_opt[-1,]
+
+#Creates the tibble
+chart_tib <- tibble(mu = mu_tib,
+                    var = var_opt,
+                    frontier = as.factor(front_id))
+
+g <- ggplot(data = chart_tib,
+            mapping = 
+              aes(x = var,
+                  y = mu,
+                  colour = frontier))
+
+g_title <- paste(n_frontiers,
+                 " Efficient Frontiers")
+g + geom_line(lwd = 1.5) + 
+  theme(legend.position = 'right') +
+  ggtitle(g_title)
+
+```
+
+
+# Conclusions
+
+As we can see, under the bayesian framework we are able to obtain several efficient frontiers by incorporating uncertainty in our estimates for $\mathbf{\mu}$ and $\mathbf{Sigma}$.
+
+By incorporating this uncertainty we can have a better guidance in our decision-making process.
+
+# Future work
+
+The assumption of normal distributed log-returns is pretty strong assumption that is not met in practice, thus it is very relevant experiment with more realistic distributions.
+
+The same conclusion goes for the prior distributions used in this post.
+
+#  References
+
+[1] **Bayesia Methods in Finance**, Rachev T., Svetlozar et al., John Wiley & Sons, Inc.
+
+[2] https://mc-stan.org/docs/2_23/stan-users-guide/index.html
+
+[3] https://mc-stan.org/docs/2_23/reference-manual/index.html
+
+[4] https://mc-stan.org/docs/2_23/functions-reference/
