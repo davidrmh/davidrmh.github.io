@@ -1,5 +1,5 @@
 ---
-title: "Bayesian Portolio Optimization a use case for RStan"
+title: "Bayesian Portfolio Optimization a use case for RStan"
 output:
   html_document:
     css: ../../css/css_notebook_one_col_r_markdown.css
