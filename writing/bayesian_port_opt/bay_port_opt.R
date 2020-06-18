@@ -4,7 +4,6 @@ library(rstan)
 library(tibble)
 library(readr)
 library(quadprog)
-library(ggplot2)
 
 ### Reads the data ###
 path <- c("./data/EUR_MXN.csv",
@@ -134,86 +133,89 @@ mu_post <- list_of_draws$mu
 #efficient frontier associated
 #with it
 n_frontiers <- 10
+set.seed(54321)
 n_draws <- nrow(mu_post)
 sample_index <- sample(n_draws,
-                        size = n_frontiers,
-                        replace = FALSE)
+                       size = n_frontiers,
+                       replace = FALSE)
 
-#target return
-mu_target <- seq(0.001,
+#target (annual) return
+mu_target <- seq(0.02,
                  #max(apply(mu_post, 2, max)),
-                 0.01,
+                 0.20,
                  le = 100)
-
-#for the table that will
-#be use to create the graph
-mu_tib <-  c()
-var_opt <- c()
-front_id <- c()
-aux_id <- 1
-cont_aux <- 0
-
-#to store the optimal
-#weights
-w_opt <- matrix(0, ncol = N)
 
 #Number of assets
 N <- ncol(mu_post)
 
+#aux for detecting last
+#frontier
+aux_last <- 0
+
+par(bg = '#EEEEEC',
+    mfcol = c(ceiling(n_frontiers / 2),2))
 for(idx in sample_index){
-  #draw from mu
-  mu_draw <- mu_post[idx,]
+  aux_last <- aux_last + 1
   
-  #draw from sigma
-  sig_draw <- sigma_post[idx, ,]
-  
-  #last iteration is for the classical
-  #frontier
-  if(cont_aux == n_frontiers){
+  #for the table that will
+  #be use to create the graph
+  mu_tib <-  c()
+  var_opt <- c()
+  #Last frontier is classical
+  #framework
+  if(aux_last == 1){
     mu_draw <- mean_ret
-    sig_draw <- cov(ret)
+    sig_draw <- cov_mat
+  }
+  else{
+    #draw from mu
+    mu_draw <- mu_post[idx,]
+    
+    #draw from sigma
+    sig_draw <- sigma_post[idx, ,]
   }
   
   #Solves the optimization
   #problem for each target value
   for(val in mu_target){
+    
     A <- matrix(0, nrow = N,ncol = 2)
     #sum of weights equals 1
     A[,1] <- 1
     
-    #At least the target return
-    A[,2] <- mu_draw
+    #the target return constrain
+    A[,2] <- mu_draw * 252
     
     b0 <- c(1, val)
-    sol <- solve.QP(2 * sig_draw,
+    sol <- solve.QP(2 * 252 * sig_draw,
                     dvec = rep(0, N),
                     Amat = A,
                     bvec = b0,
-                    meq = 1)
+                    meq = 2)
     mu_tib <- c(mu_tib, val)
-    var_opt <- c(var_opt, sol$value)
-    front_id <- c(front_id, aux_id)
-    w_opt <- rbind(w_opt, sol$solution)
+    var_opt <- c(var_opt, sol$value )
   }
-  aux_id <- aux_id + 1
   
+  #Creates the tibble
+  #For the chart
+  chart_tib <- tibble(mu =  100 * mu_tib,
+                      std = 100 * sqrt(var_opt))
+  
+  main <- 'Efficient Frontier'
+  
+  if(aux_last == 1){
+    main <- 'Efficient Frontier \n Classical Framework'
+  }
+  
+  plot(chart_tib$std, chart_tib$mu,
+       col = 'blue', lwd = 2.5,
+       main = main,
+       sub = 'Annualized figures',
+       xlab = 'Standard Deviation %',
+       ylab = 'Expected return %',
+       type = 'l',
+       ylim = c(100 * min(mu_tib), 100 * max(mu_tib)))
+  grid(col = 'black', lwd = 1.5)
 }
-w_opt <- w_opt[-1,]
 
-#Creates the tibble
-chart_tib <- tibble(mu = mu_tib,
-                    var = var_opt,
-                    frontier = as.factor(front_id))
-
-g <- ggplot(data = chart_tib,
-            mapping = 
-              aes(x = var,
-                  y = mu,
-                  colour = frontier))
-
-g_title <- paste(n_frontiers,
-                 " Efficient Frontiers")
-g + geom_line(lwd = 1.5) + 
-  theme(legend.position = 'right') +
-  ggtitle(g_title)
   
