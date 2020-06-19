@@ -218,4 +218,141 @@ for(idx in sample_index){
   grid(col = 'black', lwd = 1.5)
 }
 
+#Solves the optimization
+#and averages the solutions
+#found for every target level
+#n_frontiers <- nrow(mu_post) # the whole data
+n_frontiers <- 500
+
+#target (annual) return
+mu_target <- seq(0.02,
+                 #max(apply(mu_post, 2, max)),
+                 0.20,
+                 le = 100)
+
+#This tibble will store the
+#optimal weights
+opt_weights <- tibble(eur = NULL,
+                      usd = NULL,
+                      gbp = NULL,
+                      target = NULL,
+                      sd = NULL) 
+
+#Number of assets
+N <- ncol(mu_post)
+
+for(idx in 1:n_frontiers){
   
+  #for the table that will
+  #be use to create the graph
+  mu_tib <-  c()
+  var_opt <- c()
+  
+  #draw from mu
+  mu_draw <- mu_post[idx,]
+  
+  #draw from sigma
+  sig_draw <- sigma_post[idx, ,]
+  
+  #Solves the optimization
+  #problem for each target value
+  for(val in mu_target){
+    
+    A <- matrix(0, nrow = N,ncol = 2)
+    #sum of weights equals 1
+    A[,1] <- 1
+    
+    #the target return constrain
+    A[,2] <- mu_draw * 252
+    
+    b0 <- c(1, val)
+    sol <- solve.QP(2 * 252 * sig_draw,
+                    dvec = rep(0, N),
+                    Amat = A,
+                    bvec = b0,
+                    meq = 2)
+    var_opt <- c(var_opt, sol$value )
+    
+    #updates opt_weigths tibble
+    row <- c(sol$solution, val, sol$value)
+    opt_weights <- rbind(opt_weights, row)
+  }
+  
+}
+names(opt_weights) <- c('eur',
+                        'usd',
+                        'gbp',
+                        'target',
+                        'std')
+
+write_csv(opt_weights, "opt_weights.csv") 
+
+#tibble with the optimal
+#weights
+opt_weights <- read_csv('opt_weights.csv')
+
+#Averages the values for each
+#target value
+mean_opt_w <- opt_weights %>%
+  group_by(target) %>%
+  mutate(mean_eur = mean(eur),
+         mean_usd = mean(usd),
+         mean_gbp = mean(gbp),
+         mean_std = mean(std)) %>%
+  select(mean_eur,
+         mean_usd,
+         mean_gbp,
+         target,
+         mean_std) %>%
+  unique()
+
+par(bg = '#EEEEEC',
+    mfcol = c(1,1))
+
+main <- 'Average Efficient Frontier'
+plot(100 * mean_opt_w$mean_std,
+     100 * mean_opt_w$target,
+     col = 'blue', lwd = 2.5,
+     main = main,
+     sub = 'Annualized figures',
+     xlab = 'Standard Deviation %',
+     ylab = 'Expected return %',
+     type = 'l')
+grid(col = 'black', lwd = 1.5)
+
+
+long <- mean_opt_w %>%
+  filter((mean_eur >= 0 & mean_eur <= 1) &
+           (mean_usd >= 0 & mean_usd <= 1) &
+           (mean_gbp >= 0 & mean_gbp <= 1))
+
+short <- mean_opt_w %>%
+  filter((mean_eur >= -1 & mean_eur <= 1) &
+           (mean_usd >= -1 & mean_usd <= 1) &
+           (mean_gbp >= -1 & mean_gbp <= 1))
+
+par(bg = '#EEEEEC',
+    mfcol = c(1,2))
+
+main_long <- 'Average Efficient Frontier \n Long Only'
+main_short <- 'Average Efficient Frontier \n Short-Long'
+
+plot(100 * long$mean_std,
+     100 * long$target,
+     col = 'blue', lwd = 2.5,
+     main = main_long,
+     sub = 'Annualized figures',
+     xlab = 'Standard Deviation %',
+     ylab = 'Expected return %',
+     type = 'l')
+grid(col = 'black', lwd = 1.5)
+
+plot(100 * short$mean_std,
+     100 * short$target,
+     col = 'blue', lwd = 2.5,
+     main = main_short,
+     sub = 'Annualized figures',
+     xlab = 'Standard Deviation %',
+     ylab = 'Expected return %',
+     type = 'l')
+grid(col = 'black', lwd = 1.5)
