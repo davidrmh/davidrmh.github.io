@@ -26,7 +26,7 @@
     --text-font: monserrat-reg;
     --text-font-w: 400;
     --text-font-s: 18px;
-    --head-font: courgette-reg;
+    --head-font: monserrat-reg;
     --head-font-w: bold;
     --head-font-s: 32px;
 }
@@ -34,12 +34,12 @@
 body {
   margin: 0;
   padding: 0;
-  background: #E8E1D0;
+  background: #EEEEEC;
   
 }
 
 .paper {
-  width: 100%;
+  width: 95%;
   max-width: var(--max-width);
   word-wrap: break-word;
   height: auto;
@@ -48,8 +48,8 @@ body {
   padding-top: 20px;
   padding-bottom: 40px;
   padding-left: 50px;
-  background-color: #E8E1D0;
-  box-shadow: 0px 0px 5px 0px gray;
+  background-color: #EEEEEC;
+  /*box-shadow: 0px 0px 5px 0px gray;*/
   font-family: var(--text-font);
   font-weight: var(--text-font-w);
   font-size: var(--text-font-s);
@@ -62,8 +62,8 @@ h1, h2, h3, h4{
   font-family: var(--head-font);
   font-weight: var(--head-font-w);
   font-size: var(--head-font-s);
-  background: linear-gradient(to right,
-  rgba(9,219,198,0.5), rgba(174,236,22,0.3));
+  /*background: linear-gradient(to right,
+  rgba(9,219,198,0.5), rgba(174,236,22,0.3));*/
 }
 
 </style>
@@ -109,6 +109,7 @@ h1, h2, h3, h4{
   
     <h1>Create your dataset</h1>
     <p> You can use this tool if you want to create datasets for clustering or binary classification tasks</p>
+    <p><strong>Warning:</strong> This app doesn't works properly in mobile devices </p>
     
     <h2> Instructions </h2>
     
@@ -117,7 +118,7 @@ h1, h2, h3, h4{
     </ul>
     
     <label for="radio">Circle radio:</label>
-    <input id="radio_input" name="radio" type="number" value="3" min=1 max=20><br>
+    <input id="radio_input" name="radio" type="number" value=1 min=1 max=4><br>
     <p id="counter">You have plotted 0 points</p>
     <p id="counter_pos">0 points of the positive class</p>
     <p id="counter_neg">0 points of the negative class</p>
@@ -129,16 +130,14 @@ h1, h2, h3, h4{
         
     <button type="button" onclick="download_data();">Get your data!</button>
     <button onclick="window.location.href = 'https://davidrmh.github.io';" id="home-button">Take me home!</button>
+    <svg></svg>
   </div>
-  
-  <svg></svg>
-  
 
     <!-- Begin Javascript -->
     <script type="text/javascript">
       var w = window.innerWidth,
           h = window.innerHeight,
-          margin = { top: 20, right: 60, bottom: 60, left: 60 },
+          margin = { top: 50, right: w * 0.4, bottom: h * 0.45, left: 60 },
           radius = document.getElementById('radio_input').value;
 
       var svg = d3.select("svg").attr({
@@ -222,8 +221,8 @@ h1, h2, h3, h4{
             
             // collect new data
             var newData= {
-                x: xScale.invert(coords[0]),
-                y: yScale.invert(coords[1]),
+                x: Number(xScale.invert(coords[0]).toFixed(4)),
+                y: Number(yScale.invert(coords[1]).toFixed(4)),
                 class: label
             };
             
