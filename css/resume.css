@@ -7,7 +7,7 @@
 body {
   font-family: 'Muli', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   padding-top: 54px;
-  background-color: #EEEEEC;
+  background-color: #E5E5E5;
   /*zoom: 125%;*/
 }
 
@@ -225,7 +225,7 @@ hr.style-eight:after {
 }
 
 li.body-list:before {
-  content: "༄";
+  content: "֎";
   color: rgb(0, 0, 0)
 }
 li.body-list-header:before{
