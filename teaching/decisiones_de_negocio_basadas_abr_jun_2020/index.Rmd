@@ -1,5 +1,5 @@
 ---
-title: "Decisiones de negocio basadas ITAM  <br> Abril - Junio 2020"
+title: "Introducción a la programación en Python ITAM  <br> Abril - Junio 2020"
 author: "Profesor: David R. Montalván Hernández"
 date: "Última actualización `r format(Sys.time(), '%d/%m/%Y - %H:%M:%S')`"
 output:
@@ -41,7 +41,9 @@ Las referencias serán compartidas por el profesor a tráves de una liga de **on
 |23 mayo 2020|07-Numpy|Sólo notebook|[lec 07 - Numpy](./notebooks/lec07-numpy.ipynb)|En el notebook|[lec 07 - Numpy soluciones](./soluciones/lec07-numpy-soluciones.ipynb)|
 |30 mayo 2020|08-Scipy y matplotlib|[Datos bono](./datos/datos_bono.csv)|[lec 08 - Scipy y matplotlib](./notebooks/lec08-scipy-matplotlib.ipynb)|[Proyecto 1 Valuación de bonos](./proyectos/Valuacion_bono.ipynb)|[lec 08- Scipy y matplotlib soluciones](./soluciones/lec08-scipy-matplotlib-soluciones.ipynb)|
 |6 junio 2020|09 Programación Funcional|Sólo notebook|[lec 09-prog-fun](./notebooks/lec09-prog-fun.ipynb)|En el notebook|--|
-|13 junio 2020|10 Valuación de derivados|[Valuación derivados](./presentaciones/valuacion_derivados.html)|--|[Proyecto 2 - Valuación de derivados](./proyectos/Valuacion_derivados.ipynb)|--|
+|13 junio 2020|10 Valuación de derivados|[Valuación derivados](./presentaciones/valuacion_derivados.html)|--|[Proyecto 2 - Valuación de derivados](./proyectos/Valuacion_derivados.ipynb)|[Solución proyecto valuación de derivados](./soluciones/Valuacion_derivados_soluciones.ipynb)|
+|20 junio 2020| 11 Pandas|Sólo notebook|[lec 10 - Pandas](./notebooks/lec10-pandas.ipynb)|[Proyecto 3 - Optimización de portafolios](./proyectos/Optimizacion_portafolios.ipynb)|[Solución proyecto optimización de portafolios](./soluciones/Optimizacion_portafolios_soluciones.ipynb)|
+|27 junio 2020| 12 Continuación Pandas|Sólo notebook|[lec11-pandas-nfl](./notebooks/lec11-pandas-nfl.ipynb)|--|--|
 
 # **Contacto**
 Si desean contactarme pueden usar **Teams**.
