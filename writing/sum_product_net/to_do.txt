@@ -1,0 +1,42 @@
+** Pendientes **
+
+Implement sampling method, each sample must return an array with length equals
+to the number of leaf nodes.
+
+Parameter Learning:
+    - Function to update weights
+    - Weights are positive and they must add up to one (Constrained optimization)
+
+How to use SPN for classification tasks
+
+How to use SPN for regression tasks
+
+How to normalize a SPN
+
+
+** Terminados **
+
+Revisar función pdf (tal vez sea mejor tenerla como una función aparte y no de la clase Node)
+Evaluar pdf con un input para cada distribución.
+
+Implementar función get_weights:
+    - Encontrar nodos sumas
+    - Para cada nodo almacenar los pesos en un diccionario {node_name: weights,...}
+
+Inicializar nodos suma:
+    - Encontrar nodos suma
+    - Para cada nodo inicializar con pesos 1 / Num_Hijos
+
+Función find_by_name para encontrar un nodo de acuerdo a su nombre
+
+Función find_by_type para encontrar un conjunto de nodos de acuerdo a su tipo
+
+Creación automática del árbol.
+
+1. Crear root y agregar nombre de hijos en memoria.
+
+2. Para cada nombre en memoria
+    - Buscar el nodo correspondiente en el árbol.
+    - Agregar hijos a este nodo.
+    - Agregar nombres de hijos en memoria.
+    - Quitar nombre del padre de memoria.

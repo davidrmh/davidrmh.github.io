@@ -1,0 +1,4 @@
+parent,child,parent_type,child_type,dist
+root,d1,sum,leaf,"'norm(loc=1, scale=0.5)'"
+root,d2,sum,leaf,"'norm(loc=-2, scale=1.5)'"
+root,d3,sum,leaf,"'norm(loc=3, scale=1.0)'"

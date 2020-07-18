@@ -1,0 +1,20 @@
+parent,child,parent_type,child_type,dist
+root,p1,sum,prod,no
+root,p2,sum,prod,no
+root,p3,sum,prod,no
+p1,s1,prod,sum,no
+p1,s2,prod,sum,no
+p2,s3,prod,sum,no
+p2,s4,prod,sum,no
+p3,s5,prod,sum,no
+p3,s6,prod,sum,no
+s1,p4,sum,prod,no
+s2,p5,sum,prod,no
+s3,d1,sum,leaf,"'norm(loc = 0, scale = 1)'"
+s4,d2,sum,leaf,"'norm(loc = -1, scale = 1)'"
+s5,p6,sum,prod,no
+s6,p7,sum,prod,no
+p4,d3,prod,leaf,"'norm(loc = 2, scale = 0.5)'"
+p5,d4,prod,leaf,"'norm(loc = 0.5, scale = 0.5)'"
+p6,d5,prod,leaf,"'norm(loc = 1.5, scale = 0.5)'"
+p7,d6,prod,leaf,"'norm(loc = 1, scale = 0.5)'"

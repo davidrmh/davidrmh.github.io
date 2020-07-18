@@ -1,0 +1,9 @@
+parent,child,parent_type,child_type,dist
+root,p1,sum,prod,no
+root,p2,sum,prod,no
+root,p3,sum,prod,no
+p1,s1,prod,sum,no
+p2,s2,prod,sum,no
+p3,d1,prod,leaf,"'norm(loc=4, scale =2.)'"
+s1,d2,sum,leaf,"'norm(loc=0, scale =2.)'"
+s2,d3,sum,leaf,"'norm(loc=-2, scale =2.)'"
