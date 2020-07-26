@@ -108,7 +108,7 @@ h1, h2, h3, h4{
   <div class="paper">
   
     <h1>Create your dataset</h1>
-    <p> You can use this tool if you want to create datasets for clustering or binary classification tasks</p>
+    <p> You can use this tool if you want to create datasets for clustering or classification tasks</p>
     <p><strong>Warning:</strong> This app doesn't works properly in mobile devices </p>
     
     <h2> Instructions </h2>
@@ -120,13 +120,20 @@ h1, h2, h3, h4{
     <label for="radio">Circle radio:</label>
     <input id="radio_input" name="radio" type="number" value=1 min=1 max=4><br>
     <p id="counter">You have plotted 0 points</p>
+    <!--DEPRECATED (ONLY TWO CLASSES)
     <p id="counter_pos">0 points of the positive class</p>
     <p id="counter_neg">0 points of the negative class</p>
-    <p><b>Select the class label</b></p>
+    <p><b>Select the class color/label</b></p>
     <input type="radio" id="class_positive" name="class_button" value="Positive" checked="true">
         <label for="class_positive">Positive</label><br>
     <input type="radio" id="class_negative" name="class_button" value="Negative">
         <label for="class_negative">Negative</label><br>
+    -->
+    <input type="text" id="class_color" name="class_color" value="blue">
+        <label for="class_color">Color (a valid HTML color)</label><br>
+        
+    <input type="text" id="class_label" name="class_label" value="1">
+        <label for="class_label">Label</label><br>        
         
     <button type="button" onclick="download_data();">Get your data!</button>
     <button onclick="window.location.href = 'https://davidrmh.github.io';" id="home-button">Take me home!</button>
@@ -137,8 +144,10 @@ h1, h2, h3, h4{
     <script type="text/javascript">
       var w = window.innerWidth,
           h = window.innerHeight,
-          margin = { top: 50, right: w * 0.4, bottom: h * 0.45, left: 60 },
-          radius = document.getElementById('radio_input').value;
+          margin = { top: 50, right: w * 0.45, bottom: h * 0.45, left: 60 },
+          radius = document.getElementById('radio_input').value,
+          class_color = document.getElementById('class_color'),
+          class_label = document.getElementById('class_label');
 
       var svg = d3.select("svg").attr({
         width: w,
@@ -150,8 +159,8 @@ h1, h2, h3, h4{
       
       //For counting the number of points
       var num_points = 0;
-      var num_pos = 0;
-      var num_neg = 0;
+      //var num_pos = 0; DEPRECATED
+      //var num_neg = 0; DEPRECATED
 
       // Set X Scale
       var xScale = d3.scale.linear()
@@ -184,9 +193,9 @@ h1, h2, h3, h4{
         "class": "axis",
         transform: "translate(" + [margin.left, 0] + ")"
       }).call(yAxis);  // Call the yAxis function on the group
-
+        
+      //bool_draw = false => de-activate drawing
       var bool_draw = false;
-      
       svg.on('click', function () {
             if(bool_draw){
                 bool_draw = false;
@@ -208,7 +217,10 @@ h1, h2, h3, h4{
             
             //Gets class label
             //and color
-            option_class = document.getElementById("class_positive");
+            var label = class_label.value;
+            var point_color = class_color.value;
+            //option_class = document.getElementById("class_positive");
+            /*
             if (option_class.checked){
                 var label = 1;
                 var point_color = 'blue';
@@ -218,18 +230,19 @@ h1, h2, h3, h4{
                 var point_color = 'red';
             
             }
+            */            
             
-            // collect new data
+            // collects new data
             var newData= {
                 x: Number(xScale.invert(coords[0]).toFixed(4)),
                 y: Number(yScale.invert(coords[1]).toFixed(4)),
                 class: label
             };
             
-            // Push data to our array
+            // Pushes data to our array
             dataset.push(newData);  
 
-            //Add new circle
+            //Adds new circle
                 svg.selectAll("circle") 
                 .data(dataset)
                 .enter()
@@ -238,9 +251,11 @@ h1, h2, h3, h4{
                 .style('fill', point_color)
                 .attr('r', document.getElementById('radio_input').value)
             
-            //Increments the counter of points
             num_points = num_points + 1;
             document.getElementById('counter').innerHTML = 'You have plotted ' + String(num_points) + ' points';
+            //Increments the counter of points
+            // DEPRECATED (THIS WAS FOR ONLY TWO CLASSES)
+            /*
             if(label==1){
                 num_pos = num_pos + 1;
             }
@@ -252,7 +267,9 @@ h1, h2, h3, h4{
             ratio_neg = 100 * num_neg/num_points;
             document.getElementById('counter_pos').innerHTML = String(ratio_pos.toFixed(2)) + '% of the positive class';
             document.getElementById('counter_neg').innerHTML = String(ratio_neg.toFixed(2)) + '% of the negative class';
+            */
             };
+            
         }
         //Download the data  
         function download_data(){
