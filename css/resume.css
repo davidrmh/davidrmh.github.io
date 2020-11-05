@@ -7,7 +7,7 @@
 body {
   font-family: 'Muli', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   padding-top: 54px;
-  background-color: #E5E5E5;
+  background-color: #F1F1F1;
   /*zoom: 125%;*/
 }
 
@@ -48,8 +48,9 @@ p{
 }
 p.lead {
   font-size: 1.15rem;
-  font-weight: 400;
-  color: rgb(10, 43, 231);
+  font-weight: 510;
+  /*color: rgb(10, 43, 231);*/
+  color: #00778A; /*Blue TU/e*/
 }
 
 .subheading {
@@ -79,7 +80,8 @@ p.lead {
 }
 
 .social-icons a:hover {
-  background-color: #BD5D38;
+  /*background-color: #BD5D38;*/
+  background-color:  rgb(199, 33, 37) !important; /*red TU/e*/
 }
 
 .dev-icons {
@@ -131,7 +133,7 @@ p.lead {
     max-width: 10rem;
     max-height: 10rem;
     border: 0.5rem solid rgba(255, 255, 255, 0.2);
-    background-color: #041FD7;
+    background-color: #667174;
     
   }
   #sideNav .navbar-collapse {
@@ -189,20 +191,25 @@ section.resume-section .resume-item .resume-date {
 }
 
 .bg-primary {
-  background-color: rgb(0, 60, 130) !important;
+    /*Left menu color*/
+  /*background-color: rgb(0, 60, 130) !important;*/
+  background-color: rgb(199, 33, 37) !important; /*red TU/e*/
 }
 
 .text-primary {
-  color:  rgb(0, 110, 236) !important;
+  /*color:  rgb(0, 110, 236) !important;*/
+  color:  rgb(199, 33, 37) !important; /*red TU/e*/
   font-weight: bold;
 }
 
 a {
-  color:  rgb(32, 110, 255);
+  /*color:  rgb(32, 110, 255);*/
+  color: #00778A; /*Blue TU/e*/
 }
 
 a:hover, a:focus, a:active {
-  color: #82407;
+  /*color: #82407;*/
+  color: #339AA9; /*Blue TU/e*/
 }
 
 /* Glyph, by Harry Roberts */
@@ -221,7 +228,7 @@ hr.style-eight:after {
   top: -0.7em;
   font-size: 1.5em;
   padding: 0 0.25em;
-  background-color: #E5E5E5;
+  background-color: #F1F1F1;
 }
 
 li.body-list:before {
