@@ -1,687 +1,379 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>David R. Montalván Hernández</title><style>
-/* cspell:disable-file */
-/* webkit printing magic: print all background colors */
-html {
-	-webkit-print-color-adjust: exact;
-}
-* {
-	box-sizing: border-box;
-	-webkit-print-color-adjust: exact;
-}
-
-html,
-body {
-	margin: 0;
-	padding: 0;
-}
-@media only screen {
-	body {
-		margin: 2em auto;
-		max-width: 900px;
-		color: rgb(55, 53, 47);
-	}
-}
-
-body {
-	line-height: 1.5;
-	white-space: pre-wrap;
-}
-
-a,
-a.visited {
-	color: inherit;
-	text-decoration: underline;
-}
-
-.pdf-relative-link-path {
-	font-size: 80%;
-	color: #444;
-}
-
-h1,
-h2,
-h3 {
-	letter-spacing: -0.01em;
-	line-height: 1.2;
-	font-weight: 600;
-	margin-bottom: 0;
-}
-
-.page-title {
-	font-size: 2.5rem;
-	font-weight: 700;
-	margin-top: 0;
-	margin-bottom: 0.75em;
-}
-
-h1 {
-	font-size: 1.875rem;
-	margin-top: 1.875rem;
-}
-
-h2 {
-	font-size: 1.5rem;
-	margin-top: 1.5rem;
-}
-
-h3 {
-	font-size: 1.25rem;
-	margin-top: 1.25rem;
-}
-
-.source {
-	border: 1px solid #ddd;
-	border-radius: 3px;
-	padding: 1.5em;
-	word-break: break-all;
-}
-
-.callout {
-	border-radius: 3px;
-	padding: 1rem;
-}
-
-figure {
-	margin: 1.25em 0;
-	page-break-inside: avoid;
-}
-
-figcaption {
-	opacity: 0.5;
-	font-size: 85%;
-	margin-top: 0.5em;
-}
-
-mark {
-	background-color: transparent;
-}
-
-.indented {
-	padding-left: 1.5em;
-}
-
-hr {
-	background: transparent;
-	display: block;
-	width: 100%;
-	height: 1px;
-	visibility: visible;
-	border: none;
-	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
-}
-
-img {
-	max-width: 100%;
-}
-
-@media only print {
-	img {
-		max-height: 100vh;
-		object-fit: contain;
-	}
-}
-
-@page {
-	margin: 1in;
-}
-
-.collection-content {
-	font-size: 0.875rem;
-}
-
-.column-list {
-	display: flex;
-	justify-content: space-between;
-}
-
-.column {
-	padding: 0 1em;
-}
-
-.column:first-child {
-	padding-left: 0;
-}
-
-.column:last-child {
-	padding-right: 0;
-}
-
-.table_of_contents-item {
-	display: block;
-	font-size: 0.875rem;
-	line-height: 1.3;
-	padding: 0.125rem;
-}
-
-.table_of_contents-indent-1 {
-	margin-left: 1.5rem;
-}
-
-.table_of_contents-indent-2 {
-	margin-left: 3rem;
-}
-
-.table_of_contents-indent-3 {
-	margin-left: 4.5rem;
-}
-
-.table_of_contents-link {
-	text-decoration: none;
-	opacity: 0.7;
-	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
-}
-
-table,
-th,
-td {
-	border: 1px solid rgba(55, 53, 47, 0.09);
-	border-collapse: collapse;
-}
-
-table {
-	border-left: none;
-	border-right: none;
-}
-
-th,
-td {
-	font-weight: normal;
-	padding: 0.25em 0.5em;
-	line-height: 1.5;
-	min-height: 1.5em;
-	text-align: left;
-}
-
-th {
-	color: rgba(55, 53, 47, 0.6);
-}
-
-ol,
-ul {
-	margin: 0;
-	margin-block-start: 0.6em;
-	margin-block-end: 0.6em;
-}
-
-li > ol:first-child,
-li > ul:first-child {
-	margin-block-start: 0.6em;
-}
-
-ul > li {
-	list-style: disc;
-}
-
-ul.to-do-list {
-	padding-inline-start: 0;
-}
-
-ul.to-do-list > li {
-	list-style: none;
-}
-
-.to-do-children-checked {
-	text-decoration: line-through;
-	opacity: 0.375;
-}
-
-ul.toggle > li {
-	list-style: none;
-}
-
-ul {
-	padding-inline-start: 1.7em;
-}
-
-ul > li {
-	padding-left: 0.1em;
-}
-
-ol {
-	padding-inline-start: 1.6em;
-}
-
-ol > li {
-	padding-left: 0.2em;
-}
-
-.mono ol {
-	padding-inline-start: 2em;
-}
-
-.mono ol > li {
-	text-indent: -0.4em;
-}
-
-.toggle {
-	padding-inline-start: 0em;
-	list-style-type: none;
-}
-
-/* Indent toggle children */
-.toggle > li > details {
-	padding-left: 1.7em;
-}
-
-.toggle > li > details > summary {
-	margin-left: -1.1em;
-}
-
-.selected-value {
-	display: inline-block;
-	padding: 0 0.5em;
-	background: rgba(206, 205, 202, 0.5);
-	border-radius: 3px;
-	margin-right: 0.5em;
-	margin-top: 0.3em;
-	margin-bottom: 0.3em;
-	white-space: nowrap;
-}
-
-.collection-title {
-	display: inline-block;
-	margin-right: 1em;
-}
-
-.page-description {
-	margin-bottom: 2em;
-}
-
-.simple-table {
-	margin-top: 1em;
-	font-size: 0.875rem;
-	empty-cells: show;
-}
-.simple-table td {
-	height: 29px;
-	min-width: 120px;
-}
-
-.simple-table th {
-	height: 29px;
-	min-width: 120px;
-}
-
-.simple-table-header-color {
-	background: rgb(247, 246, 243);
-	color: black;
-}
-.simple-table-header {
-	font-weight: 500;
-}
-
-time {
-	opacity: 0.5;
-}
-
-.icon {
-	display: inline-block;
-	max-width: 1.2em;
-	max-height: 1.2em;
-	text-decoration: none;
-	vertical-align: text-bottom;
-	margin-right: 0.5em;
-}
-
-img.icon {
-	border-radius: 3px;
-}
-
-.user-icon {
-	width: 1.5em;
-	height: 1.5em;
-	border-radius: 100%;
-	margin-right: 0.5rem;
-}
-
-.user-icon-inner {
-	font-size: 0.8em;
-}
-
-.text-icon {
-	border: 1px solid #000;
-	text-align: center;
-}
-
-.page-cover-image {
-	display: block;
-	object-fit: cover;
-	width: 100%;
-	max-height: 30vh;
-}
-
-.page-header-icon {
-	font-size: 3rem;
-	margin-bottom: 1rem;
-}
-
-.page-header-icon-with-cover {
-	margin-top: -0.72em;
-	margin-left: 0.07em;
-}
-
-.page-header-icon img {
-	border-radius: 3px;
-}
-
-.link-to-page {
-	margin: 1em 0;
-	padding: 0;
-	border: none;
-	font-weight: 500;
-}
-
-p > .user {
-	opacity: 0.5;
-}
-
-td > .user,
-td > time {
-	white-space: nowrap;
-}
-
-input[type="checkbox"] {
-	transform: scale(1.5);
-	margin-right: 0.6em;
-	vertical-align: middle;
-}
-
-p {
-	margin-top: 0.5em;
-	margin-bottom: 0.5em;
-}
-
-.image {
-	border: none;
-	margin: 1.5em 0;
-	padding: 0;
-	border-radius: 0;
-	text-align: center;
-}
-
-.code,
-code {
-	background: rgba(135, 131, 120, 0.15);
-	border-radius: 3px;
-	padding: 0.2em 0.4em;
-	border-radius: 3px;
-	font-size: 85%;
-	tab-size: 2;
-}
-
-code {
-	color: #eb5757;
-}
-
-.code {
-	padding: 1.5em 1em;
-}
-
-.code-wrap {
-	white-space: pre-wrap;
-	word-break: break-all;
-}
-
-.code > code {
-	background: none;
-	padding: 0;
-	font-size: 100%;
-	color: inherit;
-}
-
-blockquote {
-	font-size: 1.25em;
-	margin: 1em 0;
-	padding-left: 1em;
-	border-left: 3px solid rgb(55, 53, 47);
-}
-
-.bookmark {
-	text-decoration: none;
-	max-height: 8em;
-	padding: 0;
-	display: flex;
-	width: 100%;
-	align-items: stretch;
-}
-
-.bookmark-title {
-	font-size: 0.85em;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	height: 1.75em;
-	white-space: nowrap;
-}
-
-.bookmark-text {
-	display: flex;
-	flex-direction: column;
-}
-
-.bookmark-info {
-	flex: 4 1 180px;
-	padding: 12px 14px 14px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-}
-
-.bookmark-image {
-	width: 33%;
-	flex: 1 1 180px;
-	display: block;
-	position: relative;
-	object-fit: cover;
-	border-radius: 1px;
-}
-
-.bookmark-description {
-	color: rgba(55, 53, 47, 0.6);
-	font-size: 0.75em;
-	overflow: hidden;
-	max-height: 4.5em;
-	word-break: break-word;
-}
-
-.bookmark-href {
-	font-size: 0.75em;
-	margin-top: 0.25em;
-}
-
-.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
-.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
-.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
-.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
-.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
-.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
-.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
-.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
-.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
-.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
-.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
-.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
-.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
-.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
-.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
-.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
-.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
-.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
-.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
-.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
-.highlight-default {
-	color: rgba(55, 53, 47, 1);
-}
-.highlight-gray {
-	color: rgba(120, 119, 116, 1);
-	fill: rgba(120, 119, 116, 1);
-}
-.highlight-brown {
-	color: rgba(159, 107, 83, 1);
-	fill: rgba(159, 107, 83, 1);
-}
-.highlight-orange {
-	color: rgba(217, 115, 13, 1);
-	fill: rgba(217, 115, 13, 1);
-}
-.highlight-yellow {
-	color: rgba(203, 145, 47, 1);
-	fill: rgba(203, 145, 47, 1);
-}
-.highlight-teal {
-	color: rgba(68, 131, 97, 1);
-	fill: rgba(68, 131, 97, 1);
-}
-.highlight-blue {
-	color: rgba(51, 126, 169, 1);
-	fill: rgba(51, 126, 169, 1);
-}
-.highlight-purple {
-	color: rgba(144, 101, 176, 1);
-	fill: rgba(144, 101, 176, 1);
-}
-.highlight-pink {
-	color: rgba(193, 76, 138, 1);
-	fill: rgba(193, 76, 138, 1);
-}
-.highlight-red {
-	color: rgba(212, 76, 71, 1);
-	fill: rgba(212, 76, 71, 1);
-}
-.highlight-default_background {
-	color: rgba(55, 53, 47, 1);
-}
-.highlight-gray_background {
-	background: rgba(248, 248, 247, 1);
-}
-.highlight-brown_background {
-	background: rgba(244, 238, 238, 1);
-}
-.highlight-orange_background {
-	background: rgba(251, 236, 221, 1);
-}
-.highlight-yellow_background {
-	background: rgba(251, 243, 219, 1);
-}
-.highlight-teal_background {
-	background: rgba(237, 243, 236, 1);
-}
-.highlight-blue_background {
-	background: rgba(231, 243, 248, 1);
-}
-.highlight-purple_background {
-	background: rgba(248, 243, 252, 1);
-}
-.highlight-pink_background {
-	background: rgba(252, 241, 246, 1);
-}
-.highlight-red_background {
-	background: rgba(253, 235, 236, 1);
-}
-.block-color-default {
-	color: inherit;
-	fill: inherit;
-}
-.block-color-gray {
-	color: rgba(120, 119, 116, 1);
-	fill: rgba(120, 119, 116, 1);
-}
-.block-color-brown {
-	color: rgba(159, 107, 83, 1);
-	fill: rgba(159, 107, 83, 1);
-}
-.block-color-orange {
-	color: rgba(217, 115, 13, 1);
-	fill: rgba(217, 115, 13, 1);
-}
-.block-color-yellow {
-	color: rgba(203, 145, 47, 1);
-	fill: rgba(203, 145, 47, 1);
-}
-.block-color-teal {
-	color: rgba(68, 131, 97, 1);
-	fill: rgba(68, 131, 97, 1);
-}
-.block-color-blue {
-	color: rgba(51, 126, 169, 1);
-	fill: rgba(51, 126, 169, 1);
-}
-.block-color-purple {
-	color: rgba(144, 101, 176, 1);
-	fill: rgba(144, 101, 176, 1);
-}
-.block-color-pink {
-	color: rgba(193, 76, 138, 1);
-	fill: rgba(193, 76, 138, 1);
-}
-.block-color-red {
-	color: rgba(212, 76, 71, 1);
-	fill: rgba(212, 76, 71, 1);
-}
-.block-color-default_background {
-	color: inherit;
-	fill: inherit;
-}
-.block-color-gray_background {
-	background: rgba(248, 248, 247, 1);
-}
-.block-color-brown_background {
-	background: rgba(244, 238, 238, 1);
-}
-.block-color-orange_background {
-	background: rgba(251, 236, 221, 1);
-}
-.block-color-yellow_background {
-	background: rgba(251, 243, 219, 1);
-}
-.block-color-teal_background {
-	background: rgba(237, 243, 236, 1);
-}
-.block-color-blue_background {
-	background: rgba(231, 243, 248, 1);
-}
-.block-color-purple_background {
-	background: rgba(248, 243, 252, 1);
-}
-.block-color-pink_background {
-	background: rgba(252, 241, 246, 1);
-}
-.block-color-red_background {
-	background: rgba(253, 235, 236, 1);
-}
-.select-value-color-uiBlue { background-color: undefined; }
-.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
-.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
-.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
-.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
-.select-value-color-transparentGray { background-color: undefined; }
-.select-value-color-translucentGray { background-color: undefined; }
-.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
-.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
-.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
-.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
-.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
-.select-value-color-pageGlass { background-color: undefined; }
-.select-value-color-washGlass { background-color: undefined; }
-
-.checkbox {
-	display: inline-flex;
-	vertical-align: text-bottom;
-	width: 16;
-	height: 16;
-	background-size: 16px;
-	margin-left: 2px;
-	margin-right: 5px;
-}
-
-.checkbox-on {
-	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
-}
-
-.checkbox-off {
-	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
-}
-	
-</style></head><body><article id="f30b7c4d-88f4-4a9e-a322-f46e6945f14b" class="page sans"><header><img class="page-cover-image" src="https://www.notion.so/images/page-cover/woodcuts_9.jpg" style="object-position:center 0%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">⛩️</span></div><h1 class="page-title">David R. Montalván Hernández</h1><p class="page-description"></p></header><div class="page-body"><div id="78999113-b209-46b7-a8eb-cb909711a649" class="column-list"><div id="54b6426c-eefb-4d81-b10b-2e73f6085f65" style="width:62.5%" class="column"><figure class="block-color-yellow_background callout" style="white-space:pre-wrap;display:flex" id="ce2adf64-e17b-474d-ba06-be9ef18b30bd"><div style="font-size:1.5em"><span class="icon">👋</span></div><div style="width:100%">I&#x27;m a mix of <strong>actuary</strong> and <strong>computer scientist, </strong>mainly interested in quantitative finance, machine learning, data science, probabilistic programming and scientific computing in general. </div></figure><nav id="f08b648a-5d4a-4ab7-aeae-8cc97ee8c8d2" class="block-color-teal_background table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#11ff4a32-e231-4eb3-9855-64d96129e883">💼 Work experience</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1cb6c36f-e0ae-8032-b47a-cc20a460070e">Quantitative Researcher</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6b065343-cf8c-46b3-bcac-044b67685d58">Lecturer</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#05d89fc7-65f6-463a-be32-79ea1bfa2ac9">Economic Data Analyst</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#62cd783e-76c2-48a0-bb26-e11dc38bb9ae">Stock Indexes Analyst</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ca8ab96f-e874-423e-9a0a-e408d2ecf2fd">Teacher Assistant</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b20716ad-0d47-4f6d-becc-306bdffd9f9e">🎓 Education</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#0a1e362f-61f7-4983-9c1d-22f2eada6998"><strong>PhD Candidate in Computer Science</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1ff4d984-eea1-4764-aff0-e93de66c3210"><strong>Master&#x27;s Degree in Computer Science</strong></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#464fcb14-b5a8-4793-9685-60cd5b5a2829"><strong>Bachelor&#x27;s Degree in Actuarial Science</strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e537a9f6-f503-4dff-b33f-0738e859dbc8">🛠️ Skills and tools</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#5aed1cd5-1ff4-4d88-a70a-b175080ba3de">Python</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ae7eb0ca-8fe8-4d6d-a3de-539518ae2e7e">R</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9505ebe5-899c-4fd2-8287-f18c5011c365">Other tools and programming languages</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#9a22f08d-424a-4eba-b8be-1faebe2cc040">📜Certifications</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#0009f09d-9a6f-4c2f-ba97-4a307eb05554">Deeplearning.AI</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#57098a6f-89ac-49b5-b2cd-bddca20191ad">Natural Language Processing <mark class="highlight-blue"><a href="https://coursera.org/share/2e07296b6ae96e9c9b3e9157c10f4753">(Certificate)</a></mark></a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#eb18911d-6b4b-4d62-9113-18d8eca47e37">Tensorflow in practice specialization<mark class="highlight-blue"><a href="https://coursera.org/share/014b97124961f94093734a988e5a9c7f"> </a></mark><mark class="highlight-blue"><strong><a href="https://coursera.org/share/014b97124961f94093734a988e5a9c7f">(Certificate)</a></strong></mark></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#653dcebb-1579-4688-9f98-a68e64a7b58c">John Hopkins University</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#69c9460d-9fb7-4207-a5d3-73531c5d6a61">🖥️ Software</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1776c36f-e0ae-8017-8d9d-e51ad26f4af7">📰Publications</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7e6a09f9-f4d5-4aa2-b60a-1e2ca1ef3f05">📝Writing</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1fa3044d-377d-4c3a-96be-035a27000753">👨‍🏫 Teaching</a></div></nav></div><div id="ab300ce2-ec38-449d-b1b2-5d371275bec6" style="width:37.500000000000014%" class="column"><p id="41f328dd-9e77-4cfb-b1d6-d8c3032ddc30" class="block-color-blue_background"><strong>Contact</strong></p><p id="d9ca1c2c-4d1d-4875-a682-3d60014db675" class=""><a href="mailto:adalovelace@mail.com">📧 d</a>avidricardo888 :at: gmail.com</p><p id="d60011e0-1282-4be1-9263-73936a32a7e0" class=""><a href="https://www.linkedin.com/company/notionhq/mycompany/">🔗 </a><a href="http://www.linkedin.com/in/david-r-montalván-hernández">My Linkedin profile</a></p><p id="695c2c55-50d4-416e-af44-4e5cd1944254" class=""><a href="https://github.com/davidrmh">👾 https://github.com/davidrmh</a></p><p id="65932f46-4c5b-4617-b4b6-b767609dc03d" class="block-color-blue_background"><strong>Languages</strong></p><p id="e8594ef2-5665-4162-b64a-0844f5c058d7" class=""><strong>Spanish:</strong> Native speaker.</p><p id="fcc1569a-7d10-43e8-a408-89e632c89214" class=""><strong>English:</strong> Professional working proficiency.</p><p id="e2ef568f-872c-4c52-94c4-3dafa0ce31d7" class="">
-</p></div></div><h1 id="11ff4a32-e231-4eb3-9855-64d96129e883" class="block-color-blue_background">💼 Work experience</h1><h2 id="1cb6c36f-e0ae-8032-b47a-cc20a460070e" class="">Quantitative Researcher</h2><p id="1cb6c36f-e0ae-8012-8057-e0e649f1ceb1" class=""><em><mark class="highlight-default"><strong>Northpool B.V., Leiden, The Netherlands – (Jan. 2025 - current)</strong></mark></em></p><p id="1cb6c36f-e0ae-80fd-85f9-c58c243bd3e2" class="">Develop and implementation of statistical models to support trading strategies for the European energy market.</p><h2 id="6b065343-cf8c-46b3-bcac-044b67685d58" class="">Lecturer</h2><p id="f7197fe7-5ef1-48b8-adcc-5b1d4309bfc3" class="block-color-gray"><mark class="highlight-default"><strong>Instituto Tecnológico Autónomo de México (ITAM)</strong></mark><em><mark class="highlight-default">, Mexico City, Mexico – (Oct 2019 - June 2020)</mark></em></p><p id="8f3a7fdd-504d-4b41-afcf-ed5d8332e94b" class="">Lecturer for a diploma program in Data Science and Machine Learning, specifically tailored for finance professionals. My lectures covered topics in Python programming, linear algebra, probability, statistics, and machine learning.</p><h2 id="05d89fc7-65f6-463a-be32-79ea1bfa2ac9" class="">Economic Data Analyst</h2><p id="5eb692aa-dda1-4256-b9de-c8aa660c4a6a" class="block-color-gray"><em><mark class="highlight-default"><strong>Bloomberg L.P., Mexico City, Mexico – (Aug 2015 - Aug 2017)</strong></mark></em></p><p id="1cb6c36f-e0ae-805d-b746-ce1359a77d4c" class="">Data analyst of macroeconomic indicators for Latin American countries (mainly Mexico, Colombia, Perú, and Uruguay).</p><p id="1cb6c36f-e0ae-806e-bcbe-f008f84e6b4f" class="">Worked closely with Bloomberg&#x27;s News team in the writing of press notes based on the analysis of these macroeconomic data.</p><h2 id="62cd783e-76c2-48a0-bb26-e11dc38bb9ae" class="">Stock Indexes Analyst</h2><p id="a616c500-ab5e-4163-b8a5-03638492b746" class="block-color-gray"><em><mark class="highlight-default"><strong>Mexican Stock Exchange, Mexico City, Mexico – (Jul 2013 - Feb 2015)</strong></mark></em></p><p id="80736d6c-f092-40d9-93ea-c7ee73acfcb4" class="">Creation and maintenance of stock indexes owned by the Mexican Stock Exchange, including the Índice de Precios y Cotizaciones (Price and Quotations Index, Bloomberg: MEXBOL).</p><h2 id="ca8ab96f-e874-423e-9a0a-e408d2ecf2fd" class="">Teacher Assistant</h2><p id="1aeb3f04-ae83-473a-837a-1a6126bfadb3" class="block-color-gray"><em><mark class="highlight-default"><strong>Universidad Nacional Autónoma de México (UNAM), Mexico City, Mexico – (Aug 2012 - Jun 2013)</strong></mark></em></p><p id="2aec040f-2bc3-4196-8182-d2e5819ee166" class="">Teaching Assistant for advanced undergraduate courses in risk theory. Main topics covered: Ruin process, risk measures, and insurance premium principles.</p><hr id="b7ca8c67-5423-4de8-8c46-2d0436658763"/><h1 id="b20716ad-0d47-4f6d-becc-306bdffd9f9e" class="block-color-blue_background">🎓 Education</h1><h2 id="0a1e362f-61f7-4983-9c1d-22f2eada6998" class=""><strong>PhD Candidate in Computer Science</strong></h2><p id="e98b318d-6f51-4533-8a28-9a0a65a7d927" class="block-color-gray"><em><mark class="highlight-default"><strong>Uncertainty in Artificial Intelligence, Eindhoven University of Technology, Eindhoven, The Netherlands - (Nov.</strong></mark></em><mark class="highlight-default"><strong> 2020 -  Nov. 2024)</strong></mark></p><p id="1cb6c36f-e0ae-805c-a4d7-d05351f961ae" class="">My research centers on the study of a class of generative probabilistic models called Credal Probabilistic Circuits.</p><p id="1cb6c36f-e0ae-8072-9eab-c8262ccc5a56" class="">In addition to theoretical advancements for this type of models, I am actively seeking possible applications for them. In particular, I&#x27;m interested in their use for finance-related tasks.</p><p id="1cb6c36f-e0ae-804c-8b28-f81bc0229b63" class=""><strong>Thesis: </strong>Credal Probabilistic Circuits: Inference, learning and applications.</p><h2 id="1ff4d984-eea1-4764-aff0-e93de66c3210" class=""><strong>Master&#x27;s Degree in Computer Science</strong></h2><p id="ba7fd3e9-2918-4ae0-bd3e-73672c714f55" class="block-color-gray"><em><mark class="highlight-default"><strong>Computer Research Center, Instituto Politécnico Nacional (IPN), Mexico City, Mexico - (</strong></mark></em><mark class="highlight-default"><strong>Aug 2017 -  Nov 2019)</strong></mark></p><p id="9a29b428-17ef-4c47-b8d4-c50f082f94b8" class=""><strong>Thesis:</strong> Automated Learning of Trading Rules for the Mexican Stock Market</p><h2 id="464fcb14-b5a8-4793-9685-60cd5b5a2829" class=""><strong>Bachelor&#x27;s Degree in Actuarial Science</strong></h2><p id="fdcc993a-3b27-4058-b28d-8ea06e89f9b4" class="block-color-gray"><em><mark class="highlight-default"><strong>Faculty of Sciences, Universidad Nacional Autónoma de México (UNAM), Mexico City, Mexico - (</strong></mark></em><mark class="highlight-default"><strong>Aug 2008 - Jul 2012)</strong></mark></p><p id="f3edd9d8-a2fb-42ae-ab21-2ecb2319ab9f" class=""><strong>Thesis: </strong>Merton&#x27;s jump diffusion model for pricing European options. A martingale-based approach</p><hr id="1c9c336b-b516-442f-ba73-78ab10e623de"/><h1 id="e537a9f6-f503-4dff-b33f-0738e859dbc8" class="block-color-blue_background">🛠️ Skills and tools</h1><h2 id="5aed1cd5-1ff4-4d88-a70a-b175080ba3de" class="">Python</h2><p id="b10c0958-29a9-486b-aa5d-079d6c80c53a" class="">I have several years of working experience with mainstream packages used in machine learning and data science such as</p><ul id="2a55ede6-9d7f-4a2e-a148-6eaed475a10f" class="bulleted-list"><li style="list-style-type:disc">Tensorflow</li></ul><ul id="94ee6fe4-a126-4f4c-bc48-cdea9c9ec27d" class="bulleted-list"><li style="list-style-type:disc">Pytorch</li></ul><ul id="3a89ba3c-abbf-46f7-a7c9-d2a3ba06b0cf" class="bulleted-list"><li style="list-style-type:disc">Numpy</li></ul><ul id="3b1be383-f895-4076-961d-a9c0891e360f" class="bulleted-list"><li style="list-style-type:disc">Scipy</li></ul><ul id="767e077c-406d-4734-b99e-9fab5b9aade7" class="bulleted-list"><li style="list-style-type:disc">Scikit-learn</li></ul><ul id="cf3d83cc-456e-48bc-b935-acac4f5aa147" class="bulleted-list"><li style="list-style-type:disc">Pandas</li></ul><ul id="a5d662d3-0b53-4c73-b030-d66f4649ba20" class="bulleted-list"><li style="list-style-type:disc">PySpark</li></ul><h2 id="ae7eb0ca-8fe8-4d6d-a3de-539518ae2e7e" class="">R</h2><p id="e6d15767-09f5-4dac-a860-8b835547ec94" class="">Working experience with the <strong>tidyverse</strong> collection of packages for data science.</p><h2 id="9505ebe5-899c-4fd2-8287-f18c5011c365" class="">Other tools and programming languages</h2><ul id="68052d75-814a-4965-976b-2b610e43c04e" class="bulleted-list"><li style="list-style-type:disc">C++11/14/17/20</li></ul><ul id="5d114cda-7ea6-480c-a90b-6a940a2cb29d" class="bulleted-list"><li style="list-style-type:disc">SQL</li></ul><ul id="926c84f6-5f80-4b1b-9715-540d0a0ce41b" class="bulleted-list"><li style="list-style-type:disc">Git</li></ul><ul id="0e2d78b5-8cbf-46fe-96f3-2aff4e9d3445" class="bulleted-list"><li style="list-style-type:disc">Linux</li></ul><ul id="b1641201-06c8-4705-998c-2eba5b75c287" class="bulleted-list"><li style="list-style-type:disc">Excel</li></ul><ul id="2c12ef86-d7eb-4821-acde-3918b3a659ce" class="bulleted-list"><li style="list-style-type:disc">Bloomberg terminal</li></ul><ul id="0bdba095-3035-4cfe-8f16-2c95e40bbe1f" class="bulleted-list"><li style="list-style-type:disc">VBA</li></ul><ul id="21d6e830-1ae5-464a-8727-4a8519043548" class="bulleted-list"><li style="list-style-type:disc">AWS</li></ul><hr id="f7be1691-8f3b-458c-842e-37b214c5769f"/><h1 id="9a22f08d-424a-4eba-b8be-1faebe2cc040" class="block-color-blue_background">📜Certifications</h1><h2 id="0009f09d-9a6f-4c2f-ba97-4a307eb05554" class="">Deeplearning.AI</h2><h3 id="57098a6f-89ac-49b5-b2cd-bddca20191ad" class="">Natural Language Processing <mark class="highlight-blue"><a href="https://coursera.org/share/2e07296b6ae96e9c9b3e9157c10f4753">(Certificate)</a></mark></h3><p id="ca25a3ad-700b-405e-83b4-fd06bf0703da" class="">This specialization comprehends the following courses:</p><ul id="9f8db055-0a0c-4b6b-83fd-7a952add2549" class="bulleted-list"><li style="list-style-type:disc">Natural Language Processing with Classification and Vector Spaces.</li></ul><ul id="be0f3540-5f36-46c3-850f-e2fc63071d76" class="bulleted-list"><li style="list-style-type:disc">Natural Language Processing with Probabilistic Models.</li></ul><ul id="330e3e26-54b7-4e0a-9389-e02f8e9cbb4c" class="bulleted-list"><li style="list-style-type:disc">Natural Language Processing with Sequence Models.</li></ul><ul id="03b14874-eb71-4f07-af45-d09597925f86" class="bulleted-list"><li style="list-style-type:disc">Natural Language Processing with Attention Models.</li></ul><h3 id="eb18911d-6b4b-4d62-9113-18d8eca47e37" class="">Tensorflow in practice specialization<mark class="highlight-blue"><a href="https://coursera.org/share/014b97124961f94093734a988e5a9c7f"> </a></mark><mark class="highlight-blue"><strong><a href="https://coursera.org/share/014b97124961f94093734a988e5a9c7f">(Certificate)</a></strong></mark></h3><p id="b25e3807-03e6-40ca-ba68-4c449c0b55e4" class="">This specialization comprehends the following courses:</p><ul id="b50edf74-dbc3-4e27-a5b2-399526ebce1c" class="bulleted-list"><li style="list-style-type:disc">Introduction to TensorFlow for Artificial Intelligence, Machine Learning, and Deep Learning.</li></ul><ul id="775db567-5906-47ed-a527-4621f409d76a" class="bulleted-list"><li style="list-style-type:disc">Convolutional Neural Networks in TensorFlow.</li></ul><ul id="d74aead0-27ea-4d1b-8c7c-dac15f69c853" class="bulleted-list"><li style="list-style-type:disc">Natural Language Processing in TensorFlow.</li></ul><ul id="14fa0b5c-c80a-4ae2-b31b-34dfad9de861" class="bulleted-list"><li style="list-style-type:disc">Sequences, Time Series and Prediction</li></ul><h2 id="653dcebb-1579-4688-9f98-a68e64a7b58c" class="">John Hopkins University</h2><ul id="3f862b88-e197-40eb-9f16-8b7b936be5f7" class="bulleted-list"><li style="list-style-type:disc">The R Programming Environment <mark class="highlight-blue"><a href="https://coursera.org/share/0347c815b0058849310852deb5ff2143">(Certificate)</a></mark></li></ul><ul id="2423d351-e77f-4a77-9fd3-fed288735c7f" class="bulleted-list"><li style="list-style-type:disc">Advanced R Programming <mark class="highlight-blue"><a href="https://coursera.org/share/b15d7794d43b56a69677d92378f0a523">(Certificate)</a></mark></li></ul><ul id="a7fb07e6-3214-4456-8ec0-f52a8f92e4d9" class="bulleted-list"><li style="list-style-type:disc">Building R Packages <mark class="highlight-blue"><a href="https://coursera.org/share/2518bad8a510484c52e796efcf78d595">(Certificate)</a></mark></li></ul><hr id="12290021-082b-4846-a4d7-21e6f6c61da7"/><h1 id="69c9460d-9fb7-4207-a5d3-73531c5d6a61" class="block-color-blue_background">🖥️ Software</h1><ul id="1776c36f-e0ae-805d-ad7d-cd5381a870c2" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><a href="https://davidrmh.github.io/software/clusters_app/clusters.html">App for creating clustering and 2D classification datasets</a></mark></li></ul><h1 id="1776c36f-e0ae-8017-8d9d-e51ad26f4af7" class="block-color-blue_background">📰Publications</h1><ul id="11a6c36f-e0ae-8083-9955-fe47c5835944" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><a href="https://link.springer.com/chapter/10.1007/978-3-031-67977-3_4">Dempster-Shafer Credal Probabilistic Circuits (</a></mark><em><mark class="highlight-blue"><a href="https://link.springer.com/chapter/10.1007/978-3-031-67977-3_4">8th International Conference on Belief Functions, 2024)</a></mark></em></li></ul><ul id="11a6c36f-e0ae-8016-bafe-f89789ea7d6c" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><a href="https://dl.acm.org/doi/10.1145/3604237.3626853">Portfolio Optimization via Credal Probabilistic Circuits (ICAIF &#x27;23: Proceedings of the Fourth ACM International Conference on AI in Finance - Nov 2023)</a></mark></li></ul><ul id="5da390c3-59ad-42cf-b984-525d036635b4" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><a href="https://www.sciencedirect.com/science/article/pii/S0888613X23001780">Beyond tree-shaped credal probabilistic circuits (International Journal of Approximate Reasoning - Oct 2023) </a></mark></li></ul><hr id="a0fccda4-0159-4ea7-9078-f1133e291ac3"/><h1 id="7e6a09f9-f4d5-4aa2-b60a-1e2ca1ef3f05" class="block-color-blue_background">📝Writing</h1><figure class="block-color-yellow_background callout" style="white-space:pre-wrap;display:flex" id="cf7900d1-c47a-4423-bf1f-ecd65453e689"><div style="font-size:1.5em"><span class="icon">⚠️</span></div><div style="width:100%">This writing is done for my own use, notes here may contain (a lot of) errors and imprecisions.</div></figure><ul id="11a6c36f-e0ae-8076-a873-ecd36503a487" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><a href="https://www.notion.so/The-rationale-behind-price-indices-and-inflation-adjusted-prices-af3fc81f44bb4dff9bf3431e81536706?pvs=21">The rationale behind price indices and inflation adjusted prices</a></mark></li></ul><ul id="11a6c36f-e0ae-80ce-8e4b-fddda489d6ec" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><a href="https://davidrmh.github.io/writing/bayesian_port_opt/bayesian_port.html">Bayesian Portfolio Optimization a use case for RStan</a></mark></li></ul><ul id="6485bd7d-86fb-433a-aec9-917bb714b6f3" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><a href="https://davidrmh.github.io/writing/image_denoising/image_denoising.html">De-noising images with Markov Random Fields and iterated conditional modes technique with python</a></mark></li></ul><ul id="d1cccb09-a913-4b34-8463-efe6f774ad7d" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><a href="https://davidrmh.github.io/writing/elbo_scratch/ELBO_scratch.html">Implementing Evidence Lower Bound maximization from scratch using base R.</a></mark></li></ul><h1 id="1fa3044d-377d-4c3a-96be-035a27000753" class="block-color-blue_background">👨‍🏫 Teaching</h1><ul id="8880b35b-91c7-44b7-b3db-f35a02f5a47d" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><a href="https://davidrmh.github.io/teaching/ds_ml_mod_2_itam_abril_2020/index.html">Module 2 for Diploma in Data Science and Machine Learning Applied to Finance - ITAM (April 2020 - Spanish)</a></mark></li></ul><ul id="6a1c5117-5560-441f-b9cf-c4797fb9125d" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue"><a href="https://davidrmh.github.io/teaching/decisiones_de_negocio_basadas_abr_jun_2020/index.html">Introduction to python programming applied to quantitative finance - ITAM (April - June 2020 Spanish)</a></mark></li></ul><p id="17264919-ca8f-4c51-9a2b-9d650f27f327" class="">
-</p><p id="ea86e6b3-1044-41d9-a489-62619efbe6fb" class="">
-</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
+<!DOCTYPE html>
+<html lang="en" id="theme-root">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David R. Montalván Hernández | CV</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+        .prose-font { font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        
+        /* Explicit backup overrides to guarantee dark-mode rendering instantly on toggle */
+        html.dark body {
+            background-color: #0b0f19 !important;
+            color: #e1cbcb !important;
+        }
+        html.dark .dark\:bg-slate-900\/60 { background-color: rgba(15, 23, 42, 0.6) !important; }
+        html.dark .dark\:bg-slate-900\/45 { background-color: rgba(15, 23, 42, 0.45) !important; }
+        html.dark .dark\:bg-slate-900\/50 { background-color: rgba(15, 23, 42, 0.5) !important; }
+        html.dark .dark\:bg-slate-950 { background-color: #020617 !important; }
+        html.dark .dark\:border-slate-800 { border-color: #1e293b !important; }
+        html.dark .dark\:text-white { color: #ffffff !important; }
+        html.dark .dark\:text-slate-300 { color: #cecbe1 !important; }
+        html.dark .dark\:text-slate-400 { color: #94a3b8 !important; }
+        html.dark .dark\:text-slate-500 { color: #03367e !important; }
+        html.dark .dark\:text-emerald-400 { color: hsl(107, 75%, 43%) !important; }
+        html.dark .dark\:text-indigo-400 { color: #818cf8 !important; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-700 antialiased min-h-screen selection:bg-emerald-500 selection:text-slate-900 transition-colors duration-200">
+
+    <!-- FIXED THEME TOGGLE BUTTON 
+    <div class="fixed top-6 right-6 z-50">
+        <button id="theme-toggle" class="flex items-center gap-2 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-800 px-3 py-1.5 rounded-lg text-xs font-mono shadow-sm hover:border-slate-400 dark:hover:border-slate-600 cursor-pointer transition-all">
+            <span id="theme-icon">🌙</span> <span id="theme-text">Night Mode</span>
+        </button>
+    </div>
+	-->
+
+    <div class="max-w-6xl mx-auto px-6 py-12 md:py-20">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            
+            <!-- SIDEBAR: PROFILE & SUMMARY -->
+            <aside class="lg:col-span-4 lg:sticky lg:top-20 space-y-6">
+                <div class="space-y-2">
+                    <div class="inline-flex items-center gap-2 bg-emerald-600/10 text-emerald-700 dark:text-emerald-400 dark:bg-emerald-500/10 border border-emerald-600/20 dark:border-emerald-500/20 px-2 py-0.5 rounded text-xs font-mono">
+                        <span class="w-1.5 h-1.5 bg-emerald-600 dark:bg-emerald-400 rounded-full animate-pulse"></span> Quant Developer and Machine Learning Engineer
+                    </div>
+                    <h1 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white font-mono">David R. Montalvan Hernandez</h1>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 prose-font leading-relaxed">
+                     Computer Scientist and Applied Mathematician with over 7+ years of professional experience in Machine Learning
+					 solutions for the FinTech and Financial Services industries.
+                    </p>
+                </div>
+
+                <!-- Contact Block -->
+                <div class="p-4 bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 rounded-lg space-y-3 text-xs font-mono shadow-xs">
+                    <div class="text-[10px] text-indigo-700 dark:text-indigo-300 uppercase tracking-wider font-bold">// Contact</div>
+					<!--
+                    <div class="flex items-center gap-2">
+                        <span class="text-emerald-600 dark:text-emerald-500">✉️</span> 
+                        <a href="mailto:davidricardo888@gmail.com" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors underline decoration-slate-300 dark:decoration-slate-700">davidricardo AT gmail</a>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-emerald-600 dark:text-emerald-500">🐙</span> 
+                        <a href="https://github.com/davidrmh" target="_blank" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors underline decoration-slate-300 dark:decoration-slate-700">github.com/davidrmh</a>
+                    </div>
+					-->
+                    <div class="flex items-center gap-2">
+                        <span class="text-emerald-600 dark:text-emerald-500">💼</span> 
+                        <a href="https://www.linkedin.com/in/davidrmh" target="_blank" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors underline decoration-slate-300 dark:decoration-slate-700">linkedin.com/in/davidrmh</a>
+                    </div>
+                </div>
+
+                <!-- Navigation Tree -->
+                <nav class="hidden lg:block space-y-2 font-mono text-xs text-slate-400 dark:text-slate-500 pl-2">
+                    <a href="#experience" class="block text-indigo-700 dark:text-indigo-300 uppercase tracking-wider font-bold">📂 src/experience/</a>
+                    <a href="#education" class="block text-indigo-700 dark:text-indigo-300 uppercase tracking-wider font-bold">📂 src/education/</a>
+                    <a href="#skills" class="block text-indigo-700 dark:text-indigo-300 uppercase tracking-wider font-bold">📂 src/tech_stack/</a>
+                    <a href="#publications" class="block text-indigo-700 dark:text-indigo-300 uppercase tracking-wider font-bold">📂 src/publications_software/</a>
+                    <a href="#writing" class="block text-indigo-700 dark:text-indigo-300 uppercase tracking-wider font-bold">📂 src/writing/</a>
+                </nav>
+            </aside>
+
+            <!-- MAIN PIPELINE CONTAINER -->
+            <main class="lg:col-span-8 space-y-16 prose-font">
+
+                <!-- SECTION: EXPERIENCE -->
+                <section id="experience" class="scroll-mt-20">
+                    <h2 class="text-xs font-mono font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400 mb-6 flex items-center gap-2">
+                        <span>01.</span> WORK EXPERIENCE
+                    </h2>
+                    
+                    <div class="space-y-6">
+
+                        <!-- Quant Developer Northpool -->
+                        <div class="p-5 bg-white dark:bg-slate-900/45 border border-slate-200 dark:border-slate-800 rounded-xl hover:border-slate-400 dark:hover:border-slate-700 shadow-xs transition-all">
+                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 font-mono">
+                                <h3 class="text-base font-bold text-slate-900 dark:text-white">Quantitative Developer / AI Developer</h3>
+                                <span class="text-xs text-emerald-700 bg-emerald-600/10 dark:text-emerald-400 dark:bg-emerald-500/10 border border-emerald-600/20 dark:border-emerald-500/20 px-2 py-0.5 rounded sm:order-last w-max">Sep 2025 — current</span>
+                            </div>
+                            <p class="text-xs font-bold text-indigo-600 dark:text-indigo-400">Northpool B.V. &bull; Leiden, The Netherlands</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 mt-3 leading-relaxed">
+                                Design of pipelines for training and inference of machine learning and deep learning models used for
+								trading in the energy markets.
+                            </p>
+							<p class="text-sm text-slate-600 dark:text-slate-400 mt-3 leading-relaxed">
+								Build real-time monitoring tools, and dashboards, to ensure the stability of the models
+								and trading strategies
+							</p>
+                        </div>
+
+                        <!-- Internship Northpool -->
+                        <div class="p-5 bg-white dark:bg-slate-900/45 border border-slate-200 dark:border-slate-800 rounded-xl hover:border-slate-400 dark:hover:border-slate-700 shadow-xs transition-all">
+                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 font-mono">
+                                <h3 class="text-base font-bold text-slate-900 dark:text-white">Quantitative Developer / AI Developer (Intern)</h3>
+                                <span class="text-xs text-emerald-700 bg-emerald-600/10 dark:text-emerald-400 dark:bg-emerald-500/10 border border-emerald-600/20 dark:border-emerald-500/20 px-2 py-0.5 rounded sm:order-last w-max">Jan 2025 — Jul 2025</span>
+                            </div>
+                            <p class="text-xs font-bold text-indigo-600 dark:text-indigo-400">Northpool B.V. &bull; Leiden, The Netherlands</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 mt-3 leading-relaxed">
+                                Developed econometrics and deep learning based models to support decision-making processes.
+                            </p>
+                        </div>
+
+                        <!-- Lecturer ITAM -->
+                        <div class="p-5 bg-white dark:bg-slate-900/45 border border-slate-200 dark:border-slate-800 rounded-xl hover:border-slate-400 dark:hover:border-slate-700 shadow-xs transition-all">
+                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 font-mono">
+                                <h3 class="text-base font-bold text-slate-900 dark:text-white">Data Science & AI Lecturer</h3>
+                                <span class="text-xs text-emerald-700 bg-emerald-600/10 dark:text-emerald-400 dark:bg-emerald-500/10 border border-emerald-600/20 dark:border-emerald-500/20 px-2 py-0.5 rounded sm:order-last w-max">Oct 2019 — Jun 2020</span>
+                            </div>
+                            <p class="text-xs font-bold text-indigo-600 dark:text-indigo-400">ITAM &bull; Mexico City</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 mt-3 leading-relaxed">
+                                Led an advanced diploma program in Data Science for Finance, training industry professionals in Python
+								programming, SQL database querying, data analysis and machine learning.
+                            </p>
+                        </div>
+
+                        <!-- Job 3 -->
+                        <div class="p-5 bg-white dark:bg-slate-900/45 border border-slate-200 dark:border-slate-800 rounded-xl hover:border-slate-400 dark:hover:border-slate-700 shadow-xs transition-all">
+                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 font-mono">
+                                <h3 class="text-base font-bold text-slate-900 dark:text-white">Economic Data Analyst / Developer</h3>
+                                <span class="text-xs text-emerald-700 bg-emerald-600/10 dark:text-emerald-400 dark:bg-emerald-500/10 border border-emerald-600/20 dark:border-emerald-500/20 px-2 py-0.5 rounded sm:order-last w-max">Aug 2015 — Aug 2017</span>
+                            </div>
+                            <p class="text-xs font-bold text-indigo-600 dark:text-indigo-400">Bloomberg L.P. &bull; Mexico City</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 mt-3 leading-relaxed">
+								Improved and accelerated data acquisition workflows by leveraging vendor APIs.
+							</p>
+							<p class="text-sm text-slate-600 dark:text-slate-400 mt-3 leading-relaxed">
+								Developed dashboards to spot statistical outliers in real time.
+                            </p>
+                        </div>
+
+                        <!-- Job 4 -->
+                        <div class="p-5 bg-white dark:bg-slate-900/45 border border-slate-200 dark:border-slate-800 rounded-xl hover:border-slate-400 dark:hover:border-slate-700 shadow-xs transition-all">
+                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 font-mono">
+                                <h3 class="text-base font-bold text-slate-900 dark:text-white">Stock Indexes Analyst</h3>
+                                <span class="text-xs text-emerald-700 bg-emerald-600/10 dark:text-emerald-400 dark:bg-emerald-500/10 border border-emerald-600/20 dark:border-emerald-500/20 px-2 py-0.5 rounded sm:order-last w-max">Jul 2013 — Feb 2015</span>
+                            </div>
+                            <p class="text-xs font-bold text-indigo-600 dark:text-indigo-400">Mexican Stock Exchange &bull; Mexico City</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 mt-3 leading-relaxed">
+                                I improved the optimization process for the S&P/BMV Bursa Optimo Index, reducing computation time from 8 hours to 10 minutes.
+                            </p>
+							<p class="text-sm text-slate-600 dark:text-slate-400 mt-3 leading-relaxed">
+								Managed the full lifecycle of stock indexes maintenance, including constituents selection and weights 
+								determination.
+							</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION: EDUCATION -->
+                <section id="education" class="scroll-mt-20">
+                    <h2 class="text-xs font-mono font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400 mb-6 flex items-center gap-2">
+                        <span>02.</span> EDUCATION
+                    </h2>
+                    
+                    <div class="space-y-4">
+                        <div class="border-l-2 border-slate-200 dark:border-slate-800 pl-4 space-y-4">
+                            <!-- Degree 1 -->
+                            <div>
+                                <span class="text-xs font-bold text-slate-400 dark:text-slate-500">2020 — 2024</span>
+                                <h3 class="text-base font-bold text-slate-900 dark:text-white">PhD Candidate in Computer Science</h3>
+                                <p class="text-xs font-bold text-indigo-600 dark:text-indigo-400">Eindhoven University of Technology (TU/e)</p>
+                                <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">
+                                    <span class="text-indigo-600 dark:text-indigo-400 font-bold text-xs block">Uncertainty in Artificial Intelligence Group</span>
+                                    <b>Thesis:</b> Deep Credal Probabilistic Circuits: Inference, learning and applications.
+                                </p>
+                            </div>
+
+                            <!-- Degree 2 -->
+                            <div class="pt-2">
+                                <span class="text-xs font-bold text-slate-400 dark:text-slate-500">2017 — 2019</span>
+                                <h3 class="text-xs font-bold text-indigo-600 dark:text-indigo-400">Master's Degree in Computer Science</h3>
+                                <p class="text-xs font-bold text-indigo-600 dark:text-indigo-400">Computer Research Center, IPN</p>
+                                <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">
+                                    <b>Thesis:</b> Automated Learning of Trading Rules for the Mexican Stock Market.
+                                </p>
+                            </div>
+
+                            <!-- Degree 3 -->
+                            <div class="pt-2">
+                                <span class="text-xs font-bold text-slate-400 dark:text-slate-500">2008 — 2012</span>
+                                <h3 class="text-xs font-bold text-indigo-600 dark:text-indigo-400">Bachelor's Degree in Actuarial Science</h3>
+                                <p class="text-xs font-bold text-indigo-600 dark:text-indigo-400">Faculty of Sciences, UNAM</p>
+                                <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">
+                                    <b>Thesis:</b> On Merton’s jump diffusion model for pricing European options.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION: SKILLS -->
+                <section id="skills" class="scroll-mt-20">
+                    <h2 class="text-xs font-mono font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400 mb-6 flex items-center gap-2">
+                        <span>03.</span> Tech Stack
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 font-mono text-xs">
+                        <div class="p-4 bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-lg shadow-xs">
+                            <h3 class="font-bold mb-3 text-slate-400 dark:text-slate-500 uppercase"> //Languages</h3>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded">Python</span>
+                                <span class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded">C++</span>
+                                <span class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded">R</span>
+                                <span class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded">Javascript</span>
+                                <span class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded">Matlab</span>
+                                <span class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded">VBA</span>
+                            </div>
+                        </div>
+
+                        <div class="p-4 bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-lg shadow-xs">
+                            <h3 class="font-bold mb-3 text-slate-400 dark:text-slate-500 uppercase">// Data science and AI</h3>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded">PyTorch</span>
+                                <span class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded">TensorFlow</span>
+                                <span class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded">NumPy</span>
+                                <span class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded">SciPy</span>
+                                <span class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded">PySpark</span>
+                                <span class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded">Scikit-Learn</span>
+                                <span class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded">Tidyverse</span>
+                            </div>
+                        </div>
+
+                        <div class="p-4 bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-lg shadow-xs">
+                            <h3 class="font-bold mb-3 text-slate-400 dark:text-slate-500 uppercase">// MLOps and others</h3>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded">Linux</span>
+                                <span class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded">Git</span>
+                                <span class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded">AWS Cloud</span>
+                                <span class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded">Docker</span>
+                                <span class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded">Kubernetes</span>
+                                <span class="bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded">FastAPI</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION: PUBLICATIONS -->
+                <section id="publications" class="scroll-mt-20">
+                    <h2 class="text-xs font-mono font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400 mb-6 flex items-center gap-2">
+                        <span>04.</span> PUBLICATIONS AND SOFTWARE
+                    </h2>
+                    
+                    <div class="space-y-4 font-mono text-xs">
+                        <!-- Build App -->
+                        <div class="p-5 bg-gradient-to-br from-white to-indigo-50/50 dark:from-slate-900 dark:to-indigo-950/40 border border-indigo-200 dark:border-indigo-500/20 rounded-xl relative shadow-xs">
+                            <div class="absolute right-4 top-4 text-indigo-600 dark:text-indigo-400 text-sm">⚡</div>
+                            <span class="text-[10px] text-indigo-700 dark:text-indigo-300 uppercase tracking-wider font-bold">Clustering App</span>
+                            <h3 class="text-sm font-bold text-slate-900 dark:text-white mt-1">Clustering & 2D Classification Dataset Application</h3>
+                            <p class="text-slate-600 dark:text-slate-400 mt-2 font-sans text-xs leading-relaxed">
+                                Web tool for the quick and easy creation of 2D clustering and classification datasets
+                            </p>
+                            <div class="mt-4 flex items-center gap-2">
+                                <a href="https://davidrmh.github.io/software/clusters_app/clusters.html" target="_blank" class="text-indigo-700 dark:text-indigo-400 hover:underline transition-colors inline-flex items-center gap-1 bg-indigo-50 dark:bg-indigo-500/10 px-2 py-1 rounded border border-indigo-200 dark:border-indigo-500/20">
+                                    Launch Interface <span class="text-xs">↗</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Pub 1 -->
+                        <div class="p-4 bg-white dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800 rounded-lg hover:border-slate-400 dark:hover:border-slate-700 transition-colors shadow-xs">
+                            <span class="text-[10px] text-indigo-700 dark:text-indigo-300 uppercase tracking-wider font-bold">8th International Conf. on Belief Functions &bull; 2024</span>
+                            <h3 class="text-sm font-bold text-slate-900 dark:text-white mt-1">Dempster-Shafer Credal Probabilistic Circuits</h3>
+                            <div class="mt-2">
+                                <a href="https://link.springer.com/chapter/10.1007/978-3-031-67977-3_4" target="_blank" class="text-slate-600 dark:text-slate-400 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors inline-flex items-center gap-1">
+                                    [Springer Link ↗]
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Pub 2 -->
+                        <div class="p-4 bg-white dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800 rounded-lg hover:border-slate-400 dark:hover:border-slate-700 transition-colors shadow-xs">
+                            <span class="text-[10px] text-indigo-700 dark:text-indigo-300 uppercase tracking-wider font-bold">ACM International Conference on AI in Finance (ICAIF) &bull; 2023</span>
+                            <h3 class="text-sm font-bold text-slate-900 dark:text-white mt-1">Portfolio Optimization via Credal Probabilistic Circuits</h3>
+                            <div class="mt-2">
+                                <a href="https://dl.acm.org/doi/10.1145/3604237.3626853" target="_blank" class="text-slate-600 dark:text-slate-400 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors inline-flex items-center gap-1">
+                                    [ACM Digital Library ↗]
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Pub 3 -->
+                        <div class="p-4 bg-white dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800 rounded-lg hover:border-slate-400 dark:hover:border-slate-700 transition-colors shadow-xs">
+                            <span class="text-[10px] text-indigo-700 dark:text-indigo-300 uppercase tracking-wider font-bold">International Journal of Approximate Reasoning (IJAR) &bull; 2023</span>
+                            <h3 class="text-sm font-bold text-slate-900 dark:text-white mt-1">Beyond tree-shaped credal probabilistic circuits</h3>
+                            <div class="mt-2">
+                                <a href="https://www.sciencedirect.com/science/article/pii/S0888613X23001780" target="_blank" class="text-slate-600 dark:text-slate-400 hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors inline-flex items-center gap-1">
+                                    [ScienceDirect ↗]
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION: TECHNICAL NOTEBOOKS -->
+                <section id="writing" class="scroll-mt-20">
+                    <h2 class="text-xs font-mono font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400 mb-6 flex items-center gap-2">
+                        <span>05.</span> Writing
+                    </h2>
+
+                    <div class="bg-white dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800 rounded-xl p-6 font-mono text-xs space-y-4 shadow-xs">
+                        <p class="text-[10px] text-indigo-700 dark:text-indigo-300 uppercase tracking-wider font-bold">// Some useful(?) notes</p>
+                        
+                        <div class="grid grid-cols-1 gap-3">
+                            <a href="https://www.notion.so/The-rationale-behind-price-indices-and-inflation-adjusted-prices-af3fc81f44bb4dff9bf3431e81536706?pvs=21" target="_blank" class="p-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800/60 rounded-md hover:border-emerald-600/40 dark:hover:border-emerald-500/30 group transition-all flex justify-between items-center">
+                                <span class="group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors text-slate-800 dark:text-slate-300">📑 The rationale behind price indices & inflation adjustments</span>
+                                <span class="text-slate-400 dark:text-slate-600 text-xs group-hover:text-emerald-600 dark:group-hover:text-emerald-400">open ↗</span>
+                            </a>
+
+                            <a href="https://davidrmh.github.io/writing/bayesian_port_opt/bayesian_port.html" target="_blank" class="p-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800/60 rounded-md hover:border-emerald-600/40 dark:hover:border-emerald-500/30 group transition-all flex justify-between items-center">
+                                <span class="group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors text-slate-800 dark:text-slate-300">📑 Bayesian Portfolio Optimization: A concrete use case for RStan</span>
+                                <span class="text-slate-400 dark:text-slate-600 text-xs group-hover:text-emerald-600 dark:group-hover:text-emerald-400">open ↗</span>
+                            </a>
+
+                            <a href="https://davidrmh.github.io/writing/image_denoising/image_denoising.html" target="_blank" class="p-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800/60 rounded-md hover:border-emerald-600/40 dark:hover:border-emerald-500/30 group transition-all flex justify-between items-center">
+                                <span class="group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors text-slate-800 dark:text-slate-300">📑 De-noising images with Markov Random Fields & ICM in Python</span>
+                                <span class="text-slate-400 dark:text-slate-600 text-xs group-hover:text-emerald-600 dark:group-hover:text-emerald-400">open ↗</span>
+                            </a>
+
+                            <a href="https://davidrmh.github.io/writing/elbo_scratch/ELBO_scratch.html" target="_blank" class="p-3 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800/60 rounded-md hover:border-emerald-600/40 dark:hover:border-emerald-500/30 group transition-all flex justify-between items-center">
+                                <span class="group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors text-slate-800 dark:text-slate-300">📑 Implementing ELBO maximization from scratch using base R</span>
+                                <span class="text-slate-400 dark:text-slate-600 text-xs group-hover:text-emerald-600 dark:group-hover:text-emerald-400">open ↗</span>
+                            </a>
+                        </div>
+                        <div class="text-[11px] text-amber-700 dark:text-amber-500/80 bg-amber-500/5 p-3 rounded border border-amber-200 dark:border-amber-500/10 font-sans">
+                            <strong>Note:</strong> Use at your own risk
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- SIMPLE DARK MODE SCRIPT -->
+    <script>
+        const btn = document.getElementById('theme-toggle');
+        const root = document.getElementById('theme-root');
+        const icon = document.getElementById('theme-icon');
+        const text = document.getElementById('theme-text');
+
+        btn.addEventListener('click', () => {
+            // Toggle HTML node class
+            root.classList.toggle('dark');
+            
+            if(root.classList.contains('dark')) {
+                icon.textContent = '☀️';
+                text.textContent = 'Light Mode';
+            } else {
+                icon.textContent = '🌙';
+                text.textContent = 'Night Mode';
+            }
+        });
+    </script>
+</body>
+</html>
