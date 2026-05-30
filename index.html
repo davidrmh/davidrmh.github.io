@@ -16,28 +16,30 @@
             background-color: #000000 !important;
             color: #e1cbcb !important;
         }
-        html.dark .dark\:bg-slate-900\/60 { background-color: rgba(15, 23, 42, 0.6) !important; }
-        html.dark .dark\:bg-slate-900\/45 { background-color: rgba(15, 23, 42, 0.45) !important; }
+        html.dark .dark\:bg-slate-900\/60 { background-color: rgba(15, 23, 42, 0.253) !important; }
+        html.dark .dark\:bg-slate-900\/45 { background-color: rgb(0, 0, 0) !important; }
         html.dark .dark\:bg-slate-900\/50 { background-color: rgba(15, 23, 42, 0.5) !important; }
         html.dark .dark\:bg-slate-950 { background-color: #020617 !important; }
         html.dark .dark\:border-slate-800 { border-color: #1e293b !important; }
-        html.dark .dark\:text-white { color: #0059ff !important; }
+        html.dark .dark\:text-white { color: #2e9c0c !important; }
         html.dark .dark\:text-slate-300 { color: #2200ff !important; }
-        html.dark .dark\:text-slate-400 { color: #94a3b8 !important; }
-        html.dark .dark\:text-slate-500 { color: #0bcb58 !important; }
-        html.dark .dark\:text-emerald-400 { color: hsl(112, 100%, 44%) !important; }
-        html.dark .dark\:text-indigo-400 { color: #d42490 !important; }
+        html.dark .dark\:text-slate-400 { color: #f7eeee !important; }
+        html.dark .dark\:text-slate-500 { color: hsl(190, 100%, 44%) !important; }
+        html.dark .dark\:text-emerald-400 { color: hsl(190, 100%, 44%) !important; }
+        html.dark .dark\:text-indigo-400 { color: #cb0dbb !important; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-700 antialiased min-h-screen selection:bg-emerald-500 selection:text-slate-900 transition-colors duration-200">
 
-    <!-- FIXED THEME TOGGLE BUTTON 
+    <!-- FIXED THEME TOGGLE BUTTON -->
+     <!--
     <div class="fixed top-6 right-6 z-50">
         <button id="theme-toggle" class="flex items-center gap-2 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-800 px-3 py-1.5 rounded-lg text-xs font-mono shadow-sm hover:border-slate-400 dark:hover:border-slate-600 cursor-pointer transition-all">
             <span id="theme-icon">🌙</span> <span id="theme-text">Night Mode</span>
         </button>
     </div>
     -->
+    
 
     <div class="max-w-6xl mx-auto px-6 py-12 md:py-20">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
@@ -50,24 +52,14 @@
                     </div>
                     <h1 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white font-mono">David R. Montalvan Hernandez</h1>
                     <p class="text-sm text-slate-600 dark:text-slate-400 prose-font leading-relaxed">
-                     Computer Scientist and Applied Mathematician with over 7+ years of professional experience in Machine Learning
-					 solutions for the FinTech and Financial Services industries.
+                     Computer Scientist and Applied Mathematician with over 7+ years of experience in machine learning, AI engineering,
+                     and advanced statistical modeling. Knowledgeable in designing end-to-end pipelines deploying robust AI solutions.
                     </p>
                 </div>
 
                 <!-- Contact Block -->
                 <div class="p-4 bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 rounded-lg space-y-3 text-xs font-mono shadow-xs">
                     <div class="text-[10px] text-indigo-700 dark:text-indigo-300 uppercase tracking-wider font-bold">// Contact</div>
-					<!--
-                    <div class="flex items-center gap-2">
-                        <span class="text-emerald-600 dark:text-emerald-500">✉️</span> 
-                        <a href="mailto:davidricardo888@gmail.com" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors underline decoration-slate-300 dark:decoration-slate-700">davidricardo AT gmail</a>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <span class="text-emerald-600 dark:text-emerald-500">🐙</span> 
-                        <a href="https://github.com/davidrmh" target="_blank" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors underline decoration-slate-300 dark:decoration-slate-700">github.com/davidrmh</a>
-                    </div>
-					-->
                     <div class="flex items-center gap-2">
                         <span class="text-emerald-600 dark:text-emerald-500">💼</span> 
                         <a href="https://www.linkedin.com/in/davidrmh" target="_blank" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors underline decoration-slate-300 dark:decoration-slate-700">linkedin.com/in/davidrmh</a>
@@ -77,8 +69,8 @@
                 <!-- Navigation Tree -->
                 <nav class="hidden lg:block space-y-2 font-mono text-xs text-slate-400 dark:text-slate-500 pl-2">
                     <a href="#experience" class="block text-indigo-700 dark:text-indigo-300 uppercase tracking-wider font-bold">📂 src/experience/</a>
-                    <a href="#education" class="block text-indigo-700 dark:text-indigo-300 uppercase tracking-wider font-bold">📂 src/education/</a>
                     <a href="#skills" class="block text-indigo-700 dark:text-indigo-300 uppercase tracking-wider font-bold">📂 src/tech_stack/</a>
+                    <a href="#education" class="block text-indigo-700 dark:text-indigo-300 uppercase tracking-wider font-bold">📂 src/education/</a>
                     <a href="#publications" class="block text-indigo-700 dark:text-indigo-300 uppercase tracking-wider font-bold">📂 src/publications_software/</a>
                     <a href="#writing" class="block text-indigo-700 dark:text-indigo-300 uppercase tracking-wider font-bold">📂 src/writing/</a>
                 </nav>
@@ -89,7 +81,7 @@
 
                 <!-- SECTION: EXPERIENCE -->
                 <section id="experience" class="scroll-mt-20">
-                    <h2 class="text-xs font-mono font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400 mb-6 flex items-center gap-2">
+                    <h2 class="text-[16px] font-mono font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400 mb-6 flex items-center gap-2">
                         <span>01.</span> WORK EXPERIENCE
                     </h2>
                     
@@ -99,29 +91,18 @@
                         <div class="p-5 bg-white dark:bg-slate-900/45 border border-slate-200 dark:border-slate-800 rounded-xl hover:border-slate-400 dark:hover:border-slate-700 shadow-xs transition-all">
                             <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 font-mono">
                                 <h3 class="text-base font-bold text-slate-900 dark:text-white">Quantitative Developer / AI Developer</h3>
-                                <span class="text-xs font-bold text-emerald-700 bg-emerald-600/10 dark:text-emerald-400 dark:bg-emerald-500/10 border border-emerald-600/20 dark:border-emerald-500/20 px-2 py-0.5 rounded sm:order-last w-max">Sep 2025 — current</span>
+                                <span class="text-xs font-bold text-emerald-700 bg-emerald-600/10 dark:text-emerald-400 dark:bg-emerald-500/10 border border-emerald-600/20 dark:border-emerald-500/20 px-2 py-0.5 rounded sm:order-last w-max">Jan 2025 — current</span>
                             </div>
                             <p class="text-xs font-bold text-indigo-600 dark:text-indigo-400">Northpool B.V. &bull; Leiden, The Netherlands</p>
                             <p class="text-sm text-slate-600 dark:text-slate-400 mt-3 leading-relaxed">
-                                Design of pipelines for training and inference of machine learning and deep learning models used for
-								trading in the energy markets.
+                                Design of pipelines for training and deploying statistical and deep learning models used for trading in the energy markets.
                             </p>
 							<p class="text-sm text-slate-600 dark:text-slate-400 mt-3 leading-relaxed">
-								Build real-time monitoring tools, and dashboards, to ensure the stability of the models
-								and trading strategies
+								Create real-time monitoring dashboards to track data drift and, model's performance.
 							</p>
-                        </div>
-
-                        <!-- Internship Northpool -->
-                        <div class="p-5 bg-white dark:bg-slate-900/45 border border-slate-200 dark:border-slate-800 rounded-xl hover:border-slate-400 dark:hover:border-slate-700 shadow-xs transition-all">
-                            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 font-mono">
-                                <h3 class="text-base font-bold text-slate-900 dark:text-white">Quantitative Developer / AI Developer (Intern)</h3>
-                                <span class="text-xs text-emerald-700 bg-emerald-600/10 dark:text-emerald-400 dark:bg-emerald-500/10 border border-emerald-600/20 dark:border-emerald-500/20 px-2 py-0.5 rounded sm:order-last w-max">Jan 2025 — Jul 2025</span>
-                            </div>
-                            <p class="text-xs font-bold text-indigo-600 dark:text-indigo-400">Northpool B.V. &bull; Leiden, The Netherlands</p>
-                            <p class="text-sm text-slate-600 dark:text-slate-400 mt-3 leading-relaxed">
-                                Developed econometrics and deep learning based models to support decision-making processes.
-                            </p>
+							<p class="text-sm text-slate-600 dark:text-slate-400 mt-3 leading-relaxed">
+								Code and containerize production-ready APIs using tools such as Docker, Kubernetes, and FastAPI.
+							</p>                            
                         </div>
 
                         <!-- Lecturer ITAM -->
@@ -132,9 +113,12 @@
                             </div>
                             <p class="text-xs font-bold text-indigo-600 dark:text-indigo-400">ITAM &bull; Mexico City</p>
                             <p class="text-sm text-slate-600 dark:text-slate-400 mt-3 leading-relaxed">
-                                Led an advanced diploma program in Data Science for Finance, training industry professionals in Python
-								programming, SQL database querying, data analysis and machine learning.
+                               Taught graduate-level data science modules for industry professionals,
+                               covering python programming, machine learning, and statistical modeling.
                             </p>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 mt-3 leading-relaxed">
+                                Mentored students on how to deploy the models using tools such as Docker, Kubernetes and FastAPI.
+                            </p>                            
                         </div>
 
                         <!-- Job 3 -->
@@ -145,10 +129,10 @@
                             </div>
                             <p class="text-xs font-bold text-indigo-600 dark:text-indigo-400">Bloomberg L.P. &bull; Mexico City</p>
                             <p class="text-sm text-slate-600 dark:text-slate-400 mt-3 leading-relaxed">
-								Improved and accelerated data acquisition workflows by leveraging vendor APIs.
+                                Accelerated data acquisition workflows by leveraging vendor APIs, reducing acquisition times from 30 minutes to less than 1 minute.
 							</p>
 							<p class="text-sm text-slate-600 dark:text-slate-400 mt-3 leading-relaxed">
-								Developed dashboards to spot statistical outliers in real time.
+                                Built internal dashboards to process time-series datasets and detect data outliers.
                             </p>
                         </div>
 
@@ -163,58 +147,16 @@
                                 I improved the optimization process for the S&P/BMV Bursa Optimo Index, reducing computation time from 8 hours to 10 minutes.
                             </p>
 							<p class="text-sm text-slate-600 dark:text-slate-400 mt-3 leading-relaxed">
-								Managed the full lifecycle of stock indexes maintenance, including constituents selection and weights 
+								Managed the full life-cycle of stock indexes maintenance, including constituents selection and weights 
 								determination.
 							</p>
                         </div>
                     </div>
                 </section>
 
-                <!-- SECTION: EDUCATION -->
-                <section id="education" class="scroll-mt-20">
-                    <h2 class="text-xs font-mono font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400 mb-6 flex items-center gap-2">
-                        <span>02.</span> EDUCATION
-                    </h2>
-                    
-                    <div class="space-y-4">
-                        <div class="border-l-2 border-slate-200 dark:border-slate-800 pl-4 space-y-4">
-                            <!-- Degree 1 -->
-                            <div>
-                                <span class="text-xs font-bold text-slate-400 dark:text-slate-500">2020 — 2024</span>
-                                <h3 class="text-base font-bold text-slate-900 dark:text-white">PhD Candidate in Computer Science</h3>
-                                <p class="text-xs font-bold text-indigo-600 dark:text-indigo-400">Eindhoven University of Technology (TU/e)</p>
-                                <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">
-                                    <span class="text-indigo-600 dark:text-indigo-400 font-bold text-xs block">Uncertainty in Artificial Intelligence Group</span>
-                                    <b>Thesis:</b> Deep Credal Probabilistic Circuits: Inference, learning and applications.
-                                </p>
-                            </div>
-
-                            <!-- Degree 2 -->
-                            <div class="pt-2">
-                                <span class="text-xs font-bold text-slate-400 dark:text-slate-500">2017 — 2019</span>
-                                <h3 class="text-xs font-bold text-indigo-600 dark:text-indigo-400">Master's Degree in Computer Science</h3>
-                                <p class="text-xs font-bold text-indigo-600 dark:text-indigo-400">Computer Research Center, IPN</p>
-                                <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">
-                                    <b>Thesis:</b> Automated Learning of Trading Rules for the Mexican Stock Market.
-                                </p>
-                            </div>
-
-                            <!-- Degree 3 -->
-                            <div class="pt-2">
-                                <span class="text-xs font-bold text-slate-400 dark:text-slate-500">2008 — 2012</span>
-                                <h3 class="text-xs font-bold text-indigo-600 dark:text-indigo-400">Bachelor's Degree in Actuarial Science</h3>
-                                <p class="text-xs font-bold text-indigo-600 dark:text-indigo-400">Faculty of Sciences, UNAM</p>
-                                <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">
-                                    <b>Thesis:</b> On Merton’s jump diffusion model for pricing European options.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- SECTION: SKILLS -->
+                <!-- SECTION: Tech stack -->
                 <section id="skills" class="scroll-mt-20">
-                    <h2 class="text-xs font-mono font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400 mb-6 flex items-center gap-2">
+                    <h2 class="text-[16px] font-mono font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400 mb-6 flex items-center gap-2">
                         <span>03.</span> Tech Stack
                     </h2>
                     
@@ -257,11 +199,53 @@
                             </div>
                         </div>
                     </div>
+                </section>                
+
+                <!-- SECTION: EDUCATION -->
+                <section id="education" class="scroll-mt-20">
+                    <h2 class="text-[16px] font-mono font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400 mb-6 flex items-center gap-2">
+                        <span>02.</span> EDUCATION
+                    </h2>
+                    
+                    <div class="space-y-4">
+                        <div class="border-l-2 border-slate-200 dark:border-slate-800 pl-4 space-y-4">
+                            <!-- Degree 1 -->
+                            <div>
+                                <span class="text-xs font-bold text-slate-400 dark:text-slate-500">2020 — 2024</span>
+                                <h3 class="text-base font-bold text-slate-900 dark:text-white">PhD Candidate in Computer Science</h3>
+                                <p class="text-xs font-bold text-indigo-600 dark:text-indigo-400">Eindhoven University of Technology (TU/e)</p>
+                                <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">
+                                    <span class="text-indigo-600 dark:text-indigo-400 font-bold text-xs block">Uncertainty in Artificial Intelligence Group</span>
+                                    <b>Thesis:</b> Deep Credal Probabilistic Circuits: Inference, learning and applications.
+                                </p>
+                            </div>
+
+                            <!-- Degree 2 -->
+                            <div class="pt-2">
+                                <span class="text-xs font-bold text-slate-400 dark:text-slate-500">2017 — 2019</span>
+                                <h3 class="text-xs font-bold text-indigo-600 dark:text-indigo-400">Master's Degree in Computer Science</h3>
+                                <p class="text-xs font-bold text-indigo-600 dark:text-indigo-400">Computer Research Center, IPN</p>
+                                <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">
+                                    <b>Thesis:</b> Automated Learning of Trading Rules for the Mexican Stock Market.
+                                </p>
+                            </div>
+
+                            <!-- Degree 3 -->
+                            <div class="pt-2">
+                                <span class="text-xs font-bold text-slate-400 dark:text-slate-500">2008 — 2012</span>
+                                <h3 class="text-xs font-bold text-indigo-600 dark:text-indigo-400">Bachelor's Degree in Actuarial Science</h3>
+                                <p class="text-xs font-bold text-indigo-600 dark:text-indigo-400">Faculty of Sciences, UNAM</p>
+                                <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">
+                                    <b>Thesis:</b> On Merton’s jump diffusion model for pricing European options.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </section>
 
                 <!-- SECTION: PUBLICATIONS -->
                 <section id="publications" class="scroll-mt-20">
-                    <h2 class="text-xs font-mono font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400 mb-6 flex items-center gap-2">
+                    <h2 class="text-[16px] font-mono font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400 mb-6 flex items-center gap-2">
                         <span>04.</span> PUBLICATIONS AND SOFTWARE
                     </h2>
                     
@@ -316,9 +300,9 @@
                     </div>
                 </section>
 
-                <!-- SECTION: TECHNICAL NOTEBOOKS -->
+                <!-- SECTION: Writing -->
                 <section id="writing" class="scroll-mt-20">
-                    <h2 class="text-xs font-mono font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400 mb-6 flex items-center gap-2">
+                    <h2 class="text-[16px] font-mono font-bold uppercase tracking-widest text-emerald-700 dark:text-emerald-400 mb-6 flex items-center gap-2">
                         <span>05.</span> Writing
                     </h2>
 
