@@ -1,4 +1,6 @@
-on: push
+on:
+    schedule:
+        - cron: '22 * * * *'
 jobs:
     commit-file:
         runs-on: ubuntu-latest
