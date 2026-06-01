@@ -2,8 +2,7 @@ on:
     workflow_dispatch:
     schedule:
         - cron: '*/5 * * * *'
-        branches:
-            - master
+        
 jobs:
     commit-file:
         runs-on: ubuntu-latest
