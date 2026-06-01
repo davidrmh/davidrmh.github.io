@@ -1,14 +1,14 @@
 on:
     workflow_dispatch:
     schedule:
-        - cron: '*/10 * * * *'
+        - cron: '*/5 * * * *'
+        branches:
+            - master
 jobs:
     commit-file:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v6
-              with:
-                  ref: test
             - run: |
                 date > generated.txt
                 git config user.name "github-actions[bot]"
