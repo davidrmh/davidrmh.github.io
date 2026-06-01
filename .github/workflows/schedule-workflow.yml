@@ -1,8 +1,8 @@
 name: Testing scheduling
 on:
-    workflow_dispatch:
-    schedule:
-        - cron: "27 * * * *"
+  workflow_dispatch:
+  schedule:
+       - cron: "*/5 * * * *"
         
 jobs:
     build:
