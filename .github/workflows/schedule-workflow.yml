@@ -1,0 +1,20 @@
+on:
+    schedule:
+        - cron: '59 20 * * *'
+          timezone: "Europe/Amsterdam"
+jobs:
+    commit-file:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v6
+              with:
+                  ref: test
+            - run: |
+                date > generated.txt
+                git config user.name "github-actions[bot]"
+                git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+                git add generated.txt
+                git commit -m "Testing schedule"
+                git push
+            
+        
