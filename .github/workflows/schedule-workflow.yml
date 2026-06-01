@@ -1,7 +1,4 @@
-on:
-    schedule:
-        - cron: '05 21 * * *'
-          timezone: "Europe/Amsterdam"
+on: push
 jobs:
     commit-file:
         runs-on: ubuntu-latest
@@ -16,5 +13,4 @@ jobs:
                 git add generated.txt
                 git commit -m "Testing schedule"
                 git push
-            
-        
+                    
