@@ -1,6 +1,6 @@
 on:
     schedule:
-        - cron: '59 20 * * *'
+        - cron: '05 21 * * *'
           timezone: "Europe/Amsterdam"
 jobs:
     commit-file:
