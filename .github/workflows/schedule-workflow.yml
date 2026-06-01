@@ -1,11 +1,11 @@
-name: "Testing scheduling"
+name: Testing scheduling
 on:
     workflow_dispatch:
     schedule:
-        - cron: "*/5 * * * *"
+        - cron: "27 * * * *"
         
 jobs:
-    commit-file:
+    build:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v6
